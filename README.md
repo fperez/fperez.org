@@ -4,4 +4,4 @@ This repo is a static HTML archive of my former website that used to live at fpe
 
 The underlying Sphinx sources [are here](https://github.com/fperez/fperez.org-src); this repo contains the last build I'd made of the site; on Dec. 27, 2017 (using Sphinx 1.6.3).
 
-My website now lives at https://fernandoperez.org.
+My official website now lives at https://fernandoperez.org.
