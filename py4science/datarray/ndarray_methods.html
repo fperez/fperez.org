@@ -1,16 +1,14 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Methods &mdash; DataArray Docs v0.1.0a documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Methods — DataArray Docs v0.1.0a documentation</title>
+<link href="/fperez.org/_static/default.css" rel="stylesheet" type="text/css"/>
+<link href="/fperez.org/_static/pygments.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
         VERSION:     '0.1.0a',
@@ -19,32 +17,28 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="DataArray Docs v0.1.0a documentation" href="index.html" />
-    <link rel="prev" title="DataArrays" href="basic_data_array.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="basic_data_array.html" title="DataArrays"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">DataArray Docs v0.1.0a documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="methods">
+<script src="/fperez.org/_static/jquery.js" type="text/javascript"></script>
+<script src="/fperez.org/_static/underscore.js" type="text/javascript"></script>
+<script src="/fperez.org/_static/doctools.js" type="text/javascript"></script>
+<link href="index.html" rel="top" title="DataArray Docs v0.1.0a documentation"/>
+<link href="basic_data_array.html" rel="prev" title="DataArrays"/>
+</head>
+<body>
+<div class="related">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a accesskey="I" href="genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a accesskey="P" href="basic_data_array.html" title="DataArrays">previous</a> |</li>
+<li><a href="index.html">DataArray Docs v0.1.0a documentation</a> »</li>
+</ul>
+</div>
+<div class="document">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body">
+<div class="section" id="methods">
 <h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
 <p>Methods:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -52,67 +46,67 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li>&#8216;__array__&#8217;,</li>
-<li><a class="reference internal" href="#explicitly-redef"><em>&#8216;__array_prepare__&#8217;,</em></a></li>
-<li><a class="reference internal" href="#explicitly-redef"><em>&#8216;__array_wrap__&#8217;,</em></a></li>
-<li>&#8216;__copy__&#8217;,</li>
-<li>&#8216;__deepcopy__&#8217;,</li>
-<li><a class="reference internal" href="#explicitly-redef"><em>&#8216;__new__&#8217;,</em></a></li>
-<li>&#8216;__reduce__&#8217;,</li>
-<li>&#8216;__reduce_ex__&#8217;,</li>
-<li>&#8216;__setstate__&#8217;,</li>
-<li>&#8216;all&#8217;,</li>
-<li>&#8216;any&#8217;,</li>
-<li><a class="reference internal" href="#wrapped-reduction-special"><em>&#8216;argmax&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction-special"><em>&#8216;argmin&#8217;,</em></a></li>
-<li><a class="reference internal" href="#sorting-methods"><em>&#8216;argsort&#8217;,</em></a></li>
-<li>&#8216;astype&#8217;,</li>
-<li>&#8216;byteswap&#8217;,</li>
-<li><a class="reference internal" href="#wtf-methods"><em>&#8216;choose&#8217;,</em></a></li>
-<li>&#8216;clip&#8217;,</li>
-<li>&#8216;compress&#8217;,</li>
-<li>&#8216;conj&#8217;,</li>
-<li>&#8216;conjugate&#8217;,</li>
-<li>&#8216;copy&#8217;,</li>
-<li><a class="reference internal" href="#incomplete-reductions"><em>&#8216;cumprod&#8217;,</em></a></li>
-<li><a class="reference internal" href="#incomplete-reductions"><em>&#8216;cumsum&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wtf-methods"><em>&#8216;diagonal&#8217;,</em></a></li>
-<li>&#8216;dump&#8217;,</li>
-<li>&#8216;dumps&#8217;,</li>
-<li>&#8216;fill&#8217;,</li>
-<li><a class="reference internal" href="#reshaping-methods"><em>&#8216;flatten&#8217;,</em></a></li>
-<li>&#8216;getfield&#8217;,</li>
-<li>&#8216;item&#8217;,</li>
-<li>&#8216;itemset&#8217;,</li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;max&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;mean&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;min&#8217;,</em></a></li>
-<li>&#8216;newbyteorder&#8217;,</li>
-<li>&#8216;nonzero&#8217;,</li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;prod&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;ptp&#8217;,</em></a></li>
-<li>&#8216;put&#8217;,</li>
-<li><a class="reference internal" href="#reshaping-methods"><em>&#8216;ravel&#8217;,</em></a></li>
-<li><a class="reference internal" href="#incomplete-reductions"><em>&#8216;repeat&#8217;,</em></a></li>
-<li><a class="reference internal" href="#reshaping-methods"><em>&#8216;reshape&#8217;,</em></a></li>
-<li><a class="reference internal" href="#reshaping-methods"><em>&#8216;resize&#8217;,</em></a></li>
-<li>&#8216;round&#8217;,</li>
-<li><a class="reference internal" href="#wtf-methods"><em>&#8216;searchsorted&#8217;,</em></a></li>
-<li>&#8216;setfield&#8217;,</li>
-<li>&#8216;setflags&#8217;,</li>
-<li><a class="reference internal" href="#sorting-methods"><em>&#8216;sort&#8217;,</em></a></li>
-<li><a class="reference internal" href="#reshaping-methods"><em>&#8216;squeeze&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;std&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;sum&#8217;,</em></a></li>
-<li><a class="reference internal" href="#explicitly-redef"><em>&#8216;swapaxes&#8217;,</em></a></li>
-<li><a class="reference internal" href="#incomplete-reductions"><em>&#8216;take&#8217;,</em></a></li>
-<li>&#8216;tofile&#8217;,</li>
-<li>&#8216;tolist&#8217;,</li>
-<li>&#8216;tostring&#8217;,</li>
-<li>&#8216;trace&#8217;,</li>
-<li><a class="reference internal" href="#explicitly-redef"><em>&#8216;transpose&#8217;,</em></a></li>
-<li><a class="reference internal" href="#wrapped-reduction"><em>&#8216;var&#8217;,</em></a></li>
-<li>&#8216;view&#8217;]</li>
+<li>‘__array__’,</li>
+<li><a class="reference internal" href="#explicitly-redef"><em>‘__array_prepare__’,</em></a></li>
+<li><a class="reference internal" href="#explicitly-redef"><em>‘__array_wrap__’,</em></a></li>
+<li>‘__copy__’,</li>
+<li>‘__deepcopy__’,</li>
+<li><a class="reference internal" href="#explicitly-redef"><em>‘__new__’,</em></a></li>
+<li>‘__reduce__’,</li>
+<li>‘__reduce_ex__’,</li>
+<li>‘__setstate__’,</li>
+<li>‘all’,</li>
+<li>‘any’,</li>
+<li><a class="reference internal" href="#wrapped-reduction-special"><em>‘argmax’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction-special"><em>‘argmin’,</em></a></li>
+<li><a class="reference internal" href="#sorting-methods"><em>‘argsort’,</em></a></li>
+<li>‘astype’,</li>
+<li>‘byteswap’,</li>
+<li><a class="reference internal" href="#wtf-methods"><em>‘choose’,</em></a></li>
+<li>‘clip’,</li>
+<li>‘compress’,</li>
+<li>‘conj’,</li>
+<li>‘conjugate’,</li>
+<li>‘copy’,</li>
+<li><a class="reference internal" href="#incomplete-reductions"><em>‘cumprod’,</em></a></li>
+<li><a class="reference internal" href="#incomplete-reductions"><em>‘cumsum’,</em></a></li>
+<li><a class="reference internal" href="#wtf-methods"><em>‘diagonal’,</em></a></li>
+<li>‘dump’,</li>
+<li>‘dumps’,</li>
+<li>‘fill’,</li>
+<li><a class="reference internal" href="#reshaping-methods"><em>‘flatten’,</em></a></li>
+<li>‘getfield’,</li>
+<li>‘item’,</li>
+<li>‘itemset’,</li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘max’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘mean’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘min’,</em></a></li>
+<li>‘newbyteorder’,</li>
+<li>‘nonzero’,</li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘prod’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘ptp’,</em></a></li>
+<li>‘put’,</li>
+<li><a class="reference internal" href="#reshaping-methods"><em>‘ravel’,</em></a></li>
+<li><a class="reference internal" href="#incomplete-reductions"><em>‘repeat’,</em></a></li>
+<li><a class="reference internal" href="#reshaping-methods"><em>‘reshape’,</em></a></li>
+<li><a class="reference internal" href="#reshaping-methods"><em>‘resize’,</em></a></li>
+<li>‘round’,</li>
+<li><a class="reference internal" href="#wtf-methods"><em>‘searchsorted’,</em></a></li>
+<li>‘setfield’,</li>
+<li>‘setflags’,</li>
+<li><a class="reference internal" href="#sorting-methods"><em>‘sort’,</em></a></li>
+<li><a class="reference internal" href="#reshaping-methods"><em>‘squeeze’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘std’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘sum’,</em></a></li>
+<li><a class="reference internal" href="#explicitly-redef"><em>‘swapaxes’,</em></a></li>
+<li><a class="reference internal" href="#incomplete-reductions"><em>‘take’,</em></a></li>
+<li>‘tofile’,</li>
+<li>‘tolist’,</li>
+<li>‘tostring’,</li>
+<li>‘trace’,</li>
+<li><a class="reference internal" href="#explicitly-redef"><em>‘transpose’,</em></a></li>
+<li><a class="reference internal" href="#wrapped-reduction"><em>‘var’,</em></a></li>
+<li>‘view’]</li>
 </ul>
 <div class="section" id="sorting">
 <span id="sorting-methods"></span><h2>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h2>
@@ -138,7 +132,7 @@ Axis. Otherwise, an ndarray is returned.</p>
 <div class="section" id="accumulations">
 <span id="incomplete-reductions"></span><h2>Accumulations<a class="headerlink" href="#accumulations" title="Permalink to this headline">¶</a></h2>
 <p>These methods are wrapped in a generic accumulator.</p>
-<p>These methods have the property of taking an &#8220;axis&#8221; keyword argument, and yet not eliminating that axis. They also default to working on the flattened array if the axis parameter is left unspecified.</p>
+<p>These methods have the property of taking an “axis” keyword argument, and yet not eliminating that axis. They also default to working on the flattened array if the axis parameter is left unspecified.</p>
 </div>
 <div class="section" id="not-applicable-methods">
 <span id="wtf-methods"></span><h2>Not-applicable methods<a class="headerlink" href="#not-applicable-methods" title="Permalink to this headline">¶</a></h2>
@@ -146,7 +140,7 @@ Axis. Otherwise, an ndarray is returned.</p>
 </div>
 <div class="section" id="reshapes">
 <span id="reshaping-methods"></span><h2>Reshapes<a class="headerlink" href="#reshapes" title="Permalink to this headline">¶</a></h2>
-<p>Reshaping is prickly.. I&#8217;ve already implemented certain slicing
+<p>Reshaping is prickly.. I’ve already implemented certain slicing
 mechanisms that can insert unlabeled axes with length-1. This seems
 legitimate. Also squeezing out length-1 seems legitimate (<strong>even if
 the Axis is labeled?</strong>).</p>
@@ -154,15 +148,13 @@ the Axis is labeled?</strong>).</p>
 flattens the array entirely (returning an ndarray).</p>
 </div>
 </div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
+</div>
+</div>
+</div>
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul>
 <li><a class="reference internal" href="#">Methods</a><ul>
 <li><a class="reference internal" href="#sorting">Sorting</a></li>
 <li><a class="reference internal" href="#explicitly-overloaded">Explicitly overloaded</a></li>
@@ -174,47 +166,42 @@ flattens the array entirely (returning an ndarray).</p>
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="basic_data_array.html"
-                        title="previous chapter">DataArrays</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/ndarray_methods.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
+<h4>Previous topic</h4>
+<p class="topless"><a href="basic_data_array.html" title="previous chapter">DataArrays</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+<li><a href="_sources/ndarray_methods.txt" rel="nofollow">Show Source</a></li>
+</ul>
 <div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
+<h3>Quick search</h3>
+<form action="search.html" class="search" method="get">
+<input name="q" size="18" type="text"/>
+<input type="submit" value="Go"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+<p class="searchtip" style="font-size: 90%">
     Enter search terms or a module, class or function name.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="basic_data_array.html" title="DataArrays"
-             >previous</a> |</li>
-        <li><a href="index.html">DataArray Docs v0.1.0a documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2010, Fernando Pérez, Kilian Koepsel, Matthew Brett, Mike Trumpis.
+</div>
+</div>
+<div class="clearer"></div>
+</div>
+<div class="related">
+<h3>Navigation</h3>
+<ul>
+<li class="right" style="margin-right: 10px">
+<a href="genindex.html" title="General Index">index</a></li>
+<li class="right">
+<a href="basic_data_array.html" title="DataArrays">previous</a> |</li>
+<li><a href="index.html">DataArray Docs v0.1.0a documentation</a> »</li>
+</ul>
+</div>
+<div class="footer">
+        © Copyright 2010, Fernando Pérez, Kilian Koepsel, Matthew Brett, Mike Trumpis.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2+.
     </div>
-  </body>
+</body>
 </html>
