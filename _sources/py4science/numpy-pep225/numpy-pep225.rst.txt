@@ -1,0 +1,304 @@
+.. _pep-225-discussion:
+
+=================================================================
+ Discussion regarding possible new operators in Python (PEP 225)
+=================================================================
+
+.. Author: Fernando Perez
+.. Contact: Fernando.Perez@berkeley.edu
+.. Time-stamp: "2008-10-28 16:47:52 fperez"
+.. Copyright: this document has been placed in the public domain.
+
+.. contents::
+..
+    1  Introduction
+    2  Background: matrix multiplication and Numpy
+    3  Summary from the NumPy community
+    4  Arguments neutral towards or against the PEP
+    5  Other considerations and suggestions
+      5.1  Operator form for logical_X functions
+      5.2  Alternate comparisons
+      5.3  Why just go one step?
+      5.4  Alternate syntax
+      5.5  Unicode operators
+      5.6  D-language inspired syntax
+
+
+Introduction
+============
+
+In the Python-dev mailing lists, there were recently two threads regarding the
+possibility of adding to the language a new set of operators.  This would
+provide easy syntactic support for behavior such as element-wise and
+matrix-like multiplication for numpy arrays.  The original python-dev threads
+are here:
+
+* http://mail.python.org/pipermail/python-dev/2008-July/081508.html
+* http://mail.python.org/pipermail/python-dev/2008-July/081551.html
+
+And the actual PEP that discusses this at length is PEP 225:
+
+* http://www.python.org/dev/peps/pep-0225/
+
+In order to provide feedback from the scientific/numerical community, a
+discussion was held on the numpy mailing list.  This document is a brief
+summary of this discussion, in addition to some issues that were brought up
+during a BOF session that was held during the SciPy'08 conference.  The point
+of this document is to provide the Python development team (and ultimately
+Guido) with feedback from a community that would be likely an important target
+of the features discussed in PEP 225, hoping that a final decision can be made
+on the PEP, either as-is or with modifications arising from this feedback.
+
+This document contains a summary of an original discussion whose thread in the
+numpy list can be found here:
+
+* http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036769.html
+* http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036858.html
+
+and it has been further updated with a final round of vetting.  The final
+thread which this document summarizes is here:
+
+* http://mail.scipy.org/pipermail/numpy-discussion/2008-October/038234.html
+
+
+Background: matrix multiplication and Numpy
+===========================================
+
+It is probably useful, for the sake of the Python dev team, to provide a bit of
+background regarding the array/matrix situation in `Numpy
+<http://numpy.scipy.org>`_, which is at the heart of much of this.  The numpy
+library provides, in addition to the basic arrays that support element-wise
+operations::
+
+    In [1]: from numpy import array, matrix
+
+    In [2]: a = array([[1,2],[3,4]])
+
+    In [3]: b = array([[10,20],[30,40]])
+
+    In [4]: a*b
+    Out[4]:
+    array([[ 10,  40],
+	   [ 90, 160]])
+
+also an object called ``matrix`` that implements classic matrix multiplication
+semantics for the ``*`` operator::
+	   
+    In [5]: aM = matrix(a)
+
+    In [6]: bM = matrix(b)
+
+    In [7]: aM*bM
+    Out[7]:
+    matrix([[ 70, 100],
+	    [150, 220]])
+
+The existence of two almost-but-not-quite identical objects at the core of
+numpy has been the source of a large amount of discussion and effort to provide
+smoother integration.  Yet, despite much work it is the opinion of many that
+the situation will always remain unsatisfactory, as many pitfalls continue to
+exist.  It is very easy to pass a matrix to some routine that does numerical
+manipulations on its inputs and forgets to verify that a matrix was received,
+and to end up with an array instead afterwards.  While much work has gone into
+making the core numpy and scipy libraries 'matrix-proof', arbitrary third party
+code may or may not be matrix aware, and thus this problem is likely to remain
+an open issue.
+
+Many more details on this can be read here:
+
+* http://www.scipy.org/MatrixIndexing
+* http://scipy.org/NewMatrixSpec
+
+Multiplication is perhaps the main need for matrices, and the proposed PEP
+could provide a viable solution for this problem.  Exponentiation is also
+useful and covered by the PEP, and the ``~/`` division could perhaps be an
+acceptable way of implementing matlab's `slash operator`_.
+
+.. _slash operator: http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/ref/mrdivide.html
+
+
+Summary from the NumPy community
+================================
+
+Overall the response to PEP 225 ranges from positive to very positive.  There
+was particular interest in the benefits of having both `PEP 225`_ and `PEP
+335`_, since together these could address the key language-based issues
+encountered by numpy.
+
+.. _PEP 225: http://www.python.org/dev/peps/pep-0225
+.. _PEP 335: http://www.python.org/dev/peps/pep-0335
+
+Participants expressed that it would solve real-world, practical problems for
+them and enable them to use Python more effectively in teaching and research
+involving numerical work, in particular (but not limited to) topics involving
+linear algebra.
+
+As Python's importance in scientific computing grows, both as an educational
+and a research tool, it becomes more critical that it can be used as a
+'drop-in' replacement to existing systems.  PEP 225 would lower the notational
+barrier to using Python for tasks where languages like Matlab(TM) and IDL(TM)
+are typically the default choice.  Expressing common algorithms, especially in
+the domain of linear algebra, would be easier and more readable if numpy could
+provide operator-level support for matrix operations without introducing new
+top-level objects.
+
+As an example of the relevance of this, we note a new NSF-funded project for
+developing scientific computing curricular materials called Secant_.  This is
+just one example amongst many of how Python is growing as the open tool of
+choice for new scientific computing efforts.
+
+.. _Secant: http://secant.cs.purdue.edu
+
+
+Arguments neutral towards or against the PEP
+============================================
+
+While the response was overall positive, there were a few differing opinions,
+listed here.
+
+* Some expressed a neutral position: they felt there was really no overwhelming
+  need for this and that people could get by with the tools offered today by
+  Python.
+
+* Some contributors feel that the real problem for numpy is *one* operator,
+  multiplication.  Thus, some feel that only one should be added (reducing the
+  reach of PEP 225), others that this simply isn't enough to justify the PEP's
+  acceptance.
+  
+* Some felt that perhaps the time is not right for this, and that one should
+  wait instead a few years for Unicode support to become more pervasive, and
+  implement this idea via Unicode instead (see below).
+
+* [ *Note by Robert Kern* ]. I really only care about having just *one*
+  extra operator, one that I can (ab)use for matrix multiplication. It's the
+  only operation that is common enough and with one obvious implementation (I'm
+  looking at you, Matlab's "``\``") to warrant it, IMO. Doubling the number of
+  operators and special methods is not a price that I'm willing to pay to get
+  it, though.
+
+* [ *Note by David Warde-Farley* ]. Even though Robert and others (myself
+  included) really only care about an operator to facilitate matrix
+  multiplication, I think most of us would support the ``~*=`` (mentioned in
+  the PEP) as a natural companion to ``~*``.
+
+  Am I right about this? I realize it can't buy you the same in-place semantics
+  as ``+-=`` and friends currently enjoy with numpy arrays, but I think most
+  folks would just *expect* it to work, i.e. if ``foo`` is 3x4 and ``bar`` is
+  4x1 (or maybe a length 4 rank 1 array) then::
+
+       foo ~*= bar
+
+  results in foo now pointing to an array that (however you choose to handle
+  rank) contains exactly 3 elements.
+  
+  
+Other considerations and suggestions
+====================================
+
+Here we list some additional considerations that were presented.
+
+
+Operator form for logical_X functions
+-------------------------------------
+
+Since the meaning of the logical, short-circuiting operators ``and`` and ``or``
+in Python can't be redefined (they are keywords of the language), Numpy
+implements its own versions as functions: ``logical_and`` and ``logical_or``
+(as well as ``not`` and ``xor`` versions).  It would be good to extend the PEP
+to cover type-defined implementations of logical operators.  Today, numpy
+users often abuses the ``&`` and ``|`` operators for logical operations, but
+the behavior of these isn't exactly that of Python logical operators::
+
+    In [35]: a
+    Out[35]: array([0, 1, 2, 3, 4])
+
+    In [36]: b
+    Out[36]: array([False,  True, False,  True, False], dtype=bool)
+
+    In [37]: a & b
+    Out[37]: array([0, 1, 0, 1, 0])
+
+    In [38]: [x and y for x,y in zip(a,b)]
+    Out[38]: [0, True, False, True, False]
+
+    In [39]: a | b
+    Out[39]: array([0, 1, 2, 3, 4])
+
+    In [40]: [x or y for x,y in zip(a,b)]
+    Out[40]: [False, 1, 2, 3, 4]
+
+Note however, that this problem could perhaps be better dealt with if `PEP
+335`_ were accepted.  That PEP is currently in draft mode, but it would address
+the issues raised above for numpy, allowing `PEP 225`_ to keep its current
+scope.
+
+.. _PEP 225: http://www.python.org/dev/peps/pep-0225
+.. _PEP 335: http://www.python.org/dev/peps/pep-0335
+
+
+Alternate comparisons
+---------------------
+
+It could be useful to extend the original PEP not only to cover the basic
+arithmetic operators, but also comparisons.  Having for a given object
+alternate comparison mechanisms would allow one to declare, for example,
+special orderings in fields for objects which can be ordered in different ways
+depending on the structure in which they are considered to live.
+
+[XXX - more justification for the field ordering example? This was suggested at
+scipy, but I don't recall all the details]
+
+
+Why just go one step?
+---------------------
+
+Instead, it would be nicer to have user-definable multiplication operators such
+that for example::
+
+  a ~1* b
+  a ~2* b
+
+etc... are all valid.  The user could thus define as many ~N* operators as
+desired, for arbitrary integer values of N.  The proponents of this idea argue
+that this provides a general solution to the problem of user-definable
+operators for complex objects while maintaining the spirit of the PEP.  There's
+the concern that if one new family of operators is allowed, we'll want more in
+the future and it is thus worthwhile solving the general problem once and for
+all.  The R language is cited as a precedent with a similar syntax, where
+``%op%`` allows for arbitrary operators to be declared.
+
+
+
+Alternate syntax
+----------------
+
+The only other syntax to receive much support was to use ``!`` instead of ``~``
+as the special character.
+
+
+Unicode operators
+-----------------
+
+A number of proposals were made to consider Unicode operators instead of ascii
+2-character combinations.  While this was favored by one group, it was also
+strongly opposed by another who feared difficulty of editing with standard
+tools, font problems and readability problems.  Several people had problems
+displaying the provided examples in their browsers.
+
+
+D-language inspired syntax
+--------------------------
+
+One contributor suggested a syntax taken from the D language::
+
+    # create array of doubles
+    a = ...
+    # add 42 to all elements
+    a[] += 42.
+    # apply a function
+    b = sin(a[])
+    # or this?
+    b = sin[](a)
+
+    c = a[] + b[]
+

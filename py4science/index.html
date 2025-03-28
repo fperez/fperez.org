@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Python for scientific computing &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Why use Python for scientific computing?" href="why_python.html" />
+    <link rel="prev" title="Conferencia y taller, Universidad de los Andes" href="../teaching/uniandes_2010.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="why_python.html" title="Why use Python for scientific computing?"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../teaching/uniandes_2010.html" title="Conferencia y taller, Universidad de los Andes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="#">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python for scientific computing</a><ul>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+<li><a class="reference internal" href="#news-and-events">News and events</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../teaching/uniandes_2010.html"
+                        title="previous chapter">Conferencia y taller, Universidad de los Andes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="why_python.html"
+                        title="next chapter">Why use Python for scientific computing?</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-for-scientific-computing">
+<span id="py4science"></span><h1>Python for scientific computing<a class="headerlink" href="#python-for-scientific-computing" title="Permalink to this headline">¶</a></h1>
+<p>The Python language is an excellent tool for scientific computing and rapidly
+growing in popularity.  This page gathers some information and resources on
+this topic.</p>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><a class="reference external" href="ucb/index.html">Py4Science meeting series at UC Berkeley</a></dt>
+<dd>An open, informal series open to anyone interested in using, learning about
+or contributing to Python-based tools for scientific research.</dd>
+<dt><a class="reference external" href="code_reviews.html">Code review meetings</a></dt>
+<dd>A topic that bridges research and computing concerns.  The rationale and some
+guidelines on the why and how of having a discipline of group code reviews as
+part of our regular research workflow.</dd>
+<dt><a class="reference external" href="why_python.html">Why Python?</a></dt>
+<dd>A short page you may find useful if you are wondering why you should consider
+the Python language as a research tool [ This needs work at the moment…]</dd>
+<dt><a class="reference external" href="starter_kit.html">A “Starter Kit”</a></dt>
+<dd>If either I or someone else convinced you with a “why python?” discussion,
+and you are asking “OK, now what?”, this may be useful.</dd>
+<dt><a class="reference external" href="warts.html">Warts</a></dt>
+<dd>No tool is perfect, this is the summary of my annoyances.</dd>
+<dt><a class="reference external" href="http://blog.fperez.org">Blog</a></dt>
+<dd>I (occasionally) post items related to this topic.</dd>
+<dt><a class="reference external" href="git.html">Git resources</a></dt>
+<dd>Not specific to Python, but rather a set of resources on how to use a good
+version control system as part of your daily workflow.</dd>
+</dl>
+</div>
+<div class="section" id="news-and-events">
+<h2>News and events<a class="headerlink" href="#news-and-events" title="Permalink to this headline">¶</a></h2>
+<p>In reverse chronological order, links to meetings, discussions or other items
+of interest on this topic.</p>
+<dl class="docutils">
+<dt>November 2009, Guido van Rossum at our Py4Science seminar</dt>
+<dd>On November 4, we had a very interesting session with Guido van Rossum, the
+creator of the Python language.  See <a class="reference external" href="2009_guido_ucb/index.html">this page</a>
+for details.</dd>
+<dt>September 2009, PyDy</dt>
+<dd>At our meeting series, Luke Peterson from UC Davis gave a very interesting
+talk on <a class="reference external" href="http://code.google.com/p/pydy">PyDy</a>, a project under the <a class="reference external" href="http://code.google.com/p/sympy">SymPy</a> umbrella to symbolically describe
+mechanical systems and derive their equations of motion.  Many thanks to Jeff
+Teeters for his continued work of <a class="reference external" href="http://www.archive.org/details/ucb_py4science_2009_09_30_Luke_Peterson">videotaping the lectures</a>.</dd>
+<dt>September 2009, decorators</dt>
+<dd>Some <a class="reference external" href="decorators.html">notes about decorators for controlling execution</a>
+from a September 2009 talk at the Berkeley Py4Science group.</dd>
+<dt>April 2009, PyMVPA</dt>
+<dd>We will be having a <a class="reference external" href="pymvpa_nipy_sprint_200904.html">PyMVPA/NiPy meeting</a>,
+where we will work on integration issues as well as having two lectures by
+the PyMVPA team.</dd>
+<dt>March 2009, <em>Expert Python Programming</em> book review</dt>
+<dd>I have recently received a copy of the book <a class="reference external" href="http://www.packtpub.com/expert-python-programming/book">Expert Python Programming</a> by Tarek Ziadé,
+you can read my full <a class="reference external" href="expert_python_programming_review.html">review here</a>.</dd>
+<dt>March 2009, SIAM CSE09</dt>
+<dd>I co-organized another Python mini-symposium at a SIAM meeting, this time the
+Computational Science and Engineering one.  I’ve <a class="reference external" href="http://fdoperez.blogspot.com/2009/03/python-at-siam-cse09-meeting.html">posted</a> a summary report
+on my blog, and <a class="reference external" href="2009_siam_cse">this page</a> has all the slides I have so
+far.</dd>
+<dt>October 2008, 2-day hands-on workshop at UC Berkeley</dt>
+<dd>I’m holding a <a class="reference external" href="workshop_berkeley_2008.html">2-day workshop</a> introducing
+Python for scientists.  The workshop is now over, but most of the lectures
+were videotaped and can be found <a class="reference external" href="http://www.archive.org/search.php?query=Fernando+Perez+scientific+python">here</a>.</dd>
+<dt>September 2008, PEP 225 for extended binary operators in Python</dt>
+<dd>Feedback <a class="reference external" href="numpy-pep225/README.html">from the numpy community</a> on Python’s PEP
+225 regarding the implementation of new arithmetic operators.</dd>
+<dt>June 2008, Python and Sage at the annual SIAM meeting</dt>
+<dd>I have posted <a class="reference external" href="2008_siam">the slides I have</a> from the Python/Sage
+minisymposium at the 2008 SIAM annual meeting.</dd>
+</dl>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="why_python.html" title="Why use Python for scientific computing?"
+             >next</a></li>
+        <li class="right" >
+          <a href="../teaching/uniandes_2010.html" title="Conferencia y taller, Universidad de los Andes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Why use Python for scientific computing? &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Py4Science: a Starter Kit" href="starter_kit.html" />
+    <link rel="prev" title="Python for scientific computing" href="index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="starter_kit.html" title="Py4Science: a Starter Kit"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Python for scientific computing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Python for scientific computing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="starter_kit.html"
+                        title="next chapter">Py4Science: a Starter Kit</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/why_python.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="why-use-python-for-scientific-computing">
+<h1>Why use Python for scientific computing?<a class="headerlink" href="#why-use-python-for-scientific-computing" title="Permalink to this headline">¶</a></h1>
+<p>For example, recently a very similar thread was started:</p>
+<p><a class="reference external" href="http://mail.scipy.org/pipermail/scipy-user/2009-July/021706.html">http://mail.scipy.org/pipermail/scipy-user/2009-July/021706.html</a></p>
+<p>you can also read it here formatted by google if you prefer:</p>
+<p><a class="reference external" href="http://groups.google.it/group/scipy-user/browse_thread/thread">http://groups.google.it/group/scipy-user/browse_thread/thread</a>/0eb1517095963c9a#</p>
+<p>There are a number of points made there that I won’t repeat, which you could
+find useful.</p>
+<p>I was never a ‘faithful’ matlab user, but I did use IDL a lot while in graduate
+school, and I have many colleagues who had thousands of lines of production
+matlab code and still found it worthwhile to switch to python (even years ago,
+when the various tools were <em>far</em> less mature and powerful than they are
+today).  But for each person, the answer to this question can be different, and
+what works for me may not work for you.</p>
+<p>I’ve made a number of ‘pro python’ points in that article and elsewhere, but
+python is certainly not perfect (no tool is).  I find it to be the best
+<em>compromise</em> tool from what exists today, for high-level scientific computing
+development, and it continually improves.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="starter_kit.html" title="Py4Science: a Starter Kit"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Python for scientific computing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

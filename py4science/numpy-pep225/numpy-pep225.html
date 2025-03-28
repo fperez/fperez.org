@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Discussion regarding possible new operators in Python (PEP 225) &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Software Tools" href="../../code/index.html" />
+    <link rel="prev" title="PEP 225 feedback from Numpy" href="README.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../../index.html">
+  <img src="../../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../code/index.html" title="Software Tools"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="README.html" title="PEP 225 feedback from Numpy"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="../index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Discussion regarding possible new operators in Python (PEP 225)</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#background-matrix-multiplication-and-numpy">Background: matrix multiplication and Numpy</a></li>
+<li><a class="reference internal" href="#summary-from-the-numpy-community">Summary from the NumPy community</a></li>
+<li><a class="reference internal" href="#arguments-neutral-towards-or-against-the-pep">Arguments neutral towards or against the PEP</a></li>
+<li><a class="reference internal" href="#other-considerations-and-suggestions">Other considerations and suggestions</a><ul>
+<li><a class="reference internal" href="#operator-form-for-logical-x-functions">Operator form for logical_X functions</a></li>
+<li><a class="reference internal" href="#alternate-comparisons">Alternate comparisons</a></li>
+<li><a class="reference internal" href="#why-just-go-one-step">Why just go one step?</a></li>
+<li><a class="reference internal" href="#alternate-syntax">Alternate syntax</a></li>
+<li><a class="reference internal" href="#unicode-operators">Unicode operators</a></li>
+<li><a class="reference internal" href="#d-language-inspired-syntax">D-language inspired syntax</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="previous chapter">PEP 225 feedback from Numpy</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../code/index.html"
+                        title="next chapter">Software Tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/py4science/numpy-pep225/numpy-pep225.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="discussion-regarding-possible-new-operators-in-python-pep-225">
+<span id="pep-225-discussion"></span><h1><a class="toc-backref" href="#id3">Discussion regarding possible new operators in Python (PEP 225)</a><a class="headerlink" href="#discussion-regarding-possible-new-operators-in-python-pep-225" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#discussion-regarding-possible-new-operators-in-python-pep-225" id="id3">Discussion regarding possible new operators in Python (PEP 225)</a><ul>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="#background-matrix-multiplication-and-numpy" id="id5">Background: matrix multiplication and Numpy</a></li>
+<li><a class="reference internal" href="#summary-from-the-numpy-community" id="id6">Summary from the NumPy community</a></li>
+<li><a class="reference internal" href="#arguments-neutral-towards-or-against-the-pep" id="id7">Arguments neutral towards or against the PEP</a></li>
+<li><a class="reference internal" href="#other-considerations-and-suggestions" id="id8">Other considerations and suggestions</a><ul>
+<li><a class="reference internal" href="#operator-form-for-logical-x-functions" id="id9">Operator form for logical_X functions</a></li>
+<li><a class="reference internal" href="#alternate-comparisons" id="id10">Alternate comparisons</a></li>
+<li><a class="reference internal" href="#why-just-go-one-step" id="id11">Why just go one step?</a></li>
+<li><a class="reference internal" href="#alternate-syntax" id="id12">Alternate syntax</a></li>
+<li><a class="reference internal" href="#unicode-operators" id="id13">Unicode operators</a></li>
+<li><a class="reference internal" href="#d-language-inspired-syntax" id="id14">D-language inspired syntax</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id4">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In the Python-dev mailing lists, there were recently two threads regarding the
+possibility of adding to the language a new set of operators.  This would
+provide easy syntactic support for behavior such as element-wise and
+matrix-like multiplication for numpy arrays.  The original python-dev threads
+are here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mail.python.org/pipermail/python-dev/2008-July/081508.html">http://mail.python.org/pipermail/python-dev/2008-July/081508.html</a></li>
+<li><a class="reference external" href="http://mail.python.org/pipermail/python-dev/2008-July/081551.html">http://mail.python.org/pipermail/python-dev/2008-July/081551.html</a></li>
+</ul>
+<p>And the actual PEP that discusses this at length is PEP 225:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.python.org/dev/peps/pep-0225/">http://www.python.org/dev/peps/pep-0225/</a></li>
+</ul>
+<p>In order to provide feedback from the scientific/numerical community, a
+discussion was held on the numpy mailing list.  This document is a brief
+summary of this discussion, in addition to some issues that were brought up
+during a BOF session that was held during the SciPy‘08 conference.  The point
+of this document is to provide the Python development team (and ultimately
+Guido) with feedback from a community that would be likely an important target
+of the features discussed in PEP 225, hoping that a final decision can be made
+on the PEP, either as-is or with modifications arising from this feedback.</p>
+<p>This document contains a summary of an original discussion whose thread in the
+numpy list can be found here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036769.html">http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036769.html</a></li>
+<li><a class="reference external" href="http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036858.html">http://mail.scipy.org/pipermail/numpy-discussion/2008-August/036858.html</a></li>
+</ul>
+<p>and it has been further updated with a final round of vetting.  The final
+thread which this document summarizes is here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mail.scipy.org/pipermail/numpy-discussion/2008-October/038234.html">http://mail.scipy.org/pipermail/numpy-discussion/2008-October/038234.html</a></li>
+</ul>
+</div>
+<div class="section" id="background-matrix-multiplication-and-numpy">
+<h2><a class="toc-backref" href="#id5">Background: matrix multiplication and Numpy</a><a class="headerlink" href="#background-matrix-multiplication-and-numpy" title="Permalink to this headline">¶</a></h2>
+<p>It is probably useful, for the sake of the Python dev team, to provide a bit of
+background regarding the array/matrix situation in <a class="reference external" href="http://numpy.scipy.org">Numpy</a>, which is at the heart of much of this.  The numpy
+library provides, in addition to the basic arrays that support element-wise
+operations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">matrix</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">],[</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">]])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">40</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">160</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>also an object called <code class="docutils literal"><span class="pre">matrix</span></code> that implements classic matrix multiplication
+semantics for the <code class="docutils literal"><span class="pre">*</span></code> operator:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">aM</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">bM</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">aM</span><span class="o">*</span><span class="n">bM</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">220</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>The existence of two almost-but-not-quite identical objects at the core of
+numpy has been the source of a large amount of discussion and effort to provide
+smoother integration.  Yet, despite much work it is the opinion of many that
+the situation will always remain unsatisfactory, as many pitfalls continue to
+exist.  It is very easy to pass a matrix to some routine that does numerical
+manipulations on its inputs and forgets to verify that a matrix was received,
+and to end up with an array instead afterwards.  While much work has gone into
+making the core numpy and scipy libraries ‘matrix-proof’, arbitrary third party
+code may or may not be matrix aware, and thus this problem is likely to remain
+an open issue.</p>
+<p>Many more details on this can be read here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.scipy.org/MatrixIndexing">http://www.scipy.org/MatrixIndexing</a></li>
+<li><a class="reference external" href="http://scipy.org/NewMatrixSpec">http://scipy.org/NewMatrixSpec</a></li>
+</ul>
+<p>Multiplication is perhaps the main need for matrices, and the proposed PEP
+could provide a viable solution for this problem.  Exponentiation is also
+useful and covered by the PEP, and the <code class="docutils literal"><span class="pre">~/</span></code> division could perhaps be an
+acceptable way of implementing matlab’s <a class="reference external" href="http://www.mathworks.com/access/helpdesk/help/techdoc/index.html?/access/helpdesk/help/techdoc/ref/mrdivide.html">slash operator</a>.</p>
+</div>
+<div class="section" id="summary-from-the-numpy-community">
+<h2><a class="toc-backref" href="#id6">Summary from the NumPy community</a><a class="headerlink" href="#summary-from-the-numpy-community" title="Permalink to this headline">¶</a></h2>
+<p>Overall the response to PEP 225 ranges from positive to very positive.  There
+was particular interest in the benefits of having both <a class="reference external" href="http://www.python.org/dev/peps/pep-0225">PEP 225</a> and <a class="reference external" href="http://www.python.org/dev/peps/pep-0335">PEP
+335</a>, since together these could address the key language-based issues
+encountered by numpy.</p>
+<p>Participants expressed that it would solve real-world, practical problems for
+them and enable them to use Python more effectively in teaching and research
+involving numerical work, in particular (but not limited to) topics involving
+linear algebra.</p>
+<p>As Python’s importance in scientific computing grows, both as an educational
+and a research tool, it becomes more critical that it can be used as a
+‘drop-in’ replacement to existing systems.  PEP 225 would lower the notational
+barrier to using Python for tasks where languages like Matlab(TM) and IDL(TM)
+are typically the default choice.  Expressing common algorithms, especially in
+the domain of linear algebra, would be easier and more readable if numpy could
+provide operator-level support for matrix operations without introducing new
+top-level objects.</p>
+<p>As an example of the relevance of this, we note a new NSF-funded project for
+developing scientific computing curricular materials called <a class="reference external" href="http://secant.cs.purdue.edu">Secant</a>.  This is
+just one example amongst many of how Python is growing as the open tool of
+choice for new scientific computing efforts.</p>
+</div>
+<div class="section" id="arguments-neutral-towards-or-against-the-pep">
+<h2><a class="toc-backref" href="#id7">Arguments neutral towards or against the PEP</a><a class="headerlink" href="#arguments-neutral-towards-or-against-the-pep" title="Permalink to this headline">¶</a></h2>
+<p>While the response was overall positive, there were a few differing opinions,
+listed here.</p>
+<ul>
+<li><p class="first">Some expressed a neutral position: they felt there was really no overwhelming
+need for this and that people could get by with the tools offered today by
+Python.</p>
+</li>
+<li><p class="first">Some contributors feel that the real problem for numpy is <em>one</em> operator,
+multiplication.  Thus, some feel that only one should be added (reducing the
+reach of PEP 225), others that this simply isn’t enough to justify the PEP’s
+acceptance.</p>
+</li>
+<li><p class="first">Some felt that perhaps the time is not right for this, and that one should
+wait instead a few years for Unicode support to become more pervasive, and
+implement this idea via Unicode instead (see below).</p>
+</li>
+<li><p class="first">[ <em>Note by Robert Kern</em> ]. I really only care about having just <em>one</em>
+extra operator, one that I can (ab)use for matrix multiplication. It’s the
+only operation that is common enough and with one obvious implementation (I’m
+looking at you, Matlab’s “<code class="docutils literal"><span class="pre">\</span></code>”) to warrant it, IMO. Doubling the number of
+operators and special methods is not a price that I’m willing to pay to get
+it, though.</p>
+</li>
+<li><p class="first">[ <em>Note by David Warde-Farley</em> ]. Even though Robert and others (myself
+included) really only care about an operator to facilitate matrix
+multiplication, I think most of us would support the <code class="docutils literal"><span class="pre">~*=</span></code> (mentioned in
+the PEP) as a natural companion to <code class="docutils literal"><span class="pre">~*</span></code>.</p>
+<p>Am I right about this? I realize it can’t buy you the same in-place semantics
+as <code class="docutils literal"><span class="pre">+-=</span></code> and friends currently enjoy with numpy arrays, but I think most
+folks would just <em>expect</em> it to work, i.e. if <code class="docutils literal"><span class="pre">foo</span></code> is 3x4 and <code class="docutils literal"><span class="pre">bar</span></code> is
+4x1 (or maybe a length 4 rank 1 array) then:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="o">~*=</span> <span class="n">bar</span>
+</pre></div>
+</div>
+<p>results in foo now pointing to an array that (however you choose to handle
+rank) contains exactly 3 elements.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="other-considerations-and-suggestions">
+<h2><a class="toc-backref" href="#id8">Other considerations and suggestions</a><a class="headerlink" href="#other-considerations-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<p>Here we list some additional considerations that were presented.</p>
+<div class="section" id="operator-form-for-logical-x-functions">
+<h3><a class="toc-backref" href="#id9">Operator form for logical_X functions</a><a class="headerlink" href="#operator-form-for-logical-x-functions" title="Permalink to this headline">¶</a></h3>
+<p>Since the meaning of the logical, short-circuiting operators <code class="docutils literal"><span class="pre">and</span></code> and <code class="docutils literal"><span class="pre">or</span></code>
+in Python can’t be redefined (they are keywords of the language), Numpy
+implements its own versions as functions: <code class="docutils literal"><span class="pre">logical_and</span></code> and <code class="docutils literal"><span class="pre">logical_or</span></code>
+(as well as <code class="docutils literal"><span class="pre">not</span></code> and <code class="docutils literal"><span class="pre">xor</span></code> versions).  It would be good to extend the PEP
+to cover type-defined implementations of logical operators.  Today, numpy
+users often abuses the <code class="docutils literal"><span class="pre">&amp;</span></code> and <code class="docutils literal"><span class="pre">|</span></code> operators for logical operations, but
+the behavior of these isn’t exactly that of Python logical operators:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">a</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">b</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">38</span><span class="p">]:</span> <span class="p">[</span><span class="n">x</span> <span class="ow">and</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">39</span><span class="p">]:</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span> <span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">40</span><span class="p">]:</span> <span class="p">[</span><span class="n">x</span> <span class="ow">or</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)]</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note however, that this problem could perhaps be better dealt with if <a class="reference external" href="http://www.python.org/dev/peps/pep-0335">PEP
+335</a> were accepted.  That PEP is currently in draft mode, but it would address
+the issues raised above for numpy, allowing <a class="reference external" href="http://www.python.org/dev/peps/pep-0225">PEP 225</a> to keep its current
+scope.</p>
+</div>
+<div class="section" id="alternate-comparisons">
+<h3><a class="toc-backref" href="#id10">Alternate comparisons</a><a class="headerlink" href="#alternate-comparisons" title="Permalink to this headline">¶</a></h3>
+<p>It could be useful to extend the original PEP not only to cover the basic
+arithmetic operators, but also comparisons.  Having for a given object
+alternate comparison mechanisms would allow one to declare, for example,
+special orderings in fields for objects which can be ordered in different ways
+depending on the structure in which they are considered to live.</p>
+<p>[XXX - more justification for the field ordering example? This was suggested at
+scipy, but I don’t recall all the details]</p>
+</div>
+<div class="section" id="why-just-go-one-step">
+<h3><a class="toc-backref" href="#id11">Why just go one step?</a><a class="headerlink" href="#why-just-go-one-step" title="Permalink to this headline">¶</a></h3>
+<p>Instead, it would be nicer to have user-definable multiplication operators such
+that for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">~</span><span class="mi">1</span><span class="o">*</span> <span class="n">b</span>
+<span class="n">a</span> <span class="o">~</span><span class="mi">2</span><span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>etc… are all valid.  The user could thus define as many ~N* operators as
+desired, for arbitrary integer values of N.  The proponents of this idea argue
+that this provides a general solution to the problem of user-definable
+operators for complex objects while maintaining the spirit of the PEP.  There’s
+the concern that if one new family of operators is allowed, we’ll want more in
+the future and it is thus worthwhile solving the general problem once and for
+all.  The R language is cited as a precedent with a similar syntax, where
+<code class="docutils literal"><span class="pre">%op%</span></code> allows for arbitrary operators to be declared.</p>
+</div>
+<div class="section" id="alternate-syntax">
+<h3><a class="toc-backref" href="#id12">Alternate syntax</a><a class="headerlink" href="#alternate-syntax" title="Permalink to this headline">¶</a></h3>
+<p>The only other syntax to receive much support was to use <code class="docutils literal"><span class="pre">!</span></code> instead of <code class="docutils literal"><span class="pre">~</span></code>
+as the special character.</p>
+</div>
+<div class="section" id="unicode-operators">
+<h3><a class="toc-backref" href="#id13">Unicode operators</a><a class="headerlink" href="#unicode-operators" title="Permalink to this headline">¶</a></h3>
+<p>A number of proposals were made to consider Unicode operators instead of ascii
+2-character combinations.  While this was favored by one group, it was also
+strongly opposed by another who feared difficulty of editing with standard
+tools, font problems and readability problems.  Several people had problems
+displaying the provided examples in their browsers.</p>
+</div>
+<div class="section" id="d-language-inspired-syntax">
+<h3><a class="toc-backref" href="#id14">D-language inspired syntax</a><a class="headerlink" href="#d-language-inspired-syntax" title="Permalink to this headline">¶</a></h3>
+<p>One contributor suggested a syntax taken from the D language:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create array of doubles</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">...</span>
+<span class="c1"># add 42 to all elements</span>
+<span class="n">a</span><span class="p">[]</span> <span class="o">+=</span> <span class="mf">42.</span>
+<span class="c1"># apply a function</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">[])</span>
+<span class="c1"># or this?</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">sin</span><span class="p">[](</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="p">[]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../code/index.html" title="Software Tools"
+             >next</a></li>
+        <li class="right" >
+          <a href="README.html" title="PEP 225 feedback from Numpy"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

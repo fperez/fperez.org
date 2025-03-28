@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Modern Scientific Computing &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Computación científica moderna" href="udea_2010.html" />
+    <link rel="prev" title="Teaching" href="index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="udea_2010.html" title="Computación científica moderna"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Teaching"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Teaching</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="../py4science/index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Modern Scientific Computing</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#format">Format</a></li>
+<li><a class="reference internal" href="#tools-required">Tools required</a></li>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#topics">Topics</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Teaching</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="udea_2010.html"
+                        title="next chapter">Computación científica moderna</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/teaching/scicomp_course.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="modern-scientific-computing">
+<span id="scicomp-course"></span><h1>Modern Scientific Computing<a class="headerlink" href="#modern-scientific-computing" title="Permalink to this headline">¶</a></h1>
+<p>An intensive course on the modern practice of scientific computing aimed at the
+late-undergraduate or graduate level in the physical sciences, mathematics and
+engineering.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Scientific computing, broadly understood as the use of computational resources
+to solve research-specific problems, has in the last decade grown immensely in
+its reach across disciplines as well as changing in nature.  The vast majority
+of computational effort in science during the XXth century was devoted to the
+solution of numerical problems (first exclusively with Fortran and then
+including other languages).  But in the past two decades, higher-level
+environments that allow for more rapid and flexible development and incorporate
+extensive libraries, data analysis and interactive exploration have become
+extremely popular.  This was pioneered by the creation of Matlab and IDL,
+followed by systems with symbolic capabilities like Mathematica and Maple, all
+of them commercial products.</p>
+<p>Simultaneously, we reached the point where today, scientists from virtually
+every discipline need to perform extensive computational work.  This is partly
+thanks to the existence of such systems that enable someone who is not an
+expert at low-level programming to perform sophisticated computational tasks,
+but also fueled by the explosion of data that is flooding many fields in a way
+that inescapably mandates a change towards semi-automated, large-scale
+computational analysis and modeling (for a particularly interesting example of
+this, see <a class="reference external" href="http://astro.berkeley.edu/~jbloom">Josh Bloom’s</a> current work on <a class="reference external" href="http://128.150.4.107/awardsearch/showAward.do?AwardNumber=0941742">automatic real-time astronomical
+data acquisition and analysis</a>)</p>
+<p>In the last decade, open source alternatives to the above commercial systems
+have emerged, and the most successful ones are all based on the <a class="reference external" href="http://www.python.org">Python</a>
+programming language, supported by a vast array of additional tools and
+libraries to do everything from basic array manipluation to sophisticated
+modeling and visualization.</p>
+<p>This course will present a practical perspective on these tools, targeted at
+the level of graduate students in the physical sciences, mathematics and
+engineering.  By practical we mean that we will not spend much time proving
+theorems regarding the convergence rate of a particular algorithm, for example.
+We <em>will</em> spend time discussing issues that sit at the intersection of
+scientific computing and software engineering, such as: documentation, testing
+and validation of codes, as well as version control and the participation of
+scientists as developers of their own research tools in open-source
+collaborations.  This is important, because I have found through painful
+experience that often, scientific research projects have difficulties not
+because we aren’t smart enough (we never are) or we don’t work hard enough (we
+actually do put in a lot of time).  The problems arise because of a nasty
+interlocking mess of poor <em>practices</em> regarding tool development, data
+management and accrual of verifyable results that leads to highly sub-optimal
+outcomes.  This course will then try to at least touch on these topics as a
+natural part of the workflow.  Rather than repeating here what others have said
+better I’d encourage you to look at Greg Wilson’s excellent <a class="reference external" href="http://software-carpentry.org">Software
+Carpentry</a> materials, as well as a related <a class="reference external" href="http://www.joelonsoftware.com/items/2009/10/26.html">post by Joel Spolsky</a> which,
+despite being made in the context of a commercial software house, in my opinion
+applies 100% to our problem of interest.</p>
+</div>
+<div class="section" id="format">
+<h2>Format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h2>
+<p>The course is organized around 24 hands-on 2-hour sessions, where we will mix
+short presentations with work on actual problems to illustrate and explore.
+The class will take place in a computer lab where systems that have all the
+prerequisites pre-installed are available, but you are also welcome to bring
+your own laptop if you so desire.  I will present short problems during class
+which you will be given some time to try and solve, and whose solution we will
+then discuss immediately; longer problems will be given as homework.</p>
+<p>At the end of the course, a final project will be required of each student,
+which can take one of two forms:</p>
+<ul class="simple">
+<li>A draft implementation of something of interest for one of your courses or
+research projects.  I will be happy to discuss your problem and make
+suggestions on tools you can use as a starting point.  You should plan on
+having something that does <em>run and produce some result</em> by the end of the
+course, even if it is preliminary in nature.</li>
+<li>A <em>working</em> improvement to any of the open-source tools we will be discussing
+and using in the course (ipython, numpy, scipy, matplotlib, mayavi, sympy,
+cython, sage, etc).  You can fix an existing bug report, improve the
+documentation or implement a new feature.  The choice of open-source project
+and specific task is yours, but I will expected you to actually produce the
+solution in the format expected by the project.  This typically means joining
+its development mailing list, learning how to file the appropriate
+information in its bug tracking system and how to prepare your work for
+submission.</li>
+</ul>
+</div>
+<div class="section" id="tools-required">
+<h2>Tools required<a class="headerlink" href="#tools-required" title="Permalink to this headline">¶</a></h2>
+<p>If you wish to install the tools in your own system, you can find the necessary
+information in my <a class="reference external" href="../py4science/starter_kit.html">“Starter Kit”</a> page.  It
+is important that you actually <em>run</em> the <a class="reference external" href="../py4science/workshop_checklist.py">checklist script</a>, which for example
+on my Ubuntu 9.10 system produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">workshop_checklist</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Running</span> <span class="n">tests</span><span class="p">:</span>
+<span class="n">__main__</span><span class="o">.</span><span class="n">test_imports</span><span class="p">(</span><span class="s1">&#39;setuptools&#39;</span><span class="p">,)</span> <span class="o">...</span> <span class="n">MOD</span><span class="p">:</span> <span class="n">setuptools</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="mf">0.6</span><span class="n">c9</span>
+<span class="n">ok</span>
+<span class="n">__main__</span><span class="o">.</span><span class="n">test_imports</span><span class="p">(</span><span class="s1">&#39;IPython&#39;</span><span class="p">,)</span> <span class="o">...</span> <span class="n">MOD</span><span class="p">:</span> <span class="n">IPython</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="mf">0.11</span><span class="o">.</span><span class="n">bzr</span><span class="o">.</span><span class="n">r1346</span>
+<span class="n">ok</span>
+<span class="n">__main__</span><span class="o">.</span><span class="n">test_imports</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,)</span> <span class="o">...</span> <span class="n">MOD</span><span class="p">:</span> <span class="n">numpy</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="mf">1.3</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">ok</span>
+<span class="n">__main__</span><span class="o">.</span><span class="n">test_imports</span><span class="p">(</span><span class="s1">&#39;scipy&#39;</span><span class="p">,)</span> <span class="o">...</span> <span class="n">MOD</span><span class="p">:</span> <span class="n">scipy</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="mf">0.7</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">ok</span>
+
+<span class="p">[</span> <span class="n">lots</span> <span class="n">of</span> <span class="n">intermediate</span> <span class="n">output</span> <span class="n">removed</span> <span class="p">]</span>
+
+<span class="n">Simple</span> <span class="n">plot</span> <span class="n">generation</span><span class="o">.</span> <span class="o">...</span> <span class="n">ok</span>
+<span class="n">Plots</span> <span class="k">with</span> <span class="n">math</span> <span class="o">...</span> <span class="n">ok</span>
+
+<span class="o">----------------------------------------------------------------------</span>
+<span class="n">Ran</span> <span class="mi">21</span> <span class="n">tests</span> <span class="ow">in</span> <span class="mf">37.571</span><span class="n">s</span>
+
+<span class="n">OK</span>
+
+<span class="o">***************************************************************************</span>
+                           <span class="n">TESTS</span> <span class="n">FINISHED</span>
+<span class="o">***************************************************************************</span>
+
+<span class="n">If</span> <span class="n">the</span> <span class="n">printout</span> <span class="n">above</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">finish</span> <span class="ow">in</span> <span class="s1">&#39;OK&#39;</span> <span class="n">but</span> <span class="n">instead</span> <span class="n">says</span> <span class="s1">&#39;FAILED&#39;</span><span class="p">,</span> <span class="n">copy</span>
+<span class="ow">and</span> <span class="n">send</span> <span class="n">the</span> <span class="o">*</span><span class="n">entire</span><span class="o">*</span> <span class="n">output</span> <span class="p">(</span><span class="nb">all</span> <span class="n">info</span> <span class="n">above</span> <span class="ow">and</span> <span class="n">summary</span> <span class="n">below</span><span class="p">)</span> <span class="n">to</span> <span class="n">the</span>
+<span class="n">instructor</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="o">==================</span>
+<span class="n">System</span> <span class="n">information</span>
+<span class="o">==================</span>
+<span class="n">os</span><span class="o">.</span><span class="n">name</span>      <span class="p">:</span> <span class="n">posix</span>
+<span class="n">os</span><span class="o">.</span><span class="n">uname</span>     <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;Linux&#39;</span><span class="p">,</span> <span class="s1">&#39;maqroll&#39;</span><span class="p">,</span> <span class="s1">&#39;2.6.31-17-generic&#39;</span><span class="p">,</span> <span class="s1">&#39;#54-Ubuntu SMP Thu Dec 10 16:20:31 UTC 2009&#39;</span><span class="p">,</span> <span class="s1">&#39;i686&#39;</span><span class="p">)</span>
+<span class="n">platform</span>     <span class="p">:</span> <span class="n">linux2</span>
+<span class="n">platform</span><span class="o">+</span>    <span class="p">:</span> <span class="n">Linux</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mi">31</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="n">generic</span><span class="o">-</span><span class="n">i686</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">Ubuntu</span><span class="o">-</span><span class="mf">9.10</span><span class="o">-</span><span class="n">karmic</span>
+<span class="n">prefix</span>       <span class="p">:</span> <span class="o">/</span><span class="n">usr</span>
+<span class="n">exec_prefix</span>  <span class="p">:</span> <span class="o">/</span><span class="n">usr</span>
+<span class="n">executable</span>   <span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span>
+<span class="n">version_info</span> <span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;final&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">version</span>      <span class="p">:</span> <span class="mf">2.6</span><span class="o">.</span><span class="mi">4</span> <span class="p">(</span><span class="n">r264</span><span class="p">:</span><span class="mi">75706</span><span class="p">,</span> <span class="n">Dec</span>  <span class="mi">7</span> <span class="mi">2009</span><span class="p">,</span> <span class="mi">18</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">15</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">4.4</span><span class="o">.</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">==================</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This course assumes the level of a graduate student in the physical sciences,
+math or engineering, with a grasp of calculus, linear algebra, ordinary
+differential equations, basic statistics and elmentary numerical methods.</p>
+<p>In addition, we will assume a <em>reasonable familiarity with programming</em>.  If
+you have never programmed in your life, I am afraid this is not the course for
+you: I will not be teaching basic programming concepts from scratch.  Python is
+an extremely readable language, and its syntax is regular and easy to remember,
+but this doesn’t change the fact that some ideas in programming require a
+certain amount of practice to understand.</p>
+<p>You must also <em>work through</em> (not just read, but actually type in and execute)
+the basic <a class="reference external" href="http://docs.python.org/tutorial">Python tutorial</a>, as well as the
+<a class="reference external" href="http://mentat.za.net/numpy/intro/intro.html">introductory NumPy tutorial</a>.
+I will explain Python syntax and language details as we go, but I will do so
+quickly; it is therefore <em>really</em> important you have some practice with the
+basics of the language and of Numpy arrays first.</p>
+<p>Specifically, I assume you have read and understood these topics (you don’t
+have to be an expert, I will cover all of these, but they should be reasonably
+familiar to you in general, and specifically in how Python implements them):</p>
+<ul class="simple">
+<li>Basic types of the language (numbers, strings, lists, dictionaries)</li>
+<li>Function definition syntax</li>
+<li>Control flow primitives (if/else, for, while, break, continue)</li>
+<li>What an exception is, how to raise one and how to catch one</li>
+<li>How to define and instantiate a class</li>
+<li>How to open a text file on disk and read its contents</li>
+<li>How to write numbers to a text file on disk</li>
+<li>What a numpy array is and how it differs from a python list</li>
+<li>What basic operations a numpy array supports</li>
+<li>How to create a numpy array of uniform random numbers in a given interval</li>
+</ul>
+<p>(hint: all of these are covered in the basic tutorials linked above).</p>
+<p>Please see the <a class="reference external" href="../py4science/starter_kit.html">“Starter Kit”</a> page for
+detailed links to multiple references available online.</p>
+</div>
+<div class="section" id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h2>
+<p>The following is a <em>tentative</em> list of topics to be covered.  I emphasize
+tentative because I hope to adjust the actual workflow of the course based on
+feedback from the students regarding background, interest and relevance to your
+own projects.</p>
+<ul class="simple">
+<li>Introduction to the scientific <a class="reference external" href="http://www.python.org">Python</a> stack of tools, and language review.</li>
+<li>Effective workflow techniques using <a class="reference external" href="http://ipython.org">IPython</a>.</li>
+<li>Introductory numerics with Python and <a class="reference external" href="http://numpy.scipy.org">numpy</a>.</li>
+<li>Numerical integration and root finding.</li>
+<li>Text processing.</li>
+<li>Dynamical systems, elementary chaos and error analysis.</li>
+<li>Elementary image processing with Numpy.</li>
+<li>Spectral techniques for image processing.</li>
+<li>Ordinary differential equations.</li>
+<li>Handling internet-based data: examples with financial datasets.</li>
+<li>Record arrays: sophisticated data management with Numpy.</li>
+<li>Statistics with Numpy and <a class="reference external" href="http://www.scipy.org">Scipy</a>.</li>
+<li>Data visualization with <a class="reference external" href="http://matplotlib.sourceforge.net">matplotlib</a>, in 2 and 3d.</li>
+<li>Data visualization with <a class="reference external" href="http://code.enthought.com/projects/mayavi">Mayavi</a>.</li>
+<li>Visually compelling 3d simulations with <a class="reference external" href="http://vpython.org">VPython</a>.</li>
+<li>Symbolic computing with <a class="reference external" href="http://code.google.com/p/sympy">Sympy</a>.</li>
+<li>Profiling and optimizing a program.</li>
+<li>Debugging techniques.</li>
+<li>Properly documenting your software.</li>
+<li>Writing codes you can believe in: automatic, reproducible testing.</li>
+<li>High-level distributed and parallel computing with IPython.</li>
+<li>f2py: interfacing with Fortran codes.</li>
+<li>scipy.weave: optimizing bottlenecks with C and C++.</li>
+<li><a class="reference external" href="http://cython.org">Cython</a>: high-performance code with Python-like syntax.</li>
+<li>Introduction to <a class="reference external" href="http://sagemath.org">Sage</a>.</li>
+<li>Basics of software engineering: version control.</li>
+<li>Open source scientific computing: contributing to a project.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="udea_2010.html" title="Computación científica moderna"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Teaching"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Teaching</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

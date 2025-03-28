@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Version control with Git: resources &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Book Review: Expert Python Programming by Tarek Ziadé" href="expert_python_programming_review.html" />
+    <link rel="prev" title="Profiling Python codes with KCacheGrind" href="profiling/index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="expert_python_programming_review.html" title="Book Review: Expert Python Programming by Tarek Ziadé"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="profiling/index.html" title="Profiling Python codes with KCacheGrind"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Version control with Git: resources</a><ul>
+<li><a class="reference internal" href="#introductory-materials">Introductory materials</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+<li><a class="reference internal" href="#collaboration-sharing-repositories">Collaboration: sharing repositories</a></li>
+<li><a class="reference internal" href="#for-svn-users">For SVN users</a></li>
+<li><a class="reference internal" href="#tips">Tips</a><ul>
+<li><a class="reference internal" href="#better-shell-support">Better shell support</a></li>
+<li><a class="reference internal" href="#embedding-git-information-in-latex-documents">Embedding Git information in LaTeX documents</a></li>
+<li><a class="reference internal" href="#automatically-make-local-branches-track-remotes">Automatically make local branches track remotes</a></li>
+<li><a class="reference internal" href="#git-export">git export</a></li>
+<li><a class="reference internal" href="#interactive-rebase">Interactive Rebase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="profiling/index.html"
+                        title="previous chapter">Profiling Python codes with KCacheGrind</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="expert_python_programming_review.html"
+                        title="next chapter">Book Review: Expert Python Programming by Tarek Ziadé</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/git.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version-control-with-git-resources">
+<span id="git-resources"></span><h1>Version control with Git: resources<a class="headerlink" href="#version-control-with-git-resources" title="Permalink to this headline">¶</a></h1>
+<p>If you are not using a version control system for all your software
+development, paper writing, research code execution and tracking of the
+generated results, you should.  There is simply no excuse today for not using
+version control as a mechanism for tracking what you are doing with your source
+materials and data (be they programming language files, LaTeX/LyX files, plain
+text, even data results!).  Using version control frees you from the madness of
+having directories with files named
+<code class="docutils literal"><span class="pre">mypaper_version2_20100202_revisions_jim_v3_new_new2.tex</span></code>, for one thing.
+It gives you a mechanism to synchronize your work with colleagues without
+tracking who attached what version when, and a way to seamlessly replicate your
+work, including its history, across computers.  Using a version control system
+is much, much easier than you think, and today’s best systems are powerful,
+well documented and free.</p>
+<p>This page isn’t meant to be a tutorial, but rather a summary of useful
+resources on using the <a class="reference external" href="http://git-scm.com">Git</a> software for version control.  Of the systems
+available today (as of 2010) for version control, I only recommend people use
+either git or mercurial; I’ve personally chosen git and find it to be an
+extraordinary tool, though I have also used mercurial lightly and from what I
+see regarding its development and uptake it is also a very good system.  Git
+and mercurial are ultimately <a class="reference external" href="http://mercurial.selenic.com/wiki/GitConcepts">quite similar in their architecture</a>, and likely
+to become even more alike in everyday use over time, as each team learns from
+the other.</p>
+<p>I will not go here into historical details about other version control systems,
+nor is this meant to encourage a comparison or discussion: I have extensive
+experience with CVS, SVN and Bazaar, and only use those systems today <em>very</em>
+reluctantly, when imposed by external constraints.  Git is simply that much
+better for <em>my needs</em>.  Should you feel the urge to comment on this, please
+send your message to one of the many online forums where debates on <em>this vs
+that</em> are welcome, not to me.</p>
+<div class="section" id="introductory-materials">
+<h2>Introductory materials<a class="headerlink" href="#introductory-materials" title="Permalink to this headline">¶</a></h2>
+<p>I suggest you start with my <a class="reference external" href="http://nbviewer.ipython.org/urls/github.com/fperez/reprosw/raw/master/Version%2520Control.ipynb">interactive tutorial aimed squarely at
+scientists</a> who want to collaborate with a few colleagues on a manuscript,
+grant proposal or data analysis project.</p>
+<p>In addition, I would recommend the following ‘core’ reading list, and below I
+mention a few extra resources:</p>
+<ol class="arabic simple">
+<li>The concise <a class="reference external" href="http://gitref.org">GitRef</a> reference: written by one of the authors of the
+excellent GitHub.com site, it’s very compact but contains all the key ideas
+with the right approach.  If you only read one document, make it this one.</li>
+<li>For a bit more detail, see the start of the excellent <a class="reference external" href="http://progit.org/book">Pro Git</a> online
+book, or similarly the early parts of the <a class="reference external" href="http://book.git-scm.com">Git community book</a>.  Pro Git’s
+chapters are very short and well illustrated; the community book tends to
+have more detail and has nice screencasts at the end of some sections.</li>
+<li>For a different take, the <a class="reference external" href="http://tom.preston-werner.com/2009/05/19/the-git-parable.html">Git parable</a> is an easy read that walks you
+through how you would go about building a version control system with a
+little story.  By the end of this gentle document, you realize that Git’s
+model is a very sound and clean one for the issues of source history
+control, management and collaboration.</li>
+</ol>
+<p>If you are really impatient and just want a quick start, this <a class="reference external" href="http://www.ralfebert.de/blog/tools/visual_git_tutorial_1">visual git
+tutorial</a> may be sufficient.  It is nicely illustrated with diagrams that show
+what happens on the filesystem.</p>
+<p><a class="reference external" href="http://www.eecs.harvard.edu/~cduan/technical/git/">Understanding Git Conceptually</a> is an excellent document that I found
+invaluable once I understood the basics.  Git has a reputation for being hard
+to use, but I have found that with a clear view of what is actually a <em>very
+simple</em> internal design, its behavior is remarkably consistent, simple and
+comprehensible.  The user interface can be sometimes opaque (though it’s
+getting better), but I think the problems most people have arise from thinking
+with a Subversion-type model and trying to simply find the corresponding
+mimicking commands in git.  Since this often makes a mess, you will be far
+better served by understanding a tiny bit of the underlying ideas: a little
+time invested in this understanding will pay off in hassle-free work later.</p>
+<p>For windows users, <a class="reference external" href="http://nathanj.github.com/gitguide/tour.html">an Illustrated Guide to Git on Windows</a> is useful in that
+it contains also some information about handling SSH (necessary to interface
+with git hosted on remote servers when collaborating) as well as screenshots of
+the Windows interface.</p>
+</div>
+<div class="section" id="other-resources">
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Cheat sheets</dt>
+<dd>Two different <a class="reference external" href="http://zrusin.blogspot.com/2007/09/git-cheat-sheet.html">cheat</a> <a class="reference external" href="http://jan-krueger.net/development/git-cheat-sheet-extended-edition">sheets</a> in PDF format that can be printed for frequent
+reference.</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="http://www.gitready.com">Git ready</a></dt>
+<dd>A great website of posts on specific git-related topics, organized by
+difficulty.</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="http://sourceforge.net/projects/qgit/">QGit</a>: an excellent Git GUI</dt>
+<dd>Git ships by default with gitk and git-gui, a pair of Tk graphical clients to
+browse a repo and to operate in it.  I personally have found <a class="reference external" href="http://sourceforge.net/projects/qgit/">qgit</a> to be
+nicer and easier to use.  It is available on modern linux distros, and since
+it is based on Qt, it should run on OSX and Windows.</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="http://www-cs-students.stanford.edu/~blynn/gitmagic/index.html">Git Magic</a></dt>
+<dd>Another book-size guide that has useful snippets.</dd>
+<dt>The <a class="reference external" href="http://learn.github.com">learning center</a> at <a class="reference external" href="http://github.com">Github</a></dt>
+<dd>Guides on a number of topics, some specific to github hosting but much of it
+of general value.</dd>
+</dl>
+<dl class="docutils">
+<dt>A <a class="reference external" href="http://cworth.org/hgbook-git/tour">port</a> of the Hg book’s beginning</dt>
+<dd>The <a class="reference external" href="http://hgbook.red-bean.com">Mercurial book</a> has a reputation for clarity, so Carl Worth decided to
+<a class="reference external" href="http://cworth.org/hgbook-git/tour">port</a> its introductory chapter to Git.  It’s a nicely written intro, which is
+possible in good measure because of how similar the underlying models of Hg
+and Git ultimately are.</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="http://andyjeffries.co.uk/articles/25-tips-for-intermediate-git-users">Intermediate tips</a></dt>
+<dd>A set of tips that contains some very valuable nuggets, once you’re past
+the basics.</dd>
+</dl>
+</div>
+<div class="section" id="collaboration-sharing-repositories">
+<h2>Collaboration: sharing repositories<a class="headerlink" href="#collaboration-sharing-repositories" title="Permalink to this headline">¶</a></h2>
+<p>While Git can be used strictly in ‘private’ mode, where you only keep
+repositories in one computer, you will often want to share your work with
+others.  The most natural way to do this is to have a repository located on a
+system that is always online and to which both parties have access.  This
+central location hosts a repository that can be read from and written to by
+both, and acts as a synchronization point.</p>
+<p>The resources above have sections explaining how to configure a server to
+publish Git repositories, but for open source projects (or for private ones by
+paying a fee), there are websites that provide this service with minimal
+hassle.  I am most familiar with <a class="reference external" href="http://github.com">Github</a>, but <a class="reference external" href="http://gitorious.org">Gitorious</a> offers similar
+services.</p>
+<p>A noteworthy hosting service is <a class="reference external" href="http://www.indefero.net">Indefero</a>: while less well-known than Github
+and Gitorious, its special feature is that the source code behind the website
+is itself open source and it contains support for SVN, mercurial and git as
+well as a wiki and a bug tracker.  This means that you can run Indefero on your
+own server, with as many private repositories as you wish and the typical
+amenities of a project (Gitorious is also open source, but has no bug tracker).
+I use this for my own <a class="reference external" href="http://projects.fperez.org">private projects</a>, and I have <a class="reference internal" href="../code/indefero_dreamhost.html"><span class="doc">some notes</span></a> that you may find useful on configuring Indefero on
+your own server.</p>
+</div>
+<div class="section" id="for-svn-users">
+<span id="some-notes"></span><h2>For SVN users<a class="headerlink" href="#for-svn-users" title="Permalink to this headline">¶</a></h2>
+<p>If you want a bit more background on why the model of version control used by
+Git and Mercurial (known as distributed version control) is such a good idea, I
+encourage you to read this very well written <a class="reference external" href="http://www.joelonsoftware.com/items/2010/03/17.html">post</a> by Joel Spolsky on the
+topic.  After that post, Joel created a very nice Mercurial tutorial, whose
+<a class="reference external" href="http://hginit.com/00.html">first page</a> applies equally well to git and is a very good ‘re-education’ for
+anyone coming from an SVN (or similar) background.</p>
+<p>In practice, I think you are better off following Joel’s advice and
+understanding git on its own merits instead of trying to bang SVN concepts into
+git shapes.  But for the occasional translation from SVN to Git of a specific
+idiom, the <a class="reference external" href="http://git-scm.org/course/svn.html">Git - SVN Crash Course</a> can
+be handy.</p>
+</div>
+<div class="section" id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="better-shell-support">
+<h3>Better shell support<a class="headerlink" href="#better-shell-support" title="Permalink to this headline">¶</a></h3>
+<p>(Sent by Nate Vack to the nipy mailing list)</p>
+<p>Adding git branch info to your bash prompt and tab completion for git commands
+and branches; they make git life really brilliant:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/slawcup/dotfiles/blob/master/.git-completion.bash">http://github.com/slawcup/dotfiles/blob/master/.git-completion.bash</a></li>
+<li><a class="reference external" href="http://railstips.org/blog/archives/2009/02/02/bedazzle-your-bash-prompt-with-git-info">http://railstips.org/blog/archives/2009/02/02/bedazzle-your-bash-prompt-with-git-info</a></li>
+</ul>
+</div>
+<div class="section" id="embedding-git-information-in-latex-documents">
+<h3>Embedding Git information in LaTeX documents<a class="headerlink" href="#embedding-git-information-in-latex-documents" title="Permalink to this headline">¶</a></h3>
+<p>(Sent by <a class="reference external" href="http://www.onerussian.com">Yaroslav Halchenko</a>)</p>
+<p>I use a Make rule:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Helper if interested in providing proper version tag within the manuscript
+revision.tex: ../misc/revision.tex.in ../.git/index
+       GITID=$$(git log -1 | grep -e &#39;^commit&#39; -e &#39;^Date:&#39; | sed  -e &#39;s/^[^ ]* *//g&#39; | tr &#39;\n&#39; &#39; &#39;); \
+       echo $$GITID; \
+       sed -e &quot;s/GITID/$$GITID/g&quot; $&lt; &gt;| $@
+</pre></div>
+</div>
+<p>in the top level <code class="docutils literal"><span class="pre">Makefile.common</span></code> which is included in all subdirectories
+which actually contain papers (hence all those <code class="docutils literal"><span class="pre">../.git</span></code>).  The
+<code class="docutils literal"><span class="pre">revision.tex.in</span></code> file is simply:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">Embed</span> <span class="n">GIT</span> <span class="n">ID</span> <span class="n">revision</span> <span class="ow">and</span> <span class="n">date</span>
+\<span class="n">def</span>\<span class="n">revision</span><span class="p">{</span><span class="n">GITID</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The corresponding <code class="docutils literal"><span class="pre">paper.pdf</span></code> depends on <code class="docutils literal"><span class="pre">revision.tex</span></code> and includes the
+line <code class="docutils literal"><span class="pre">\input{revision}</span></code> to load up the actual revision mark.</p>
+</div>
+<div class="section" id="automatically-make-local-branches-track-remotes">
+<h3>Automatically make local branches track remotes<a class="headerlink" href="#automatically-make-local-branches-track-remotes" title="Permalink to this headline">¶</a></h3>
+<p>When checking out a remote branch with a local one, adding –track will ensure
+that the new local branch is automatically a tracking branch.  But if you have
+an existing local branch and you decide you want to push it remotely, you can
+do it once by saying:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">branchname</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>or you can configure things (so the local branch becomes a tracking one with):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.&lt;</span><span class="n">branchname</span><span class="o">&gt;.</span><span class="n">remote</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.&lt;</span><span class="n">branchname</span><span class="o">&gt;.</span><span class="n">merge</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/&lt;</span><span class="n">branchname</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that as of git 1.7, this can be done with the simpler command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="o">&lt;</span><span class="n">branchname</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">remote</span><span class="o">&gt;/&lt;</span><span class="n">branchname</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and in all of these, it’s possible to set the remote and local branch names to
+be different, in case there’s a conflict with your local name already existing
+in the remote.</p>
+<p>Using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.</span><span class="n">autosetupmerge</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>Tells <code class="docutils literal"><span class="pre">git-branch</span></code> and <code class="docutils literal"><span class="pre">git-checkout</span></code> to setup new branches so that
+<code class="docutils literal"><span class="pre">git-pull</span></code> will appropriately merge from that remote
+branch. Recommended. Without this, you will have to add <code class="docutils literal"><span class="pre">--track</span></code> to your
+branch command or manually merge remote tracking branches with “fetch” and then
+“merge”.</p>
+</div>
+<div class="section" id="git-export">
+<h3>git export<a class="headerlink" href="#git-export" title="Permalink to this headline">¶</a></h3>
+<p>Git doesn’t have a native export command, but this works just fine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">archive</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="n">fperez</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>  <span class="n">master</span> <span class="o">|</span> <span class="n">gzip</span> <span class="o">&gt;</span> <span class="o">~/</span><span class="n">tmp</span><span class="o">/</span><span class="n">source</span><span class="o">.</span><span class="n">tgz</span>
+</pre></div>
+</div>
+<p>Setting default push/pull:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">master</span><span class="p">)</span><span class="n">maqroll</span><span class="p">[</span><span class="mi">0203</span><span class="n">_lecture2</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">push</span>
+<span class="n">fatal</span><span class="p">:</span> <span class="n">The</span> <span class="n">current</span> <span class="n">branch</span> <span class="n">master</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">tracking</span> <span class="n">anything</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>So do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">merge</span> <span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span><span class="n">master</span>
+<span class="n">git</span> <span class="n">config</span> <span class="n">branch</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">remote</span> <span class="n">origin</span>
+</pre></div>
+</div>
+<p>and now things work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">master</span><span class="p">)</span><span class="n">maqroll</span><span class="p">[</span><span class="mi">0203</span><span class="n">_lecture2</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">push</span>
+<span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">2</span> <span class="n">threads</span><span class="o">.</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span> <span class="mf">84.82</span> <span class="n">KiB</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+<span class="n">Total</span> <span class="mi">6</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">To</span> <span class="n">git</span><span class="nd">@gfif</span><span class="o">.</span><span class="n">udea</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">co</span><span class="p">:</span><span class="n">mscomp</span><span class="o">-</span><span class="mf">2010.</span><span class="n">git</span>
+   <span class="mi">807</span><span class="n">d520</span><span class="o">..</span><span class="mi">0</span><span class="n">a8e2d2</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interactive-rebase">
+<h3>Interactive Rebase<a class="headerlink" href="#interactive-rebase" title="Permalink to this headline">¶</a></h3>
+<p>One of the neat things about git is that you can modify your commits before you
+push them up to a public, shared repository. Let’s say you’ve made 10 commits
+to your local git repository, but you want it to look like two when it gets
+pushed up. All you need to do is type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rebase</span> <span class="o">-</span><span class="n">i</span> <span class="n">HEAD</span><span class="o">~</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>And git will launch your $EDITOR and allow you to perform what’s referred to as
+an “interactive rebase.”</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="expert_python_programming_review.html" title="Book Review: Expert Python Programming by Tarek Ziadé"
+             >next</a></li>
+        <li class="right" >
+          <a href="profiling/index.html" title="Profiling Python codes with KCacheGrind"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

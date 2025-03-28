@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sharing Git repositories on Dreamhost with InDefero &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lyxport" href="lyxport/index.html" />
+    <link rel="prev" title="Software Tools" href="index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="lyxport/index.html" title="lyxport"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Software Tools"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Software Tools</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="../py4science/index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sharing Git repositories on Dreamhost with InDefero</a><ul>
+<li><a class="reference internal" href="#preliminaries">Preliminaries</a></li>
+<li><a class="reference internal" href="#dreamhost-configuration">Dreamhost configuration</a><ul>
+<li><a class="reference internal" href="#domain-configuration-and-file-layout">Domain configuration and file layout</a></li>
+<li><a class="reference internal" href="#mysql">MySQL</a></li>
+<li><a class="reference internal" href="#local-user-for-git-management">Local user for Git management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-all-the-prerequisites">Installing all the prerequisites</a><ul>
+<li><a class="reference internal" href="#openssl-and-curl-for-git">OpenSSL and Curl (for Git)</a></li>
+<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#pear-and-php-tools">PEAR and PHP tools</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#install-and-configure-pluf-indefero">Install and configure Pluf/InDefero</a></li>
+<li><a class="reference internal" href="#initialize-pluf-and-indefero">Initialize Pluf and InDefero</a></li>
+<li><a class="reference internal" href="#new-users">New users</a><ul>
+<li><a class="reference internal" href="#ssh-key-synchronization-and-security">SSH key synchronization and security</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#backing-things-up">Backing things up</a></li>
+<li><a class="reference internal" href="#final-comments">Final comments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Software Tools</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lyxport/index.html"
+                        title="next chapter">lyxport</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/code/indefero_dreamhost.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sharing-git-repositories-on-dreamhost-with-indefero">
+<span id="indefero-dreamhost"></span><h1>Sharing Git repositories on Dreamhost with InDefero<a class="headerlink" href="#sharing-git-repositories-on-dreamhost-with-indefero" title="Permalink to this headline">¶</a></h1>
+<p>This document explains how to install the <a class="reference external" href="http://www.indefero.net/">InDefero</a> project management system
+on a shared host like Dreamhost. They should also be useful for any other
+self-contained deployment with minor adjustments, as I’ve tried to explain in
+detail a number of points that weren’t too clear in the original documentation.
+While these notes focus on Git, InDefero also supports Mercurial and SVN
+backends; the installation part of this document may still be useful to you
+even if you intend to use either of those backends.</p>
+<p>I wanted to have a way of hosting my own Git repositories and projects for
+collaboration with colleagues.  While I already use <a class="reference external" href="http://github.com/fperez">github</a> for open source
+projects, I wanted an easy solution for private collaboration.  For this type
+of work I don’t need all the bells and whistles of Github, my requirements are
+pretty simple:</p>
+<ul class="simple">
+<li>Hosting multiple git repositories.</li>
+<li>Open source code I can run on my own server.</li>
+<li>The ability to add users and have different users on different projects,
+without needing to give each user a real shell account on the server.</li>
+<li>Basic code management features: source viewing, change log and commits.</li>
+<li>A few project documentation and ticket managemet features are welcome, but
+not a deal breaker.</li>
+</ul>
+<p>I looked around quite a bit, and InDefero seemed to fit the bill best.  The
+various *Forge alternatives are enormous beasts, from what I found online
+Trac’s git support may still be a bit flaky (I found discouraging comments
+about the plugin), Redmine looks neat but it requires a full Rails stack, which
+I’m not really interested in getting into, and gitosis may be just a tad too
+bare bones for what I wanted.  But InDefero kept appearing as a good balance of
+the above, so I decided to give it a try.  I’d summarize it as a lightweight,
+google-code-like project management system whose git backend design is inspired
+by gitosis.  It also supports Hg and SVN backends, though I’m not interested in
+those and won’t discuss their configuration here (I turned them off).</p>
+<p>So far I have been very satisfied in that I think it does precisely what I
+need.  There are one or two minor things I’d like to have that I miss from
+Trac, but in the end they are all sugar I can live without, since they involve
+git history and log manipulations I can easily do with a local client.</p>
+<p>The one thing that wasn’t too easy was the installation: the documentation
+isn’t the best, the installation instructions are scattered across various
+documents, and a number of key steps are not explained at all (not even
+mentioned), so it took me a fair amount of time to get the whole thing working.
+I am putting together these notes in the hope they save someone else time, and
+the InDefero team is welcome to use any or all of this in their own documents.
+I estimate that with a document like this one, you should be able to start from
+scratch and configure an entire setup in 2-4 hours, assuming you are
+comfortable working in a Linux command-line environment and are used to
+building software from source.</p>
+<p>Please let me know of any inaccuracies in this document so I can correct them
+for the benefit of others.</p>
+<div class="section" id="preliminaries">
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this headline">¶</a></h2>
+<p>The key sets of instructions that this document complements are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://projects.ceondo.com/p/indefero/page/Installation">InDefero general installation.</a></li>
+<li>Installation on <a class="reference external" href="http://projects.ceondo.com/p/indefero/page/Installation-Dreamhost-Mercurial">Dreamhost with Mercurial backend</a>: this comes closest to
+our needs, but it’s missing a few key pieces of information. Still, if
+something is missing in my notes, see this document.</li>
+<li>Configuring <a class="reference external" href="http://projects.ceondo.com/p/indefero/page/InstallationScmGit">the InDefero Git backend</a>: another piece of the puzzle.</li>
+<li>The <a class="reference external" href="http://wiki.dreamhost.com/Git">Dreamhost notes on Git</a>: they may be
+useful to you, though I think all of the pieces regarding git are contained
+here.</li>
+</ul>
+<p>Hopefully if I missed something, the above should let you figure out the whole
+thing.</p>
+<p>For everything below, I have set the variable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>PREFIX=$HOME/usr/local
+</pre></div>
+</div>
+<p>and I have a set of bash utilities that configure my various <code class="docutils literal"><span class="pre">*PATH</span></code>
+variables so this is a valid installation prefix for me, so all installs will
+be done using <code class="docutils literal"><span class="pre">--prefix=$PREFIX</span></code>.  This means that the following path
+variables are all properly configured:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PATH</span><span class="p">:</span> <span class="n">binary</span> <span class="n">execution</span>
+<span class="n">LD_LIBRARY_PATH</span><span class="p">:</span> <span class="n">dynamic</span> <span class="n">linker</span> <span class="n">search</span> <span class="n">path</span>
+<span class="n">LIBRARY_PATH</span><span class="p">:</span> <span class="n">static</span> <span class="n">linking</span> <span class="n">by</span> <span class="n">gcc</span> <span class="p">(</span><span class="n">like</span> <span class="o">-</span><span class="n">L</span><span class="p">)</span>
+<span class="n">CPATH</span><span class="p">:</span> <span class="n">generic</span> <span class="n">include</span> <span class="n">path</span> <span class="k">for</span> <span class="n">gcc</span> <span class="p">(</span><span class="n">like</span> <span class="o">-</span><span class="n">I</span><span class="p">),</span> <span class="n">used</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">languages</span>
+<span class="n">C_INCLUDE_PATH</span><span class="p">:</span> <span class="n">C</span><span class="o">-</span><span class="n">specific</span> <span class="n">include</span> <span class="n">path</span><span class="p">,</span> <span class="n">after</span> <span class="n">CPATH</span>
+<span class="n">CPLUS_INCLUDE_PATH</span><span class="p">:</span> <span class="n">C</span><span class="o">++-</span><span class="n">specific</span> <span class="n">include</span> <span class="n">path</span><span class="p">,</span> <span class="n">after</span> <span class="n">CPATH</span>
+<span class="n">PYTHONPATH</span><span class="p">:</span> <span class="n">search</span> <span class="n">path</span> <span class="k">for</span> <span class="n">python</span> <span class="n">packages</span>
+</pre></div>
+</div>
+<p>I also use a little python script called <a class="reference external" href="http://arctrix.com/nas/python/unpack">unpack</a> that knows how to unpack zip,
+tar, gzip, bz2 and other formats with a single call, so I don’t have to
+constantly remember what to type.  If you don’t use <code class="docutils literal"><span class="pre">unpack</span></code>, simply
+substitute the appropriate <code class="docutils literal"><span class="pre">tar/unzip</span></code> commands as needed.</p>
+</div>
+<div class="section" id="dreamhost-configuration">
+<h2>Dreamhost configuration<a class="headerlink" href="#dreamhost-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This section contains the various things you need to do on the Dreamhost
+account, some of them via the control panel, some locally on the shell.
+Basically, you will need:</p>
+<ul class="simple">
+<li>A custom domain for your InDefero install, along with a set of directories
+for it.</li>
+<li>A MySQL database.</li>
+<li>A new user whose purpose will be only to manage the Git repositories, and who
+will receive the SSH keys of your InDefero users.</li>
+</ul>
+<p>We’ll now see these in detail.</p>
+<div class="section" id="domain-configuration-and-file-layout">
+<h3>Domain configuration and file layout<a class="headerlink" href="#domain-configuration-and-file-layout" title="Permalink to this headline">¶</a></h3>
+<p>Since on a shared host I can’t install in <code class="docutils literal"><span class="pre">/home/www</span></code> as the default
+instructions suggest, I made a separate directory for the InDefero
+installation, along with a sub-domain pointing to it.  In these instructions, I
+will use <code class="docutils literal"><span class="pre">example.com</span></code> as the generic domain and <code class="docutils literal"><span class="pre">site</span></code> for the subdomain
+hosting the InDefero site, substitute your values accordingly.</p>
+<p>If the main site is called <code class="docutils literal"><span class="pre">http://example.com</span></code>, then I created a subdomain
+in the Dreamhost panel called <code class="docutils literal"><span class="pre">http://site.example.com</span></code>, wich was pointed to
+the directory <code class="docutils literal"><span class="pre">$HOME/example.com/site/www</span></code> as the serving directory.  The
+extra <code class="docutils literal"><span class="pre">www</span></code> subdirectory is meant to host the actual public files (akin to
+<code class="docutils literal"><span class="pre">/var/www</span></code> in a non-shared host), while <code class="docutils literal"><span class="pre">$HOME/example.com/site</span></code> holds the
+various files of the InDefero install, git repositories, etc.  Specifically, in
+my case, the layout of <code class="docutils literal"><span class="pre">$HOME/example.com/site</span></code> is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">3</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">18</span><span class="p">:</span><span class="mi">31</span> <span class="n">git_repos</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">21</span><span class="p">:</span><span class="mi">51</span> <span class="n">idf_upload</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">21</span><span class="p">:</span><span class="mi">51</span> <span class="n">idf_upload_attach</span><span class="o">/</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">17</span><span class="p">:</span><span class="mi">14</span> <span class="n">indefero</span> <span class="o">-&gt;</span> <span class="n">indefero</span><span class="o">-</span><span class="mf">0.8</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">8</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">29</span> <span class="mi">21</span><span class="p">:</span><span class="mi">38</span> <span class="n">indefero</span><span class="o">-</span><span class="mf">0.8</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">3</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">01</span> <span class="mi">03</span><span class="p">:</span><span class="mi">41</span> <span class="n">mysql</span><span class="o">-</span><span class="n">dumps</span><span class="o">/</span>
+<span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">23</span><span class="p">:</span><span class="mi">50</span> <span class="n">pluf</span> <span class="o">-&gt;</span> <span class="n">pluf</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="mi">091126</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">7</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">17</span><span class="p">:</span><span class="mi">14</span> <span class="n">pluf</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="mi">091126</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">28</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span> <span class="n">www</span><span class="o">/</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span> <span class="mi">3</span> <span class="mi">2009</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">18</span><span class="p">:</span><span class="mi">00</span> <span class="n">tmp</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">www/</span></code> directory where files actually get served from only contains:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">htaccess</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">indefero</span><span class="o">/</span><span class="n">www</span><span class="o">/.</span><span class="n">htaccess</span>
+<span class="n">favicon</span><span class="o">.</span><span class="n">gif</span>
+<span class="n">favicon</span><span class="o">.</span><span class="n">ico</span>
+<span class="n">index</span><span class="o">.</span><span class="n">php</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">indefero</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">php</span>
+<span class="n">media</span> <span class="o">-&gt;</span> <span class="o">../</span><span class="n">indefero</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">media</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>A local directory is needed for the actual git repositories.  The InDefero
+suggested layout can’t be used on a shared host, which is why there is a
+<code class="docutils literal"><span class="pre">git_repos</span></code> subdirectory shown above.  This will be put in the InDefero
+config file later.</p>
+<p>The <code class="docutils literal"><span class="pre">mysql-dumps</span></code> directory will be used to store backups of our database, as
+explained below.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I kept the main <code class="docutils literal"><span class="pre">indefero</span></code> and <code class="docutils literal"><span class="pre">pluf</span></code> directories as symlinks to the
+unpacked versions I downloaded, to make upgrades easier by repointing a
+symlink once things are tested to work (and to make backing off a problem a
+little easier).  I also created a git repo for each of indefero and pluf
+upon download, so that I can track my local changes as patches on git, which
+hopefully will make it easiet to upgrade by showing me precisely what I
+changed from the default install.</p>
+</div>
+</div>
+<div class="section" id="mysql">
+<h3>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+<p>One thing the instructions didn’t mention even in passing, is the separate
+MySQL configuration steps required.  This may be common knowledge for someone
+used to PHP, but it wasn’t for me.  Using the Dreamhost panel, I made an SQL
+database with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">User</span><span class="p">:</span> <span class="n">USER</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">mysql</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="n">DB</span>  <span class="p">:</span> <span class="n">examplecom_site</span>
+</pre></div>
+</div>
+<p>For reference, the local login command is:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mysql -u USER -p -h mysql.site.example.com examplecom_site
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-user-for-git-management">
+<h3>Local user for Git management<a class="headerlink" href="#local-user-for-git-management" title="Permalink to this headline">¶</a></h3>
+<p>We need a user to manage the git transactions.  All tutorials I’ve found
+suggest the creation of a dedicated user called <code class="docutils literal"><span class="pre">git</span></code>.  On dreamhost this
+username is already taken, so I made another user (call it <code class="docutils literal"><span class="pre">git2</span></code>), and also
+created a custom group to which both <code class="docutils literal"><span class="pre">git2</span></code> and my normal user will belong.
+As long as this information is given to the proper InDefero config variables,
+the actual name of the user is irrelevant.</p>
+<p>In the git user’s home directory, don’t forget to make the <code class="docutils literal"><span class="pre">.ssh</span></code> directory
+with the proper permissions and make an empty <code class="docutils literal"><span class="pre">authorized_keys</span></code> file.  The
+InDefero instructions for the SyncGit plugin explain this, but they assume you
+have sudo access.  On a shared host this isn’t the case, so you must do it
+manually by logging in as the new user, and then running the rest of the
+commands.  For reference (substitute <code class="docutils literal"><span class="pre">git2</span></code> with the name of your git user):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>su - git2  <span class="c1"># become the new user manually</span>
+<span class="nb">cd</span>
+mkdir .ssh
+touch .ssh/authorized_keys
+chmod <span class="m">0700</span> .ssh
+chmod <span class="m">0600</span> .ssh/authorized_keys
+<span class="nb">exit</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On the Dreamhost panel, when creating the new user, do <em>not</em> select
+“enhanced security”, because we need this new user to be able to share a
+group with the normal user, and if I understand correctly, “enhanced
+security” would lock down the new user too much.</p>
+</div>
+</div>
+</div>
+<div class="section" id="installing-all-the-prerequisites">
+<h2>Installing all the prerequisites<a class="headerlink" href="#installing-all-the-prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="openssl-and-curl-for-git">
+<h3>OpenSSL and Curl (for Git)<a class="headerlink" href="#openssl-and-curl-for-git" title="Permalink to this headline">¶</a></h3>
+<p>As suggested by <a class="reference external" href="http://www.ivankuznetsov.com/2009/07/setting-up-ruby-rails-git-and-redmine-on-dreamhost.html">this post</a>, I built OpenSSL and Curl, as they provide some
+extra functionality to the Git we’ll build (the one on Dreamhost is very old).
+In my case they may not have been 100% necessary, as right now I don’t intend
+to have my InDefero repositories pulling, but it’s easy enough to do as part of
+the whole build.  They are perfectly straightforward.  First, the latest
+openssl:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget http://www.openssl.org/source/openssl-0.9.8l.tar.gz
+unpack openssl-0.9.8l.tar.gz
+<span class="nb">cd</span> openssl-0.9.8l
+./config shared zlib --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+make
+make install
+</pre></div>
+</div>
+<p>And similarly for Curl:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget http://curl.haxx.se/download/curl-7.19.7.tar.gz
+unpack curl-7.19.7.tar.gz
+<span class="nb">cd</span> curl-7.19.7/
+./configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> --with-ssl<span class="o">=</span><span class="nv">$PREFIX</span>
+make
+make install
+</pre></div>
+</div>
+<p>If you have symbol version problems with OpenSSL, you may find the following
+notes by <a class="reference external" href="http://blog.jacobodevera.com">Jacobo de Vera</a> useful (thanks for the contribution!):</p>
+<p>The upstream version of OpenSSL does not include versioning symbols, since this
+causes problems when more than one version of a library is present, the
+versions of openSSL that are shipped with the main distros are patched to
+include versioning symbols.  One of the symptoms of this is having those error
+messages output whenever a tool that uses OpenSSL is executed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ php
+php: /home/user/run/lib/libssl.so.0.9.8: no version information
+available (required by php)
+php: /home/user/run/lib/libcrypto.so.0.9.8: no version information
+available (required by php)
+php: /home/user/run/lib/libcrypto.so.0.9.8: no version information
+available (required by /usr/lib/libc-client.so.2002edebian)
+php: /home/user/run/lib/libssl.so.0.9.8: no version information
+available (required by /usr/lib/libc-client.so.2002edebian)
+php: /home/user/run/lib/libssl.so.0.9.8: no version information
+available (required by /usr/lib/libcurl.so.3)
+php: /home/user/run/lib/libcrypto.so.0.9.8: no version information
+available (required by /usr/lib/libcurl.so.3)
+</pre></div>
+</div>
+<p>What I have done to avoid this, since I compiled my own OpenSSL in
+order to build a newer version of GIT (to replace the default one
+provided by Dreamhost), is to follow the steps that distros do,
+described in a comment here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; http://rt.openssl.org/Ticket/Display.html?id=1222&amp;user=guest&amp;pass=guest
+&gt; For that to happen I introduced a version script openssl.ld with the
+&gt; following contents:
+&gt;
+&gt; OPENSSL_0.9.8 {
+&gt; global:
+&gt; *;
+&gt; };
+&gt;
+&gt; It has to be in the toplevel directory and in the engines directory.
+&gt;
+&gt; The SHARED_LDFLAGS get the additional options
+&gt; -Wl,--version-script=openssl.ld
+</pre></div>
+</div>
+<p>SHARED_FLAGS is a variable in the Makefile that is generated by config.  After
+installing this version, the errors disappear.</p>
+</div>
+<div class="section" id="git">
+<h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://wiki.dreamhost.com/Git">dreamhost wiki page on git</a> has more details, including the NO_MMAP
+suggestion to prevent dreamhost from killing git processes that access large
+files via mmap (this triggers a false positive on their automatic memory
+police).  In my case, I built v1.6.5.3.  After unpacking the sources, I used:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>./configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> --with-openssl<span class="o">=</span><span class="nv">$PREFIX</span> --with-curl<span class="o">=</span><span class="nv">$PREFIX</span>
+make <span class="nv">NO_MMAP</span><span class="o">=</span><span class="m">1</span> install
+</pre></div>
+</div>
+<p>Note that you <em>must</em> give the NO_MMAP flag in the install step, else git will
+get rebuilt if you only give it in the make step and then try to run a simple
+<code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code>.</p>
+</div>
+<div class="section" id="pear-and-php-tools">
+<h3>PEAR and PHP tools<a class="headerlink" href="#pear-and-php-tools" title="Permalink to this headline">¶</a></h3>
+<p>The indefero docs put this later, but to be 100% sure that all subsequent
+pear/php commands run using the proper versions, I think it’s safest to first
+set up the environment by putting this into the bashrc file and reloading:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># PEAR/PHP install at dreamhost</span>
+<span class="nb">export</span> <span class="nv">PHP_PEAR_PHP_BIN</span><span class="o">=</span>/usr/local/php5/bin/php
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/usr/pear:/usr/local/php5/bin:<span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>Now, we can do a local pear install.  It seems pear also needs some caching
+directories, and I don’t know enough about it to be sure it’s safe to have the
+caching directories below the root pear path, so I’m keeping them separate.  I
+made the following directories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir -p ~/usr/var/pear/cache
+mkdir -p ~/usr/var/pear/temp
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">~/usr/pear</span></code> will be the root pear tree, and <code class="docutils literal"><span class="pre">~/usr/var</span></code> will hold
+server-style data in a single location, and will use that for the PEAR
+temporary directories.  The indefero installation instructions suggest using
+<code class="docutils literal"><span class="pre">~/tmp/pear</span></code>, but I don’t like keeping anything that I can’t simply destroy
+on <code class="docutils literal"><span class="pre">~/tmp</span></code>, so I used this layout instead.</p>
+<p>Now I can create the pear config:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pear config-create ~/usr/ ~/.pearrc
+pear config-set download_dir ~/usr/var/pear/cache/
+pear config-set cache_dir ~/usr/var/pear/cache/
+pear config-set temp_dir ~/usr/var/pear/temp/
+</pre></div>
+</div>
+<p>With this configured, I can now run the install and it all worked fine:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pear install -o PEAR
+pear install --alldeps Mail
+pear install --alldeps Mail_mime
+</pre></div>
+</div>
+<p>A quick check gives me:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">usr</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">pear</span> <span class="nb">list</span>
+<span class="n">INSTALLED</span> <span class="n">PACKAGES</span><span class="p">,</span> <span class="n">CHANNEL</span> <span class="n">PEAR</span><span class="o">.</span><span class="n">PHP</span><span class="o">.</span><span class="n">NET</span><span class="p">:</span>
+<span class="o">=========================================</span>
+<span class="n">PACKAGE</span>          <span class="n">VERSION</span> <span class="n">STATE</span>
+<span class="n">Archive_Tar</span>      <span class="mf">1.3</span><span class="o">.</span><span class="mi">3</span>   <span class="n">stable</span>
+<span class="n">Auth_SASL</span>        <span class="mf">1.0</span><span class="o">.</span><span class="mi">3</span>   <span class="n">stable</span>
+<span class="n">Console_Getopt</span>   <span class="mf">1.2</span><span class="o">.</span><span class="mi">3</span>   <span class="n">stable</span>
+<span class="n">Mail</span>             <span class="mf">1.1</span><span class="o">.</span><span class="mi">14</span>  <span class="n">stable</span>
+<span class="n">Mail_Mime</span>        <span class="mf">1.5</span><span class="o">.</span><span class="mi">2</span>   <span class="n">stable</span>
+<span class="n">Mail_mimeDecode</span>  <span class="mf">1.5</span><span class="o">.</span><span class="mi">0</span>   <span class="n">stable</span>
+<span class="n">Net_SMTP</span>         <span class="mf">1.3</span><span class="o">.</span><span class="mi">4</span>   <span class="n">stable</span>
+<span class="n">Net_Socket</span>       <span class="mf">1.0</span><span class="o">.</span><span class="mi">9</span>   <span class="n">stable</span>
+<span class="n">PEAR</span>             <span class="mf">1.9</span><span class="o">.</span><span class="mi">0</span>   <span class="n">stable</span>
+<span class="n">Structures_Graph</span> <span class="mf">1.0</span><span class="o">.</span><span class="mi">3</span>   <span class="n">stable</span>
+<span class="n">XML_Util</span>         <span class="mf">1.2</span><span class="o">.</span><span class="mi">1</span>   <span class="n">stable</span>
+</pre></div>
+</div>
+<p>The above worked for me, but <a class="reference external" href="http://blog.jacobodevera.com">Jacobo</a> notes that he actually needed to do a full
+PEAR install, his notes are below in case you also need a from-scratch PEAR
+build (still assuming the PATH configuration listed above):</p>
+<p>The version of PEAR that is currently available in DreamHost is so old that
+<code class="docutils literal"><span class="pre">Archive_Tar</span></code>, which is a dependency of the newer PEAR, will not accept to be
+installed.</p>
+<p>I wanted a clean PEAR installation, like the ones resulting from running <code class="docutils literal"><span class="pre">pear</span>
+<span class="pre">install</span> <span class="pre">-o</span> <span class="pre">PEAR</span></code>, but, ironically, first I needed a newer PEAR :)</p>
+<p>I created a temp directory <code class="docutils literal"><span class="pre">~/tmpear</span></code> and then ran this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/tmpear
+curl http://pear.php.net/go-pear <span class="p">|</span> php
+</pre></div>
+</div>
+<p>Said yes to everything but changed the installation prefix to be
+<code class="docutils literal"><span class="pre">$HOME/tmpear</span></code>.  Once that was finished, ran this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">$HOME</span>/tmpear/bin/pear config-create <span class="nv">$HOME</span>/usr .pearrc
+<span class="nv">$HOME</span>/tmpear/bin/pear install -of PEAR
+</pre></div>
+</div>
+<p>Notice the -f flag, otherwise it won’t reinstall it:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>rm -rf <span class="nv">$HOME</span>/tmpear
+</pre></div>
+</div>
+<p>I then installed the rest of the needed packages:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pear install -a Mail
+pear install -a Mail_Mime
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-and-configure-pluf-indefero">
+<h2>Install and configure Pluf/InDefero<a class="headerlink" href="#install-and-configure-pluf-indefero" title="Permalink to this headline">¶</a></h2>
+<p>Once I had the file layout ready, for the actual installation of Pluf and
+Indefero, I followed the instructions as listed in part 3 of the InDefero
+<a class="reference external" href="http://projects.ceondo.com/p/indefero/page/Installation-Dreamhost-Mercurial/">Dreamhost/Mercurial</a> instructions pretty much to the letter.  That section
+describes fairly well the changes needed to the generic InDefero install
+(explained <a class="reference external" href="http://projects.ceondo.com/p/indefero/page/Installation">here</a>).</p>
+<p>This is the part where most of the work goes, in editing the configuration of
+the <code class="docutils literal"><span class="pre">conf/idf.php</span></code> file (along with a few changes to <code class="docutils literal"><span class="pre">path.php</span></code>)</p>
+<p>In the <code class="docutils literal"><span class="pre">conf/idf.php</span></code> file, I created this block of variables that summarizes
+most of my configuration:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x"># fperez - variables</span>
+<span class="x">$fp = &#39;example.com&#39;;</span>
+<span class="x">$fp_home = &#39;$HOME&#39;;</span>
+<span class="x">$fp_site = &#39;$HOME/example.com/site&#39;;</span>
+<span class="x">$fp_git_user_home = &#39;/home/git2&#39;;</span>
+<span class="x">$fp_git_repos = &quot;$fp_site/git_repos&quot;;</span>
+<span class="x">$fp_site_url = &#39;site.example.com&#39;;</span>
+<span class="x">$fp_mail_user = &#39;nobody@nowhere&#39;;</span>
+<span class="x">$fp_db_login = &#39;USER&#39;;</span>
+<span class="x">$fp_db_password = &#39;???&#39;;</span>
+<span class="x">$fp_db_server = &quot;mysql.$fp_site_url&quot;;</span>
+<span class="x">$fp_database = &#39;examplecom_site&#39;;</span>
+</pre></div>
+</div>
+<p>Then, with those variables I constructed the values for everything below in the
+actual file, minimizing repetition of paths and making the whole thing a bit
+easier to understand (for me).</p>
+<p>In particular, don’t forget that the MySQL information must then be properly
+put into the php configuration file also:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x"># Database configuration</span>
+<span class="x">$cfg[&#39;db_login&#39;] = $fp_db_login;</span>
+<span class="x">$cfg[&#39;db_password&#39;] = $fp_db_password;</span>
+<span class="x">$cfg[&#39;db_server&#39;] = $fp_db_server;</span>
+<span class="x">$cfg[&#39;db_version&#39;] = &#39;5.0&#39;; # Only needed for MySQL</span>
+<span class="x">$cfg[&#39;db_table_prefix&#39;] = &#39;indefero_&#39;;</span>
+<span class="x">$cfg[&#39;db_engine&#39;] = &#39;MySQL&#39;;</span>
+<span class="x">$cfg[&#39;db_database&#39;] = $fp_database;</span>
+</pre></div>
+</div>
+<p>A few other configuration variables that rely on the ones above, and on the
+directory layout previously explained for our site:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">$cfg[&#39;url_upload&#39;] = &quot;http://$fp_proj_url/media/upload&quot;;</span>
+<span class="x">$cfg[&#39;upload_path&#39;] = &quot;$fp_proj/idf_upload&quot;;</span>
+<span class="x">$cfg[&#39;upload_issue_path&#39;] = &quot;$fp_proj/idf_upload_attach&quot;;</span>
+<span class="x">$cfg[&#39;tmp_folder&#39;] = &quot;$fp_proj/tmp&quot;;</span>
+<span class="x">$cfg[&#39;pear_path&#39;] = &quot;$fp_home/usr/pear/php&quot;;</span>
+<span class="x">$cfg[&#39;git_path&#39;] = &quot;$fp_home/usr/local/bin/git&quot;;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-pluf-and-indefero">
+<h2>Initialize Pluf and InDefero<a class="headerlink" href="#initialize-pluf-and-indefero" title="Permalink to this headline">¶</a></h2>
+<p>Once the db information above is correctly entered into the php config, the
+following should work, executed in the <code class="docutils literal"><span class="pre">indefero/src</span></code> directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ php ../../pluf/src/migrate.php --conf=IDF/conf/idf.php -a -i -d
+PHP include path: $HOME/usr/pear/php:.:/usr/local/php5/lib/php:/usr/local/lib/php:$HOME/example.com/site/pluf-master/src
+Install all the apps
+Pluf_Migrations_Install_setup
+IDF_Migrations_Install_setup
+</pre></div>
+</div>
+<p>Next, run the boostrap script to create the first user.  Once that’s working,
+use this .htaccess file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*) /index.php?_pluf_action=$1
+</pre></div>
+</div>
+<p>to get shorter urls for projects. Note: the last line is different from that on
+the website, and this is the correct one (from a message on the mailing list by
+the author).</p>
+<p>You should now have a running installation, try it out by creating a new
+project.  Enjoy!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, InDefero does <em>not</em> create empty repositories on the server, nor
+is there an option to do so.  The recommended workflow is simply to create
+the project on the server, then make a local repository and push to the
+InDefero host (the ‘Source’ tab for each project has nice copy/paste
+instructions for this).</p>
+</div>
+</div>
+<div class="section" id="new-users">
+<h2>New users<a class="headerlink" href="#new-users" title="Permalink to this headline">¶</a></h2>
+<p>InDefero is meant as a public forge, but in my case I don’t actually need
+outsiders to create new accounts, and in fact I don’t want the functionality.
+I will create new accounts manually only for collaborators I am going to work
+with, and this is easily done by running again the bootstrap script with
+different user information.  These users can then change their password via the
+web interface to whatever they want.</p>
+<p>I actually disabled new account creation by simply commenting out from
+<code class="docutils literal"><span class="pre">src/IDF/templates/idf/login_form.html</span></code> the “I am new here” entry that
+normally leads to the new account page.  Just surround the relevant line with
+<code class="docutils literal"><span class="pre">{*</span></code> and <code class="docutils literal"><span class="pre">*}</span></code> comment markers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">git</span> <span class="n">diff</span> <span class="n">HEAD</span><span class="o">~</span><span class="mi">2</span> <span class="n">login_form</span><span class="o">.</span><span class="n">html</span>
+<span class="n">diff</span> <span class="o">--</span><span class="n">git</span> <span class="n">a</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">IDF</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">idf</span><span class="o">/</span><span class="n">login_form</span><span class="o">.</span><span class="n">html</span> <span class="n">b</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">IDF</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">idf</span><span class="o">/</span><span class="n">login</span>
+<span class="n">_form</span><span class="o">.</span><span class="n">html</span>
+<span class="n">index</span> <span class="mi">624</span><span class="n">d613</span><span class="o">..</span><span class="mi">93</span><span class="n">d5566</span> <span class="mi">100644</span>
+<span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">IDF</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">idf</span><span class="o">/</span><span class="n">login_form</span><span class="o">.</span><span class="n">html</span>
+<span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">IDF</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">idf</span><span class="o">/</span><span class="n">login_form</span><span class="o">.</span><span class="n">html</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span> <span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span> <span class="o">@@</span>
+ <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;id_login&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="n">trans</span> <span class="s1">&#39;My login is&#39;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="n">name</span><span class="o">=</span>
+<span class="s2">&quot;login&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;id_login&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;{$login}&quot;</span> <span class="o">/&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+ <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="n">trans</span> <span class="s1">&#39;Do you have a password?&#39;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+<span class="o">-&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="nb">input</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;action&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;action-new-user&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;new-user&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;radio&quot;</span> <span class="o">/&gt;</span> <span class="o">&lt;</span>
+<span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;action-new-user&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="n">trans</span> <span class="s1">&#39;No, I am a new here.&#39;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="o">-</span>
+<span class="o">+</span><span class="p">{</span><span class="o">*</span>
+<span class="o">+&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="nb">input</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;action&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;action-new-user&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;new-user&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;radio&quot;</span> <span class="o">/&gt;</span> <span class="o">&lt;</span>
+<span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;action-new-user&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="n">trans</span> <span class="s1">&#39;No, I am a new here.&#39;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">&gt;</span>
+<span class="o">+*</span><span class="p">}</span>
+ <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="nb">input</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;action&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;action-login&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;login&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;radio&quot;</span> <span class="n">checked</span><span class="o">=</span><span class="s2">&quot;c</span>
+<span class="n">hecked</span><span class="s2">&quot; /&gt; &lt;label for=&quot;</span><span class="n">action</span><span class="o">-</span><span class="n">login</span><span class="s2">&quot;&gt;{trans &#39;Yes&#39;}&lt;/label&gt;, &lt;label for=&quot;</span><span class="n">id_passw</span>
+<span class="nb">ord</span><span class="s2">&quot;&gt;{trans &#39;my password is&#39;}&lt;/label&gt; &lt;input type=&quot;</span><span class="n">password</span><span class="s2">&quot; name=&quot;</span><span class="n">password</span><span class="s2">&quot; id=</span>
+<span class="s2">&quot;id_password&quot;</span> <span class="o">/&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+ <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;{trans &#39;Sign in&#39;}&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>If you want to <em>really</em> disable creation in full, you should also replace the
+<code class="docutils literal"><span class="pre">indefero/src/IDF/templates/idf/register/index.html</span></code> template with a mostly
+empty page, since otherwise people can still just navigate to the
+<code class="docutils literal"><span class="pre">site.example.com/register</span></code> url and will get the registration page.  This is
+what I did for my actual site.</p>
+<p>If you make changes to the html templates, remember to flush the temporary and
+cache directories to force a refresh of the public pages.</p>
+<div class="section" id="ssh-key-synchronization-and-security">
+<h3>SSH key synchronization and security<a class="headerlink" href="#ssh-key-synchronization-and-security" title="Permalink to this headline">¶</a></h3>
+<p>One small nugget that is stated in the <a class="reference external" href="http://projects.ceondo.com/p/indefero/page/InstallationScmGit">InDefero Git docs</a> but is not very
+clearly explained is how new users are given permissions to the repositories.
+This requires two things: a little cron job run <em>by the special git user</em> and
+understanding how the keys are managed.</p>
+<p>Your InDefero users do not have shell access to your server; in order to use
+the repositories they must upload their SSH public key through the web
+interface.  Every time a user’s SSH key is uploaded, InDefero leaves a little
+temporary file (its name is stored as <code class="docutils literal"><span class="pre">$cfg['idf_plugin_syncgit_sync_file']</span></code>)
+and InDefero ships with a php script that detects this file and syncs the SSH
+key from the database over to the <code class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></code> file of the
+special git user.  You can run this script manually to sync users, and it’s a
+good idea to leave it as a cron job in case users update their SSH keys later;
+the script is <code class="docutils literal"><span class="pre">indefero/scripts/gitcron.php</span></code>.</p>
+<p>An important point is that when these keys are uploaded, they do <em>not</em> give
+your InDefero users unrestricted login access, as this would defeat the
+isolation between projects that InDefero offers.  Their SSH keys are saved as
+authorized, but <em>only</em> to run a single command, a little python script called
+<code class="docutils literal"><span class="pre">indefero/scripts/gitserve.py</span></code> that checks that user’s permissions in the
+database, and only gives them access to the repositories consistent with those
+permissions.  This ensures that the special git user is not a security hole
+that would allow one user who knew the path to another repository he’s normally
+not allowed access, to read it bypassing the web interface.  Many thanks to
+Loic D’Anterroches, the InDefero project lead, for clarifying this point.</p>
+</div>
+</div>
+<div class="section" id="backing-things-up">
+<h2>Backing things up<a class="headerlink" href="#backing-things-up" title="Permalink to this headline">¶</a></h2>
+<p>OK, you now have a system up and running.  How do you back it up?  Most of the
+state of the project lives on the file system (and can thus be backed up with a
+simple <code class="docutils literal"><span class="pre">rsync</span></code> call), except for the SQL database.  A simple way to handle
+this is to back it up manually once, and then to store this backup into a git
+repository.  We can then run a cron job on the server that periodically runs a
+backup again, and then commits the changes to the repo.  By storing an
+uncompressed dump of the backup, we make it easy for git to compute diffs and
+to later compress the entire repository efficiently.</p>
+<p>We start by running a manual backup once:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> mysql-dumps
+mysqldump --opt -uUSER -pPASSWD -h HOSTNAME DBNAME &gt; DUMPFILE
+</pre></div>
+</div>
+<p>with this in place, we can now initialize the git repo:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git init
+git add DUMPFILE
+git ci -m<span class="s2">&quot;Initializing: repo to hold backups of SQL database for InDefero site.&quot;</span>
+</pre></div>
+</div>
+<p>And now, we can add a cron job that runs every night a script like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Dump a backup of mysql database and store it in git repo.</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Configure here with your information</span>
+<span class="nv">user</span><span class="o">=</span>YOUR_SQL_USERNAME
+<span class="nv">hostname</span><span class="o">=</span>YOUR_SQL_HOSTNAME
+<span class="nv">passwd</span><span class="o">=</span><span class="s2">&quot;????&quot;</span>
+<span class="nv">dbname</span><span class="o">=</span>YOUR_DATABASE_NAME
+<span class="nv">outdir</span><span class="o">=</span><span class="nv">$HOME</span>/example.com/site/mysql-dumps
+
+<span class="c1"># Make sure we use our own git</span>
+<span class="nv">git</span><span class="o">=</span><span class="nv">$HOME</span>/usr/local/bin/git
+
+<span class="c1">#######################################################</span>
+<span class="c1"># Code below</span>
+<span class="nv">dumpfile</span><span class="o">=</span><span class="nv">$dbname</span>.sql
+
+<span class="nb">cd</span> <span class="nv">$outdir</span>
+mysqldump --opt -u<span class="nv">$user</span> -p<span class="nv">$passwd</span> -h <span class="nv">$hostname</span> <span class="nv">$dbname</span> &gt; <span class="nv">$dumpfile</span>
+<span class="c1"># Store the history in git itself.</span>
+<span class="nv">$git</span> commit -a -m<span class="s2">&quot;Automated backup&quot;</span>
+<span class="c1"># Run gc every time to compact repo and save space</span>
+<span class="nb">echo</span> <span class="s2">&quot;Optimizing repository&quot;</span>
+<span class="nv">$git</span> gc
+</pre></div>
+</div>
+<p>Since this script has to hold your SQL password in plain text, make it
+read-execute only for your user, and don’t use an important password there.
+Alternatively, if you want to play it safer, you can take the password as an
+argument and initiate the backup process remotely over SSH, from a trusted
+host.  For my purposes this is sufficient.</p>
+<p>Once the SQL database is nicely backed up in our site directory, the entire
+project state consists of plain files, and we can simply rsync it nightly to a
+remote host for off-site backup.</p>
+<p>That’s it.  Every night the SQL database is backed up, and git gives us a
+revision history that is also very space efficient, as the gc step ensures that
+days with no real changes don’t take any extra space on disk (I tested this).
+A regular rsync off-site ensures that I have the entire site state and history
+safely stored, should anything happen at Dreamhost.</p>
+</div>
+<div class="section" id="final-comments">
+<h2>Final comments<a class="headerlink" href="#final-comments" title="Permalink to this headline">¶</a></h2>
+<p>So far I think InDefero does what I need it to.  I hope to clarify a few small
+questions I have on the list (the author has been very responsive to my queries
+so far), but I think I’ll stick with it.</p>
+<p>A few final points that I did not cover in these notes but that you may need
+in your own setup:</p>
+<p>Email</p>
+<blockquote>
+<div>I did not configure email delivery, as I only expect to make a few new
+users and I will do it by hand.  <a class="reference external" href="http://blog.jacobodevera.com">Jacobo</a> notes that if you eliminate from
+the IDF config file all email-related options, then the PEAR Mail module’s
+defaults should work; I haven’t tested this myself.</div></blockquote>
+<p>Git-daemon</p>
+<blockquote>
+<div>This is mentioned in the last step of the official instructions, but the
+basic Dreamhost plan does not allow me to run daemons.  However, git-daemon
+is only needed if you want to provide anonymous access to your
+repositories.  This is not my case (I use github.com for all my public
+code), so I didn’t look further into this topic.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="lyxport/index.html" title="lyxport"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Software Tools"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Software Tools</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

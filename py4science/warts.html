@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Python for scientific computing: a personal list of “warts” &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Code reviews: the lab meeting for code" href="code_reviews.html" />
+    <link rel="prev" title="Py4Science: a Starter Kit" href="starter_kit.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="code_reviews.html" title="Code reviews: the lab meeting for code"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="starter_kit.html" title="Py4Science: a Starter Kit"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="starter_kit.html"
+                        title="previous chapter">Py4Science: a Starter Kit</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code_reviews.html"
+                        title="next chapter">Code reviews: the lab meeting for code</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/warts.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-for-scientific-computing-a-personal-list-of-warts">
+<h1>Python for scientific computing: a personal list of “warts”<a class="headerlink" href="#python-for-scientific-computing-a-personal-list-of-warts" title="Permalink to this headline">¶</a></h1>
+<p>While I don’t hide the fact that I love Python for scientific computing work,
+obviously no tool is perfect.  I happen to think that Python is, <em>today</em>, the
+best <em>compromise</em> we have available that combines the following features:</p>
+<ul class="simple">
+<li>Open source, cross-platform and functional on a wide number of platforms,
+including supercomputers and other HPC environments.</li>
+<li>A high-level, very expressive language with readable syntax, a clean object
+model and useful built-in data types (strings, lists, dictionaries,
+sets, …).</li>
+<li>A rich general-purpose library with support for common non-numerical tasks:
+networking, regular expressions and other text processing, database access,
+process management, operating system level tasks (file and directory
+manipulations), etc.</li>
+<li>A sophisticated array object for manipulating homogeneous collections of
+numerical data in a Fortran-like manner.</li>
+<li>A well-defined foreign function interface, and machinery to easily call
+existing codes in C, C++ and Fortran.</li>
+<li>A good body of bindings to common tools needed in scientific work: 2d and 3d
+plotting, numerical libraries, etc.</li>
+<li>Support for interactive work, including execution, visualization and
+debugging.</li>
+<li>Tools for documentation of code and automatic testing.</li>
+</ul>
+<p>On any one of the above it’s probably easy to find a better tool than Python,
+but on the combination, I don’t think that today we have any better option.
+Perhaps in 10 years things will be different.</p>
+<p>In the meantime, I’ll focus on making Python as good of a tool as possible for
+my own research, and one important aspect of working with a tool you’ve become
+used to, is not forgetting about its problems and limitations.  We often get so
+accustomed to the little (or big) problems in the tools we use that we simply
+integrate workarounds into our mental workflows, and stop being critical.  This
+is the start of the fossilization of a project, and I hope that doesn’t happen
+to us on the scientific python front.  So I’m trying to ask myself often about
+what significant problems we still have in using Python efficiently every day
+for scientific work, and occasionally third-parties also ask me this.</p>
+<p>After a recent such discussion took place over email, I decided to make this
+little page to track this question.  This is meant to serve both as a reminder
+to myself of these problems, and hopefully also as a list of ideas for new
+contributors to jump in and help in areas that genuinely require improvement.
+Please <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a> with corrections, ideas for working on any of this, or your
+own favorite problem.</p>
+<p>Off the top of my head, here are a few of Python’s “warts” for scientific work.
+Some of these are fixable, others are hurdles that only impact the beginning
+user who comes from Matlab or IDL.</p>
+<p>I should add that almost all of these are points that I often mention as
+<em>advantages</em> of Python (e.g. incremental optimization).  The solution to the
+apparent contradiction is that I think we can still do much, much better, and
+the fact that Python in some of these issues is better than everything else
+that exists (not in all) should be no excuse to avoid improving things.</p>
+<dl class="docutils">
+<dt>Linear algebra syntax</dt>
+<dd>For purely linear-algebra based problems, matlab’s syntax can be cleaner than
+numpy’s (multiplication, operator, array creation, etc).</dd>
+<dt>Numpy ndarray is a complex object</dt>
+<dd>Numpy’s core object is the n-dimensional array, which is far more powerful
+than matlab’s arrays, but can be more complex to master.</dd>
+<dt>More complex core types in the language</dt>
+<dd>Being a general language, it has multiple container types (sets, tuples,
+lists, n-dimensional arrays).  This flexibility can be daunting for the
+beginner and intermediate user who sometimes misuses them, though it is a
+huge benefit for more advanced algorithmic development.</dd>
+<dt>Lack of native rationals</dt>
+<dd>I <em>really</em> wish Python had native rationals and that integer division
+produced rational results as needed.  Python’s native numerical types are
+pretty good for a general purpose language, as it includes out of the box
+arbitrary-length integers, floats, complex numbers (over the ‘field’ of
+the floats) and even arbitrary-precision <a class="reference external" href="http://docs.python.org/library/decimal.html">decimals</a>.  But the integers
+divide into the floats (they used to do integer truncating division, a la
+C).  Since this is part of the very core of the language, no amount of GMP
+wrappers will make it easier (this is why <a class="reference external" href="http://sagemath.org">Sage</a> has to preparse its input
+and convert input like <code class="docutils literal"><span class="pre">1+2</span></code> into <code class="docutils literal"><span class="pre">Integer(1)+Integer(2)</span></code>, so that all
+integer operations are done in a proper manner without burdening the user
+with that syntax all the time).</dd>
+<dt>Array multiplication operator</dt>
+<dd>I also wish that <a class="reference external" href="http://www.python.org/dev/peps/pep-0225">PEP 225</a> or something like it were accepted, so that we
+could have at least a second multiplication operator to express constructs
+like matrix or vector products in addition to element-wise operations.  See
+<a class="reference internal" href="numpy-pep225/numpy-pep225.html#pep-225-discussion"><span class="std std-ref">this page</span></a> for background on this matter.</dd>
+<dt>Packaging and distribution is a mess</dt>
+<dd>The machinery for distributing python packages is brittle, buggy and
+generally a major pain to use and extend.  There is currently (summer 2009)
+active work to address this; the core ideas are listed in Python’s <a class="reference external" href="http://www.python.org/dev/peps/pep-0376">PEP 376</a>
+and Tarek Ziadé (the person leading much of this effort) recently put up a
+<a class="reference external" href="http://tarekziade.wordpress.com/2009/07/24/words-on-distribute-distutils-pep-376-pep-386-pep-345/">post on his blog</a> about it all.</dd>
+<dt>Automatic testing</dt>
+<dd>The automated testing systems for python are currently a bit fragmented.
+Python ships with two (<a class="reference external" href="http://docs.python.org/library/unittest.html#module-unittest">unittest</a> and <a class="reference external" href="http://docs.python.org/library/doctest.html#module-doctest">doctest</a>) but these lack critical
+functionality and ease of use, which has led to third-party systems like
+<a class="reference external" href="http://somethingaboutorange.com/mrl/projects/nose">nose</a>, which isn’t well integrated in the core.  It would be great to see a
+merge of the good ideas of nose into the core in a robust and stable way.
+<em>Note</em>: progress is being made on this front for Python 2.7/3.2.</dd>
+<dt>Growing pains with Python 3</dt>
+<dd>The transition to Python 3 will cause some pain for a while, as the new
+version is not backwards compatible.</dd>
+<dt>Integrated help and docs</dt>
+<dd>There is no single-point-of-entry set of tools with unified documentation and
+help system for Python.  The remarkable <a class="reference external" href="http://sagemath.org">Sage</a> project does offer something
+like this and is an extremely valuable piece of this puzzle (I use it
+myself). Sage is a viable solution to this problem, though it actually goes
+beyond the pure python language by extending its syntax and modifying
+Python’s core numerical type hierarchy.  But in pure python, there is nothing
+that currently integrates execution, development, debugging and documentation
+with the polish of Mathematica or Matlab.</dd>
+<dt>The infamous GIL</dt>
+<dd>The main python implementation in C has a global lock (the GIL, short for
+Global Interpreter Lock) that prevents multithreaded code from modifying
+python data structures.  So while python does support threads, they can only
+be used effectively for i/o bound tasks, not for cpu-bound ones.  Google’s
+<a class="reference external" href="http://code.google.com/p/unladen-swallow">Unladen Swallow</a> project aims to correct this, but we’ll have to wait a few
+more months to see if it succeeds.  In the meantime, all parallel python code
+must use multiple processes, which can be a pain for certain valid use cases.</dd>
+<dt>Very easy incremental optimization</dt>
+<dd>There is currently no seamless way to get fast execution for numerical code
+that manually loops over arrays and does indexing operations on individual
+elements.  In recent years, Matlab has developed JIT technology to support
+this, and currently no seamless equivalent exists for Python.  Cython helps
+quite a bit on this front, but it’s not yet 100% integrated into the system
+machinery (though rapid progress is being made).</dd>
+<dt>Better docstrings in the standard library</dt>
+<dd>For those of us who regularly work interactively, good docstrings make an
+enormous difference in the usability of a library.  It is thus unfortunate
+that the quality of the docstrings in Python’s standard library is so
+inconsistent (from very good to non-existent).  Furthermore, I think we would
+all really benefit from having a standard for docstring formatting that
+included field descriptions for parametrs, return values, etc.  In that view,
+I think the <a class="reference external" href="http://projects.scipy.org/numpy/wiki/CodingStyleGuidelines#docstring-standard">numpy docstring standard</a> is in fact a very good starting
+point, as it does a good job of balancing readability in plain-text
+(important if you read the docstrings in source form) and expressiveness for
+postprocessing into HTML or PDF via sphinx.</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="code_reviews.html" title="Code reviews: the lab meeting for code"
+             >next</a></li>
+        <li class="right" >
+          <a href="starter_kit.html" title="Py4Science: a Starter Kit"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

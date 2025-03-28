@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Py4Science: a Starter Kit &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python for scientific computing: a personal list of “warts”" href="warts.html" />
+    <link rel="prev" title="Why use Python for scientific computing?" href="why_python.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="warts.html" title="Python for scientific computing: a personal list of “warts”"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="why_python.html" title="Why use Python for scientific computing?"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Py4Science: a Starter Kit</a><ul>
+<li><a class="reference internal" href="#what-to-download-the-quick-version">What to download (the quick version)</a><ul>
+<li><a class="reference internal" href="#on-linux">On Linux</a></li>
+<li><a class="reference internal" href="#on-mac-osx-or-windows">On Mac OSX or Windows</a></li>
+<li><a class="reference internal" href="#editing-code">Editing code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-to-read-and-view">What to read and view</a><ul>
+<li><a class="reference internal" href="#online-resources">Online resources</a></li>
+<li><a class="reference internal" href="#books">Books</a></li>
+<li><a class="reference internal" href="#videos-and-webinars">Videos and webinars</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#where-to-get-more-help-and-information">Where to get more help and information</a></li>
+<li><a class="reference internal" href="#what-to-download-the-longer-version">What to download (the longer version)</a></li>
+<li><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="why_python.html"
+                        title="previous chapter">Why use Python for scientific computing?</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="warts.html"
+                        title="next chapter">Python for scientific computing: a personal list of “warts”</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/starter_kit.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="py4science-a-starter-kit">
+<span id="starter-kit"></span><h1>Py4Science: a Starter Kit<a class="headerlink" href="#py4science-a-starter-kit" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unfortunately, this page is woefully out of date and I currently have very
+little time to keep it updated.  Fortunately the quality of other resources
+has greatly improved since I originally wrote it years ago, so hopefully
+Google will be your friend this time around.</p>
+</div>
+<p>This document is meant to gather resources for the scientist interested in
+starting to use the Python programming language for scientific computing.  Most
+of the information here should be of general use, though a few pointers are
+specific to resources at UC Berkeley.  Please <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a> with feedback, corrections or suggestions.</p>
+<p>The landscape of Python tools for scientific computing is varied and rapidly
+growing.  Python wasn’t originally designed specifically for numerical
+computing but instead as a general purpose, high level language.  For this
+reason, as a scientist you will need to install some extra tools on top of the
+basic language download to provide support for array manipulations, numerical
+algorithms and data visualization.  All of the tools mentioned here are free
+and developed as open source software in a collaborative manner by other
+scientists; I encourage you to not only use these tools but to get involved
+with the groups that develop them.  You will find not only help with questions
+and problems, but likely also the opportunity to shape the development of the
+major tools in a way that improves them for your own research.</p>
+<div class="section" id="what-to-download-the-quick-version">
+<h2>What to download (the quick version)<a class="headerlink" href="#what-to-download-the-quick-version" title="Permalink to this headline">¶</a></h2>
+<p>Here are quick instructions on what to download to get started, especially if
+you will be soon attending a class or workshop I may be teaching.  <a class="reference internal" href="#download-long"><span class="std std-ref">At the
+end of this page</span></a> there is a longer description of the various
+tools and distributions available, with some context to inform your decision.</p>
+<p>For a basic verification that you have a functioning installation of the core
+tools on your system, simply download and run <a class="reference external" href="workshop_checklist.py">this checklist script</a> as per
+the instructions at the top of the file.</p>
+<div class="section" id="on-linux">
+<h3>On Linux<a class="headerlink" href="#on-linux" title="Permalink to this headline">¶</a></h3>
+<p>On a reasonably recent Linux distribution, all the tools you need are available
+via the package management system.  On Ubuntu or other Debian-based
+distributions, type at the shell (tested on Ubuntu 9.10 Karmic):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">ipython</span> <span class="n">ipython</span><span class="o">-</span><span class="n">notebook</span> <span class="n">ipython</span><span class="o">-</span><span class="n">qtconsole</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">mayavi2</span> <span class="n">python</span><span class="o">-</span><span class="n">pandas</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">sympy</span> <span class="n">cython</span> <span class="n">python</span><span class="o">-</span><span class="n">networkx</span> <span class="n">python</span><span class="o">-</span><span class="n">pexpect</span> <span class="n">python</span><span class="o">-</span><span class="n">nose</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python</span><span class="o">-</span><span class="n">sphinx</span> <span class="n">python</span><span class="o">-</span><span class="n">pygments</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">tk</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">build</span><span class="o">-</span><span class="n">dep</span> <span class="n">python</span> <span class="n">python</span><span class="o">-</span><span class="n">scipy</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">mayavi2</span> <span class="n">cython</span>
+</pre></div>
+</div>
+<p>These two commands give you all the core packages to get started with
+scientific Python work, including development tools like compilers.  On Fedora,
+the equivalent commands are (tested on Fedora 12):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">yum</span><span class="o">-</span><span class="n">utils</span>
+
+<span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">ipython</span><span class="o">-</span><span class="n">notebook</span> \
+  <span class="n">scipy</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">Mayavi</span> <span class="n">sympy</span> <span class="n">Cython</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">networkx</span> <span class="n">pexpect</span> <span class="n">python</span><span class="o">-</span><span class="n">nose</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span> \
+  <span class="n">python</span><span class="o">-</span><span class="n">sphinx</span> <span class="n">python</span><span class="o">-</span><span class="n">pygments</span> <span class="n">python</span><span class="o">-</span><span class="n">pandas</span>
+
+<span class="n">sudo</span> <span class="n">yum</span><span class="o">-</span><span class="n">builddep</span> <span class="n">python</span> <span class="n">scipy</span> <span class="n">python</span><span class="o">-</span><span class="n">matplotlib</span> <span class="n">Mayavi</span> <span class="n">Cython</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="on-mac-osx-or-windows">
+<h3>On Mac OSX or Windows<a class="headerlink" href="#on-mac-osx-or-windows" title="Permalink to this headline">¶</a></h3>
+<p>Install the <a class="reference external" href="http://www.enthought.com/products/epd.php">Enthought Python Distribution</a> (I’m assuming here you are an
+academic user who can use the free license).  This has all of the above, and
+much more, in a single installer.</p>
+<p>On the Mac, you will also want to have:</p>
+<ul class="simple">
+<li>The Apple <a class="reference external" href="http://developer.apple.com/technology/xcode.html">Xcode</a> development toolkit.  Once you register, it’s a free (but
+fairly large) download.</li>
+<li><a class="reference external" href="http://r.research.att.com/tools">The GNU Fortran compiler</a>.</li>
+</ul>
+</div>
+<div class="section" id="editing-code">
+<h3>Editing code<a class="headerlink" href="#editing-code" title="Permalink to this headline">¶</a></h3>
+<p>Python is a programming language, so at some point you’ll need to type code.
+Learning how to use a good, powerful text editor is one of the best investments
+of time you can make in terms of computing-related skills.  I’m a life emacs
+user, but vi is equally sophisticated (in a very different style).  These
+editors, however, aren’t the easiest to get started with (if you’re serious
+about computing though, I strongly recommend you do learn how to use them).</p>
+<p>If you want something with a slightly easier learning curve to begin with, the
+following are all free, good options:</p>
+<ul class="simple">
+<li>Linux: gedit (typically installed by default).</li>
+<li>OSX: <a class="reference external" href="http://www.barebones.com/products/TextWrangler">Text Wrangler</a>,
+<a class="reference external" href="http://software-central.berkeley.edu/software/92-TextMate">TextMate (free for UC Berkeley affiliates)</a></li>
+<li>Windows: <a class="reference external" href="http://notepad-plus.sourceforge.net/uk/site.htm">Notepad ++</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="what-to-read-and-view">
+<h2>What to read and view<a class="headerlink" href="#what-to-read-and-view" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="online-resources">
+<h3>Online resources<a class="headerlink" href="#online-resources" title="Permalink to this headline">¶</a></h3>
+<p>As a starting point, I recommend that people at the very least <em>work through</em>
+(not just read, but actually type in and execute) the basic <a class="reference external" href="http://docs.python.org/tutorial">Python tutorial</a>, as well as the <a class="reference external" href="http://mentat.za.net/numpy/intro/intro.html">introductory NumPy
+tutorial</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In all of these, the markers that you see as <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> are the prompts
+generated by Python which you do not type.  Similarly, the <a class="reference external" href="http://ipython.org">IPython</a>
+prompts look like <code class="docutils literal"><span class="pre">In</span> <span class="pre">[3]:</span></code>.</p>
+</div>
+<p>In addition to these two minimal requirements, the following links can also be
+useful:</p>
+<ul class="simple">
+<li>The NumPy <a class="reference external" href="http://docs.scipy.org/doc/numpy/user">User Guide</a> and <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference">Reference Guide</a>: these are works in progress
+but they contain much useful information.</li>
+<li>The <a class="reference external" href="http://matplotlib.sourceforge.net/contents.html">Matplotlib manual</a>:
+this is the Matlab-like plotting library most of us use regularly.</li>
+<li>The <a class="reference external" href="http://ipython.org/documentation.html">IPython documentation</a>:
+handy resources about making the most of your interactive environment.</li>
+<li>The <a class="reference external" href="http://www.scipy.org/Additional_Documentation">SciPy documentation page</a> contains links to many more
+documentation resources, especially for scientific work.</li>
+<li><a class="reference external" href="http://www.scipy.org/wikis/topical_software/Tutorial">Interactive data analysis</a>: a tutorial with an
+astronomy focus but very useful for anyone dealing with data.  This is an
+<em>excellent resource</em> which you can download for reading but also with
+examples you can execute.</li>
+<li><a class="reference external" href="http://radiantbytes.com/books/python-latex">An introduction to Python and LaTeX</a>: still (as of early 2010) a
+work in-progress, but already a useful introduction to Python programming
+targeted at students in science, math and engineering.  This is part of the
+remarkable <a class="reference external" href="http://fossee.in">FOSSEE India</a> project.</li>
+</ul>
+<p>With a slightly broader view, I <em>very strongly</em> recommend you spend some time
+with Greg Wilson’s excellent <a class="reference external" href="http://software-carpentry.org">Software Carpentry</a> materials.  As of early 2010
+he is restructuring them and I’m sure the new version will be even better, but
+even the archives have a lot of value; Greg addresses the real problems that
+exist at the intersection of software engineering and scientific computing and
+tries to offer not only practical solutions, but more importantly, a set of
+approaches that hopefully lead to the creation of a more robust computational
+culture in scientific work.</p>
+<p>These are a few good links about how to write good Python code:</p>
+<ul class="simple">
+<li>Philip J. Guo’s <a class="reference external" href="http://www.stanford.edu/~pgbovine/python-idioms.htm">Python idoms</a>.</li>
+<li>Rob Knight runs a stellar research group at CU Boulder, whose computational
+tools use Python heavily and has a great <a class="reference external" href="http://jaynes.colorado.edu/PythonIdioms.html">collection of tips and idioms</a>.</li>
+<li>David Goodger’s <a class="reference external" href="http://python.net/%7Egoodger/projects/pycon/2007/idiomatic/handout.html">Code Like a Pythonista: Idiomatic Python</a>.</li>
+</ul>
+<p>Quick reference: use <a class="reference external" href="http://rgruet.free.fr">Richard Gruet’s excellent Python Quick Reference</a>, available in html and pdf formats for several Python
+versions.</p>
+<p>At some point you’ll need to debug your code, and <a class="reference external" href="http://pythonconquerstheuniverse.wordpress.com/category/the-python-debugger/">this page</a>
+is the cleanest introduction to the Python debugger I’ve read.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In IPython, you can run scripts under the control of the debugger by typing
+<code class="docutils literal"><span class="pre">%run</span> <span class="pre">-d</span> <span class="pre">script.py</span></code>, and you can debug post-mortem by typing <code class="docutils literal"><span class="pre">%debug</span></code>
+after any exception (or type <code class="docutils literal"><span class="pre">%pdb</span></code> to make this happen automatically
+anytime there is an exception).  The IPython debugger is an extended version
+of the one described in this page, with syntax highlighting and tab
+completion, but otherwise works identically.</p>
+</div>
+</div>
+<div class="section" id="books">
+<h3>Books<a class="headerlink" href="#books" title="Permalink to this headline">¶</a></h3>
+<p>In terms of books for scientists, I recommend the following:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1449319793">Python for Data Analysis</a>
+by Wes McKinney: an excellent all-around data analysis book, with emphasis on
+understanding and using Pandas.</li>
+<li><a class="reference external" href="http://ipython-books.github.io/cookbook/">IPython Interactive Computing and Visualization Cookbook</a> and <a class="reference external" href="http://ipython-books.github.io/minibook/">Learning IPython for
+Interactive Computing and Data Visualization</a> by Cyrille Rossant: both cover
+IPython and the surrounding scientific Python ecosystem, the latter being a
+short “mini-book” while the former is more comprehensive.</li>
+<li><a class="reference external" href="http://www.apress.com/book/view/9781430218432">Beginning Python Visualization</a> by Shai Vaingast: this is a great practical
+introduction to numerical data processing and visualization.</li>
+<li><a class="reference external" href="http://folk.uio.no/hpl/scripting">Python Scripting for Computational Science</a> by Hans Petter Langtangen: a
+longer and denser but very comprehensive discussion of using Python in
+scientific computing contexts, available online from the author (<a class="reference external" href="http://www.amazon.com/Python-Scripting-Computational-Science-Engineering/dp/3540739157/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1248306847&amp;sr=8-1">Amazon
+link</a>).</li>
+<li><a class="reference external" href="http://www.packtpub.com/matplotlib-python-development/book">Matplotlib for Python Developers</a> by Sandro Tosi: everything you need to
+know about producing meaningful and aesthetic data visualizations with
+Matplotlib.</li>
+</ul>
+<p>The following Python books (except for David Beazley’s) are freely available to
+UC Berkeley via the O’Reilly Safari system.  These are books I have personally
+found to be useful and can recommend; they are general-purpose books without
+content specific to scientific use.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/9780596513986">Learning Python, 3rd Edition</a> by Mark Lutz.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596001894">Python Pocket Reference, 2nd Edition</a> by Mark Lutz.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596100469">Python in a Nutshell, 2nd Edition</a> by Alex Martelli.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596007973">Python Cookbook, 2nd Edition</a> by Alex Martelli; Anna
+Martelli Ravenscroft; David Ascher.</li>
+<li><a class="reference external" href="http://www.amazon.com/Python-Essential-Reference-David-Beazley/dp/0672329786/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1264128825&amp;sr=1-1">Python Essential Reference (4th Edition)</a> by David M. Beazley.  Not for the
+raw beginner, but if you have some programming experience, this is probably
+the most useful general-purpose Python book you can own.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">U.C. Berkeley users can access Safari for free.  For this you need to be
+either on campus or browsing with the <a class="reference external" href="http://lib.berkeley.edu/Help/proxy.html">Berkeley Library Proxy</a>.</p>
+</div>
+</div>
+<div class="section" id="videos-and-webinars">
+<h3>Videos and webinars<a class="headerlink" href="#videos-and-webinars" title="Permalink to this headline">¶</a></h3>
+<p>In late 2008 I taught an intensive 2-day workshop introducing Python to
+scientific users at UC Berkeley.  While this was a very hands-on course and
+thus probably not the best thing to watch as a recording, a number of people
+have still told me that they find the lectures useful, all the <a class="reference external" href="http://www.archive.org/search.php?query=Fernando+Perez+scientific+python">video is
+available</a>.  They were kindly videotaped and put online by Jeff Teeters.</p>
+<p>Enthought offers a <a class="reference external" href="http://www.enthought.com/training/webinars.php">webinar series</a> that is open to the public, and recordings
+of past ones are available as well.</p>
+<p>MIT’s famous <a class="reference external" href="http://ocw.mit.edu/OcwWeb/Electrical-Engineering-and-Computer-Science/6-00Fall-2008/CourseHome/index.htm">6.00 Introduction to Computer Science and Programming</a> course
+is now using Python and the whole course is available online on their
+OpenCourseware system.  In particular, <a class="reference external" href="http://ocw.mit.edu/OcwWeb/Electrical-Engineering-and-Computer-Science/6-00Fall-2008/LectureVideos/detail/embed18.htm">lecture 18</a> covers Matplotlib.</p>
+<p>And there is a series of <a class="reference external" href="http://www.youtube.com/watch?v=4Mf0h3HphEA">basic Python tutorials on YouTube</a>.</p>
+<p>These are a few extra video lectures you may find useful:</p>
+<p><strong>Scientific-computing oriented</strong></p>
+<ul class="simple">
+<li>SciPy 2009 conference: the entire tutorial series and conference <a class="reference external" href="http://www.archive.org/search.php?query=%22SciPy%202009%22">videos</a> are
+online, as well as the <a class="reference external" href="http://conference.scipy.org/slides">slides</a> for all presentations.</li>
+<li><a class="reference external" href="http://video.google.com/videoplay?docid=3D2025411588241625522">A Demonstration of the ‘IPython’ Interactive Shell</a>.</li>
+<li><a class="reference external" href="http://videolectures.net/mloss08_hunter_mat/">Matplotlib by John D. Hunter</a>, a talk at NIPS‘08.</li>
+<li><a class="reference external" href="http://nanohub.org/resources/99">Scientific Computing with Python</a>: a full
+day workshop presented by Eric Jones and Travis Oliphant, from <a class="reference external" href="http://www.enthought.com">Enthought</a>.</li>
+<li>Python for Scientific and High Performance Computing: a set of 4 videos
+(several hours total) from a tutorial presented at the Chicago Python User’s
+group, by folks from Argonne National Lab and other Chicago area
+institutions. <a class="reference external" href="http://carlfk.blip.tv/file/2844247">Part 1</a>, <a class="reference external" href="http://carlfk.blip.tv/file/2844521">Part 2</a>, <a class="reference external" href="http://carlfk.blip.tv/file/2845210">Part 3</a>,  <a class="reference external" href="http://carlfk.blip.tv/file/2845400">Part 4</a>.</li>
+<li><a class="reference external" href="http://sagemath.org">Sage</a>: Unifying Mathematical Software: <a class="reference external" href="http://wstein.org/edu/2009/sd16/00021-stein-unifying_open_source_math_software-part1.m4v">I</a>,
+<a class="reference external" href="http://wstein.org/edu/2009/sd16/00022-stein-unifying_open_source_math_software-part2.m4v">II</a></li>
+</ul>
+<p><strong>General Python lectures</strong></p>
+<ul class="simple">
+<li>PyCon: <a class="reference external" href="http://pycon.blip.tv">a selection from the annual Python conference</a>:<ul>
+<li>Python 101: <a class="reference external" href="http://blip.tv/file/1999483/">I</a>, <a class="reference external" href="http://blip.tv/file/1999358/">II</a>.</li>
+<li>Python 102: <a class="reference external" href="http://blip.tv/file/1999205/">I</a>, <a class="reference external" href="http://blip.tv/file/1999063">II</a>, <a class="reference external" href="http://blip.tv/file/1998921">III</a>.</li>
+<li>Python 401: Some Advanced Topics: <a class="reference external" href="http://www.blip.tv/file/2023288">I</a>,
+<a class="reference external" href="http://www.blip.tv/file/2023093">II</a>, <a class="reference external" href="http://www.blip.tv/file/2023307">III</a></li>
+<li>An Introduction to Object-Oriented Programming: <a class="reference external" href="http://www.blip.tv/file/2022419/">I</a>, <a class="reference external" href="http://www.blip.tv/file/2022629/">II</a>, <a class="reference external" href="http://www.blip.tv/file/2022478/">III</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="http://video.google.com/videoplay?docid=3D7760178035196894549">Advanced Python</a>: a Google
+Tech Talk by Thomas Wouters.</li>
+<li>Google I/O 2008, ‘Painless Python’: <a class="reference external" href="http://www.youtube.com/watch?v=3DbDgD9whDfEY&amp;feature=3Dchannel">I</a>, <a class="reference external" href="http://www.youtube.com/watch?v=3Dy7vwZ20SDzc&amp;feature=3Dchannel">II</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="where-to-get-more-help-and-information">
+<h2>Where to get more help and information<a class="headerlink" href="#where-to-get-more-help-and-information" title="Permalink to this headline">¶</a></h2>
+<p>All of the projects linked above have mailing lists that are very welcoming; I
+have personally learned much from the discussions on these lists.  You will
+find that very knowledgeable people are surprisingly generous with their time,
+if you ask questions carefully and provide sufficient information to clearly
+delineate your problem.  Simply click on each project’s main page and you will
+typically find an up-to-date link to its mailing lists.</p>
+<p>The <a class="reference external" href="http://planet.scipy.org">Planet SciPy</a> blog aggregator is a useful way to keep in touch with what
+many projects are doing.</p>
+<p>Another excellent way to get in touch with what the developers of all these
+tools are doing is to attend the annual SciPy <a class="reference external" href="http://conference.scipy.org">conference</a>, which combines
+teaching tutorials, formal presentations and development sprints.</p>
+<p>If you are a UC Berkeley (or other Bay Area person for whom coming to campus is
+feasible), I encourage you to stop by any of the regular <a class="reference external" href="https://wiki.ipython.org/Py4Science">Py4Science meetings
+on campus</a>.  This informal group
+meets to discuss tools, problems and solutions regarding the use of Python in
+scientific research; we have a very low-traffic <a class="reference external" href="https://calmail.berkeley.edu/manage/list/listinfo/py4science&#64;lists.berkeley.edu">mailing list</a>
+for meeting announcements that anyone can subscribe to.</p>
+</div>
+<div class="section" id="what-to-download-the-longer-version">
+<span id="download-long"></span><h2>What to download (the longer version)<a class="headerlink" href="#what-to-download-the-longer-version" title="Permalink to this headline">¶</a></h2>
+<p>If you think of Python as a ‘Matlab/IDL replacement’, you probably want at the
+very least (before you download any of these individually, continue reading
+below):</p>
+<ul class="simple">
+<li>A basic interactive environment: <a class="reference external" href="http://ipython.org">IPython</a> (disclosure: I’m biased since this
+is a project I started years ago, but many people seem to like it).</li>
+<li>Multidimensional array support: <a class="reference external" href="http://numpy.scipy.org">NumPy</a> is the core library that most other
+scientific Python projects depend on and which allows it to efficiently
+manipulate large amounts of homogeneous numerical data in a manner similar to
+Matlab, IDL or any other array language.</li>
+<li>Linear algebra and other numerical libraries: <a class="reference external" href="http://www.scipy.org">SciPy</a> is a set of libraries
+that add to NumPy access to all of LAPACK, FFTs, numerical integration,
+optimization, special functions, and much more.  This is a large combination
+of old and well known codes in C and FORTRAN (many from <a class="reference external" href="http://netlib.org">netlib</a>) with lots of
+new Python code both to expose those libraries and to provide new
+functionality.</li>
+<li>Data visualization: <a class="reference external" href="http://matplotlib.sourceforge.net">Matplotlib</a> is my tool of choice for high quality 2d
+plotting (it recently also has developed basic 3d support), while <a class="reference external" href="http://code.enthought.com/projects/mayavi">Mayavi</a> is
+a powerful system that builds on top of the <a class="reference external" href="http://vtk.org">VTK</a> toolkit to provide
+sophisticated 3d visualization.</li>
+</ul>
+<p>These are probably the raw basics, and a <a class="reference external" href="http://www.scipy.org/Topical_Software">community maintained page</a> at the
+SciPy site lists a vast array of other tools you may find useful in your
+specific problem domain, all of them free.</p>
+<p>In terms of actually downloading and installing tools, there are a few
+alternatives, partly depending on your operating system of choice:</p>
+<ul class="simple">
+<li>Linux: On most modern Linux distributions, the above tools (and many more)
+are one click or command away, though you might not get by default the very
+latest versions.  As a starting point you will probably be fine.</li>
+<li>The <a class="reference external" href="http://www.enthought.com/products/epd.php">Enthought Python Distribution</a> (EPD) is a self-contained installer with
+the above and many other tools.  EPD is a very easy solution that is
+particularly appealing for Windows and Mac OSX, and it also exists for
+several Linux distributions and Solaris.</li>
+<li><a class="reference external" href="http://www.pythonxy.com">Python(x,y)</a> provides a single-click installer for Windows of a number of
+useful libraries, though unfortunately it does not ship the very useful
+Enthought tools (that include the powerful Mayavi 3d visualizer, the 2d
+plotting library Chaco and much more).</li>
+</ul>
+<p>As an alternative approach, the <a class="reference external" href="http://sagemath.org">Sage</a> project also ships most of these tools,
+and then adds others (like GMP and Pari) to provide a new numerical foundation,
+as well as its own original libraries for many tasks.  It also extends the
+Python language syntax and modifies its core numerical type system with one
+based on more structured mathematical abstractions (all integer arithmetic is
+performed over the rationals, floating point numbers can always be arbitrary
+precision ones, etc).  Sage provides a web-based interactive notebook
+environment (as well as a customized IPython command-line one) but does not by
+default build the graphical user interface components for Matplotlib and
+Mayavi.  It’s worth noting that since Sage has its own numerical type system
+and matrix classes, by default most normal numpy/scipy examples will not work
+in exactly the same way in Sage.  Depending on your needs, you can either use
+the Sage notebook in ‘pure python mode’ where it will not load Sage’s native
+types, or use ‘Sage mode’ where its objects provide mathematical computing
+capabilities not available in Python or NumPy.</p>
+<p>Whether you choose to use the integrated Sage environment or the individual
+libraries is up to you <a class="footnote-reference" href="#id15" id="id14">[1]</a>; I personally do most of my development on top of
+‘bare’ Python using only the libraries I need for each problem, but I always
+keep an updated Sage installation available and use it as needed.  Sage is
+available in source and binary form for many different Unix-like operating
+systems, and can be used in Windows as a VMWare Linux image.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>Thanks to Chris Burns from UC Berkeley for a useful set of links and resources,
+to Stefan van der Walt from U. Stellenbosch for notes on Sage and numerics, and
+to Gokhan Sever for a number of useful links.</p>
+<hr class="docutils" />
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[1]</a></td><td>One point that may be of importance to you in making this decision,
+depending on your context, is licensing.  Most of the tools I link to
+here are licensed in a <a class="reference external" href="http://www.opensource.org/licenses/bsd-license.php">BSD</a> or similar manner, except for Sage which is
+<a class="reference external" href="http://www.gnu.org/licenses/gpl.html">GPL</a> licensed.  Since Sage builds on a large foundation of other code
+that includes a mix of BSD and GPL tools, the combined Sage entity is
+necessarily also a GPL’d project.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="warts.html" title="Python for scientific computing: a personal list of “warts”"
+             >next</a></li>
+        <li class="right" >
+          <a href="why_python.html" title="Why use Python for scientific computing?"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

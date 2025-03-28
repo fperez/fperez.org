@@ -1,0 +1,20 @@
+Contact
+=======
+
+.. admonition:: Fernando Perez
+
+   Email
+     | fernando.perez@berkeley.edu (primary)
+     | fperez@lbl.gov
+
+
+   Office
+     | Evans Hall 419
+     | Phone: +1 (510) 488-4842
+     | Fax  : +1 (510) 642-7892
+
+   Post
+     | Statistics Department
+     | 367 Evans Hall
+     | University of California, Berkeley
+     | Berkeley, CA 94720-3860

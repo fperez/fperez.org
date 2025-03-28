@@ -1,0 +1,745 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Decorators and execution context &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python for science at UC Berkeley" href="ucb/index.html" />
+    <link rel="prev" title="Code reviews: the lab meeting for code" href="code_reviews.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ucb/index.html" title="Python for science at UC Berkeley"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="code_reviews.html" title="Code reviews: the lab meeting for code"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Decorators and execution context</a><ul>
+<li><a class="reference internal" href="#what-are-decorators-quick-recap">What are Decorators?  Quick recap</a></li>
+<li><a class="reference internal" href="#now-for-a-twist">Now for a twist</a></li>
+<li><a class="reference internal" href="#but-first-a-detour">But first, a detour</a></li>
+<li><a class="reference internal" href="#i-thought-this-was-a-python-meeting-and-you-only-used-linux">I thought this was a Python meeting and you only used Linux</a></li>
+<li><a class="reference internal" href="#syntax-in-python-for-anonymous-blocks">Syntax in Python for (anonymous) blocks?</a></li>
+<li><a class="reference internal" href="#so-your-point-is">So, your point is??</a></li>
+<li><a class="reference internal" href="#now-onto-something-more-useful">Now onto something more useful</a></li>
+<li><a class="reference internal" href="#limitations-no-access-to-enclosing-scopes-in-python-2-x">Limitations? No access to enclosing scopes in Python 2.x</a></li>
+<li><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="code_reviews.html"
+                        title="previous chapter">Code reviews: the lab meeting for code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ucb/index.html"
+                        title="next chapter">Python for science at UC Berkeley</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/decorators.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decorators-and-execution-context">
+<h1>Decorators and execution context<a class="headerlink" href="#decorators-and-execution-context" title="Permalink to this headline">¶</a></h1>
+<p>Or abusing &#64; for fun and profit.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These are the notes for a presentation I made on September 16, 2009 at our
+UC Berkeley <a class="reference external" href="https://cirl.berkeley.edu/view/Py4Science">Py4Science</a> group.  Feel free to <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a> with any comments,
+thoughts or corrections.</p>
+</div>
+<div class="section" id="what-are-decorators-quick-recap">
+<h2>What are Decorators?  Quick recap<a class="headerlink" href="#what-are-decorators-quick-recap" title="Permalink to this headline">¶</a></h2>
+<p>As <a class="reference external" href="https://cirl.berkeley.edu/mb312/data_docs/decorating_for_dummies.html">Matthew Brett says</a>, a decorator is “a function, that takes a function as
+input, and returns a function” (this is only <em>mostly</em> true, as Matthew also
+clarifies later, but it will serve for now):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s2">&quot;I got a function named:&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">func_name</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+<span class="nd">@deco</span>
+<span class="k">def</span> <span class="nf">sq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="n">got</span> <span class="n">a</span> <span class="n">function</span> <span class="n">named</span><span class="p">:</span> <span class="n">sq</span>
+</pre></div>
+</div>
+<p>And the function <code class="xref py py-func docutils literal"><span class="pre">sq()</span></code> still works normally:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">sq</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">9</span>
+</pre></div>
+</div>
+<p>But a decorator typically modifies the function it gets, it ‘decorates’ it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="k">def</span> <span class="nf">timed</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s2">&quot;Time used: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">st</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@timed</span>
+<span class="k">def</span> <span class="nf">ssq</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s2">&quot;Sum of squares&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now we automatically get timing info on every call to ssq:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">ssq</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">Time</span> <span class="n">used</span><span class="p">:</span> <span class="mf">0.00</span> <span class="n">s</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="mi">332833500</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">ssq</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">Time</span> <span class="n">used</span><span class="p">:</span> <span class="mf">0.12</span> <span class="n">s</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="il">333328333350000L</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">ssq</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">Time</span> <span class="n">used</span><span class="p">:</span> <span class="mf">1.84</span> <span class="n">s</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="il">333332833333500000L</span>
+</pre></div>
+</div>
+<p>Unfortunately this messes up introspection on <code class="xref py py-func docutils literal"><span class="pre">ssq()</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>In [6]: ssq?
+Type:               function
+Base Class: &lt;type &#39;function&#39;&gt;
+String Form:        &lt;function wrapper at 0x91e302c&gt;
+Namespace:  Interactive
+File:               Dynamically generated function. No source code available.
+Definition: ssq(n, **kw)
+Docstring:
+    &lt;no docstring&gt;
+</pre></div>
+</div>
+<p>So you should use <code class="xref py py-func docutils literal"><span class="pre">functools.wraps()</span></code> from the stdlib (thanks to Gael for
+<a class="reference external" href="http://mail.scipy.org/pipermail/ipython-dev/2009-September/005511.html">reminding me</a> of this on the IPython mailing list discussion that spawned
+these notes)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+<span class="k">def</span> <span class="nf">timed</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s2">&quot;Time used: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">st</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@timed</span>
+<span class="k">def</span> <span class="nf">ssq</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s2">&quot;Sum of squares&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And now you get at least the right docstring (but not the signature):</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> ssq<span class="o">?</span>
+    <span class="n">Type</span><span class="p">:</span>            <span class="n">function</span>
+    <span class="n">Base</span> <span class="n">Class</span><span class="p">:</span>      <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;function&#39;</span><span class="o">&gt;</span>
+    <span class="n">String</span> <span class="n">Form</span><span class="p">:</span>     <span class="o">&lt;</span><span class="n">function</span> <span class="n">ssq</span> <span class="n">at</span> <span class="mh">0x91af454</span><span class="o">&gt;</span>
+    <span class="n">Namespace</span><span class="p">:</span>       <span class="n">Interactive</span>
+    <span class="n">File</span><span class="p">:</span>            <span class="n">Dynamically</span> <span class="n">generated</span> <span class="n">function</span><span class="o">.</span> <span class="n">No</span> <span class="n">source</span> <span class="n">code</span> <span class="n">available</span><span class="o">.</span>
+    <span class="n">Definition</span><span class="p">:</span>      <span class="n">ssq</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="n">Docstring</span><span class="p">:</span>
+        <span class="n">Sum</span> <span class="n">of</span> <span class="n">squares</span>
+</pre></div>
+</div>
+<p>If you want the whole thing to work right, use Michele Simionato’s
+<a class="reference external" href="http://pypi.python.org/pypi/decorator">decorator</a> module (available at PyPI):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">decorator</span> <span class="k">import</span> <span class="n">decorator</span>
+
+<span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">timed</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="s2">&quot;Time used: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">st</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="nd">@timed</span>
+<span class="k">def</span> <span class="nf">ssq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="s2">&quot;Sum of squares&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And now even full signature information is preserved:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> ssq<span class="o">?</span>
+<span class="n">Type</span><span class="p">:</span>               <span class="n">function</span>
+<span class="n">Base</span> <span class="n">Class</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;function&#39;</span><span class="o">&gt;</span>
+<span class="n">String</span> <span class="n">Form</span><span class="p">:</span>        <span class="o">&lt;</span><span class="n">function</span> <span class="n">ssq</span> <span class="n">at</span> <span class="mh">0x94e402c</span><span class="o">&gt;</span>
+<span class="n">Namespace</span><span class="p">:</span>  <span class="n">Interactive</span>
+<span class="n">File</span><span class="p">:</span>               <span class="n">Dynamically</span> <span class="n">generated</span> <span class="n">function</span><span class="o">.</span> <span class="n">No</span> <span class="n">source</span> <span class="n">code</span> <span class="n">available</span><span class="o">.</span>
+<span class="n">Definition</span><span class="p">:</span> <span class="n">ssq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Docstring</span><span class="p">:</span>
+    <span class="n">Sum</span> <span class="n">of</span> <span class="n">squares</span>
+</pre></div>
+</div>
+<p>In summary: if you become a fan of decorators, <em>use Michele’s module</em>, it
+rocks.  And it should be in the stdlib, if you ask me, because as far as I’m
+concerned <code class="xref py py-func docutils literal"><span class="pre">functools.wraps()</span></code> is broken, since it mangles the function
+signature.</p>
+<p>PS - for those paying close attention.  What about the source?? It’s there,
+just a little hidden:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> ssq.undecorated<span class="o">??</span>
+<span class="n">Type</span><span class="p">:</span>               <span class="n">function</span>
+<span class="n">Base</span> <span class="n">Class</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;function&#39;</span><span class="o">&gt;</span>
+<span class="n">String</span> <span class="n">Form</span><span class="p">:</span>        <span class="o">&lt;</span><span class="n">function</span> <span class="n">ssq</span> <span class="n">at</span> <span class="mh">0x8cac17c</span><span class="o">&gt;</span>
+<span class="n">Namespace</span><span class="p">:</span>  <span class="n">Interactive</span>
+<span class="n">File</span><span class="p">:</span>               <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">fperez</span><span class="o">/</span><span class="n">research</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">contexts</span><span class="o">/</span><span class="n">t</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Definition</span><span class="p">:</span> <span class="n">ssq</span><span class="o">.</span><span class="n">undecorated</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Source</span><span class="p">:</span>
+<span class="nd">@timed</span>
+<span class="k">def</span> <span class="nf">ssq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="s2">&quot;Sum of squares&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="now-for-a-twist">
+<h2>Now for a twist<a class="headerlink" href="#now-for-a-twist" title="Permalink to this headline">¶</a></h2>
+<p>While most uses of a decorator return a function, they don’t <em>have</em> to.  The
+decorator syntax only requires that in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nd">@deco1</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="o">...</span>
+
+<span class="nd">@deco2</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">deco1()</span></code> be a callable, and that the result of <code class="docutils literal"><span class="pre">deco2(args)</span></code> also be a
+callable, since both will be called with func as an argument.  But there is <em>no
+restriction</em> on the result of <code class="docutils literal"><span class="pre">deco1(func)</span></code> or <code class="docutils literal"><span class="pre">deco2(args)(func)</span></code> itself,
+as we can see with a simple example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">funnydeco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;Hi, I am a decorator...&#39;</span>
+
+<span class="nd">@funnydeco</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>which produces:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="o">------------------------------------------------------------</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;ipython console&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">callable</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="k">print</span> <span class="n">f</span>
+<span class="n">Hi</span><span class="p">,</span> <span class="n">I</span> <span class="n">am</span> <span class="n">a</span> <span class="n">decorator</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>And that opens up a whole lot of interesting possibilities…</p>
+</div>
+<div class="section" id="but-first-a-detour">
+<h2>But first, a detour<a class="headerlink" href="#but-first-a-detour" title="Permalink to this headline">¶</a></h2>
+<p>Apple’s <a class="reference external" href="http://arstechnica.com/apple/reviews/2009/08/mac-os-x-10-6.ars/12">Grand Central Dispatch</a>:</p>
+<ul class="simple">
+<li>A kernel-managed set of per-application dynamic threadpools and a scheduler
+for them.</li>
+<li>A library (libdispatch) to provide APIs that let you pass code into these
+thread pools, but with a high-level notion of thread queues.</li>
+<li>An <em>extension to the C language</em> called <a class="reference external" href="http://arstechnica.com/apple/reviews/2009/08/mac-os-x-10-6.ars/10">blocks</a> that gives C anonymous
+blocks with local scope as first-class entities.</li>
+</ul>
+<p>None of this is revolutionary or even new.  Yet I’m willing to bet the
+combination will have a tremendous impact, especially since Apple <a class="reference external" href="http://arstechnica.com/open-source/news/2009/09/apple-opens-gcd-challenges-impede-adoption-on-linux.ars">open
+sourced</a> the GCD libdispatch library and is proposing the blocks extension to
+the C standards groups.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Microsoft has <a class="reference external" href="http://msdn.microsoft.com/en-us/magazine/cc163340.aspx">something similar</a> in .Net with C#, though I don’t know if
+the scheduling is at the kernel level like GCD’s.</p>
+</div>
+<p>Why are we talking about this?  A simple code example, this serial code:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>becomes parallel with tiny changes:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">dispatch_apply</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="o">^</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The only changes are the calls to <code class="xref py py-func docutils literal"><span class="pre">dispatch_apply()</span></code> and the new
+<code class="docutils literal"><span class="pre">^{...}</span></code> syntax, those are the new fancy C blocks.</p>
+<p>For those of you who are familiar with OpenMP, <a class="reference external" href="http://www.macresearch.org/cocoa-scientists-xxxi-all-aboard-grand-central">this post</a> is a nice followup
+with an example that compares a simple image blur done with OpenMP and with
+GCD.  It is unfortunate that the author didn’t have 8 or 16 cores to run it on,
+as getting ‘linear speedup’ with N=2 is a bit of a joke, but other than that
+the post is a clear and informative example.</p>
+</div>
+<div class="section" id="i-thought-this-was-a-python-meeting-and-you-only-used-linux">
+<h2>I thought this was a Python meeting and you only used Linux<a class="headerlink" href="#i-thought-this-was-a-python-meeting-and-you-only-used-linux" title="Permalink to this headline">¶</a></h2>
+<p>Coming, coming…  The point is:</p>
+<ul class="simple">
+<li>GCD is mostly syntactic sugar.</li>
+<li>But so is Python (you’re welcome to write all the code for your thesis in
+assembly, I’ll see you at graduation in 2040).</li>
+</ul>
+<p><strong>SYNTAX MATTERS!!!</strong></p>
+<p>So, can we get that in Python? What do we need?</p>
+<ul class="simple">
+<li>A kernel-level thread pool dispatcher? <em>Nope</em>.</li>
+<li>A library to access it? <em>Nope</em>, but a library can be written.</li>
+<li>Syntax for anonymous blocks? <em>Nope</em>, this is Python, not Ruby.</li>
+</ul>
+<p>Wait a second, go back to that last one…</p>
+</div>
+<div class="section" id="syntax-in-python-for-anonymous-blocks">
+<h2>Syntax in Python for (anonymous) blocks?<a class="headerlink" href="#syntax-in-python-for-anonymous-blocks" title="Permalink to this headline">¶</a></h2>
+<p>How about we compromise and drop the whole ‘anonymous’ part.  Obama wants to
+extend the Patriot act, so anonymity is probably a terrorist thing, even here
+in Berkeley.  Let’s make them:</p>
+<ul class="simple">
+<li>Named.</li>
+<li>With parameters (like Apple’s C ones).</li>
+<li>With access to the enclosing scope (like Apple’s).</li>
+<li>With optional return values (like Apple’s).</li>
+</ul>
+<p>I know!  Let’s call them “functions”!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s1">&#39;In outer, a=&#39;</span><span class="p">,</span><span class="n">a</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s1">&#39;  In func, z=&#39;</span><span class="p">,</span><span class="n">z</span>
+        <span class="nb">print</span> <span class="s1">&#39;  I also see x=&#39;</span><span class="p">,</span><span class="n">x</span>
+        <span class="k">return</span> <span class="n">z</span><span class="o">+</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">y</span>
+
+<span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="n">outer</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span> <span class="mi">10</span>
+  <span class="n">In</span> <span class="n">func</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span> <span class="mi">10</span>
+  <span class="n">I</span> <span class="n">also</span> <span class="n">see</span> <span class="n">x</span><span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="so-your-point-is">
+<h2>So, your point is??<a class="headerlink" href="#so-your-point-is" title="Permalink to this headline">¶</a></h2>
+<p>That functions already give us everything we need for blocks (minus the
+anonymous part, but that’s OK and it actually has a use).</p>
+<p>And the initial mention of decorators had a purpose, too: the part about
+decorators not having to return a function.  They can do <em>anything</em> with the
+function they get.</p>
+<p><em>Including executing it…</em>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s2">&quot;  Calling function named:&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">func_name</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
+
+<span class="nb">print</span> <span class="s2">&quot;About to define a simple function f&quot;</span>
+
+<span class="nd">@execute</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">10</span>
+
+<span class="nb">print</span> <span class="s2">&quot;The &#39;function&#39; f we just defined is:&quot;</span><span class="p">,</span><span class="n">f</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">About</span> <span class="n">to</span> <span class="n">define</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">function</span> <span class="n">f</span>
+  <span class="n">Calling</span> <span class="n">function</span> <span class="n">named</span><span class="p">:</span> <span class="n">f</span>
+<span class="n">The</span> <span class="s1">&#39;function&#39;</span> <span class="n">f</span> <span class="n">we</span> <span class="n">just</span> <span class="n">defined</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="now-onto-something-more-useful">
+<h2>Now onto something more useful<a class="headerlink" href="#now-onto-something-more-useful" title="Permalink to this headline">¶</a></h2>
+<p>That loop from the GCD example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Consider a simple pair of &#39;loop body&#39; and &#39;loop summary&#39; functions:</span>
+<span class="k">def</span> <span class="nf">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+   <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">[:</span><span class="n">count</span><span class="p">])</span>
+
+<span class="c1"># And some &#39;dataset&#39; (here just a list of 10 numbers</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="o">*</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">]</span>
+
+<span class="c1"># That we&#39;ll process.  This is our processing loop, implemented as a regular</span>
+<span class="c1"># serial function that preallocates storage and then goes to work.</span>
+<span class="k">def</span> <span class="nf">loop_serial</span><span class="p">():</span>
+   <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">count</span>
+
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+      <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+<span class="c1"># The same thing can be done with a decorator:</span>
+<span class="k">def</span> <span class="nf">for_each</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;This decorator-based loop does a normal serial run.</span>
+<span class="sd">   But in principle it could be doing the dispatch remotely, or into a thread</span>
+<span class="sd">   pool, etc.</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+      <span class="nb">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">call</span>
+
+<span class="c1"># This is the actual code of the decorator-based loop:</span>
+<span class="k">def</span> <span class="nf">loop_deco</span><span class="p">():</span>
+   <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">count</span>
+
+   <span class="nd">@for_each</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+   <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+      <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+<span class="c1"># Test</span>
+<span class="k">assert</span> <span class="n">loop_serial</span><span class="p">()</span> <span class="o">==</span> <span class="n">loop_deco</span><span class="p">()</span>
+<span class="nb">print</span> <span class="s1">&#39;OK&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">OK</span>
+</pre></div>
+</div>
+<p>Let’s summarize the syntactic parallels in isolation, for clarity:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># becomes:</span>
+
+<span class="nd">@for_each</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A few less trivial examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">traced</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">trace</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">Trace</span><span class="p">()</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">runfunc</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and a 2-line change of code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loop_traced</span><span class="p">():</span>
+   <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">count</span>
+
+   <span class="nd">@traced</span>  <span class="c1">### NEW</span>
+   <span class="k">def</span> <span class="nf">func</span><span class="p">():</span>  <span class="c1">### NEW, the name is irrelevant</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+           <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>gives on execution:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">run</span> <span class="n">contexts</span><span class="o">.</span><span class="n">py</span>
+ <span class="o">---</span> <span class="n">modulename</span><span class="p">:</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">funcname</span><span class="p">:</span> <span class="n">func</span>
+<span class="n">contexts</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">64</span><span class="p">):</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+<span class="n">contexts</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">65</span><span class="p">):</span>         <span class="nd">@traced</span>
+ <span class="o">---</span> <span class="n">modulename</span><span class="p">:</span> <span class="n">contexts</span><span class="p">,</span> <span class="n">funcname</span><span class="p">:</span> <span class="n">do_work</span>
+<span class="n">contexts</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>     <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">contexts</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">64</span><span class="p">):</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+<span class="n">contexts</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">65</span><span class="p">):</span>         <span class="nd">@traced</span>
+
+<span class="o">...</span> <span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This shows how trivial, small decorators can be used to control code execution.
+For example, if you are a fan of Robert’s <a class="reference external" href="http://packages.python.org/line_profiler">fabulous line profiler</a>, using this
+trivial trick you can profile arbitrarily small chunks of code inline:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">profiled</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+   <span class="kn">import</span> <span class="nn">line_profiler</span>
+   <span class="n">prof</span> <span class="o">=</span> <span class="n">line_profiler</span><span class="o">.</span><span class="n">LineProfiler</span><span class="p">()</span>
+   <span class="n">f</span> <span class="o">=</span> <span class="n">prof</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+   <span class="n">f</span><span class="p">()</span>
+   <span class="n">prof</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
+   <span class="n">prof</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">loop_profiled</span><span class="p">():</span>
+   <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">count</span>
+
+   <span class="nd">@profiled</span>  <span class="c1"># NEW</span>
+   <span class="k">def</span> <span class="nf">block</span><span class="p">():</span>  <span class="c1"># NEW</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+           <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">summarize</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When run, you get:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">run</span> <span class="n">contexts</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Timer</span> <span class="n">unit</span><span class="p">:</span> <span class="mf">1e-06</span> <span class="n">s</span>
+
+<span class="n">File</span><span class="p">:</span> <span class="n">contexts</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">block</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">82</span>
+<span class="n">Total</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.6e-05</span> <span class="n">s</span>
+
+<span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="o">==============================================================</span>
+   <span class="mi">82</span>                                               <span class="nd">@profiled</span>
+   <span class="mi">83</span>                                               <span class="k">def</span> <span class="nf">block</span><span class="p">():</span>
+   <span class="mi">84</span>         <span class="mi">5</span>            <span class="mi">7</span>      <span class="mf">1.4</span>     <span class="mf">43.8</span>          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+   <span class="mi">85</span>         <span class="mi">4</span>            <span class="mi">9</span>      <span class="mf">2.2</span>     <span class="mf">56.2</span>
+<span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">do_work</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limitations-no-access-to-enclosing-scopes-in-python-2-x">
+<h2>Limitations? No access to enclosing scopes in Python 2.x<a class="headerlink" href="#limitations-no-access-to-enclosing-scopes-in-python-2-x" title="Permalink to this headline">¶</a></h2>
+<p>With Python 2.x there is at least one real annoyance: the inability to rebind
+non-local (but not global) names in an inner scope.  This was fixed with the
+‘nonlocal’ keyword in 3.0, but for 2.x the following won’t work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">simple</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+   <span class="nd">@execute</span>
+   <span class="k">def</span> <span class="nf">block</span><span class="p">():</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+           <span class="n">s</span> <span class="o">+=</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span>
+
+   <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+<p>because you get an unbound local error:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">run</span> <span class="n">simple</span>
+
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">fperez</span><span class="o">/</span><span class="n">research</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">contexts</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">block</span><span class="p">()</span>
+    <span class="mi">15</span>     <span class="k">def</span> <span class="nf">block</span><span class="p">():</span>
+    <span class="mi">16</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="o">---&gt;</span> <span class="mi">17</span>             <span class="n">s</span> <span class="o">+=</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span>
+    <span class="mi">18</span>
+    <span class="mi">19</span>     <span class="k">return</span> <span class="n">s</span>
+
+<span class="ne">UnboundLocalError</span><span class="p">:</span> <span class="n">local</span> <span class="n">variable</span> <span class="s1">&#39;s&#39;</span> <span class="n">referenced</span> <span class="n">before</span> <span class="n">assignment</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">Failure</span> <span class="n">executing</span> <span class="nb">file</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In Python 3, this was fixed and works great:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+   <span class="nd">@execute</span>
+   <span class="k">def</span> <span class="nf">block</span><span class="p">():</span>
+       <span class="k">nonlocal</span> <span class="n">s</span>  <span class="c1">### NEW keyword in Python 3.x</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+           <span class="n">s</span> <span class="o">+=</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span>
+
+   <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="acknowledgments">
+<span id="id1"></span><h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>These notes are mostly the summary of a long but very useful <a class="reference external" href="http://mail.scipy.org/pipermail/ipython-dev/2009-September/005485.html">thread</a> on the
+<a class="reference external" href="http://ipython.scipy.org">IPython</a> <a class="reference external" href="http://mail.scipy.org/mailman/listinfo/ipython-dev">development mailing list</a>, where I presented the main points and
+many others pitched in with very useful comments and feedback.  I’d like to
+thank everyone who participated for their interest, ideas and additional
+information, and if you find this topic interesting, I’d encourage you to have
+a read of the whole thread, as there are many more details that I’ve ommitted
+here.</p>
+<p>And as I mention in that thread, much of my thinking on this problem stems from
+discussions with colleagues and seeing other’s code.  Here is a brief recap of
+those to whom I owe much of these ideas (minus the mistakes, on which I hold
+exclusive rights):</p>
+<ul class="simple">
+<li>I’ve been worrying about scoping and execution control for a while.  My first
+‘click’ was a conversation with Eric Jones at Berkeley in late 2007, where he
+pointed out really how the <code class="docutils literal"><span class="pre">with</span></code> statement could be (ab)used for execution
+management, which they are doing a lot of with <a class="reference external" href="http://enthought.com">Enthought</a>’s context library
+(BlockCanvas, I think?).</li>
+<li>In March 2008, William Stein implemented for <a class="reference external" href="http://sagemath.org">Sage</a> the <code class="docutils literal"><span class="pre">&#64;interact</span></code>
+decorator at the sprint at Enthought, using the ‘call and consume’ approach
+to the decorated function.  This was the first time I saw this pattern used,
+and it got me thinking again about the problem.  On the flight back home, I
+implemented for IPython’s parallel machinery some context managers via a
+different approach: I used the <code class="docutils literal"><span class="pre">with</span></code> statement.  This worked but was so
+nasty that I never really pursued it further (it involved brittle stack
+manipulations and source introspection).</li>
+<li>In September 2008 at Scipy‘08 I had a long talk about the problem with Alex
+Martelli on whether extending the <code class="docutils literal"><span class="pre">with</span></code> context manager protocol with an
+<code class="docutils literal"><span class="pre">__execute__</span></code> method to control the actual execution of the code would be
+feasible.  This conversation was very enlightening, even though it made it
+fairly clear that the <code class="docutils literal"><span class="pre">with</span></code> approach was probably doomed in the long run.
+Alex pointed out very clearly a few of the key issues regarding scoping that
+helped me a lot.</li>
+<li>Then at SciPy‘09 I had a talk with Peter Norvig again about the same problem,
+so I got the whole thing back in my head.</li>
+<li>And finally, <a class="reference external" href="http://arstechnica.com/apple/reviews/2009/08/mac-os-x-10-6.ars/10">John Siracusa’s review of Snow Leopard</a> at Ars Technica about
+Apple’s work with anonymous blocks and Grand Central Dispatch make the whole
+thing click, leading to the IPython-dev thread mentioned above and ultimately
+these notes.</li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is a certain irony in realizing that <em>everything</em> we discuss here has
+been available since Python 2.4 (i.e. since November 30 2004!).  Yet I’ve
+hardly seen any use ‘in the wild’ of this pattern, save for the isolated
+case of Sage’s &#64;interact (see <a class="reference internal" href="#acknowledgments">acknowledgments</a>).</p>
+</div>
+<p>Using decorators that consume their functions, we can:</p>
+<ul class="simple">
+<li>Declare local (named) blocks that are executed.</li>
+<li>But where we (the decorator) controls the execution context.</li>
+</ul>
+<p>This opens up many very interesting possibilities:</p>
+<ul class="simple">
+<li>A high-level (GCD-style) API for remote execution via IPython.<ul>
+<li>That can be disabled globally for serial debugging!</li>
+</ul>
+</li>
+<li>Execution with supervision, timing, modified (shadow) contexts, etc.</li>
+<li>Execution via Cython</li>
+<li>Execution on exotic hardware (GPUs)</li>
+<li>Optional  compilation of array expressions via numexpr…</li>
+</ul>
+<p>I hope you all have more ideas! (and that you implement them…)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="ucb/index.html" title="Python for science at UC Berkeley"
+             >next</a></li>
+        <li class="right" >
+          <a href="code_reviews.html" title="Code reviews: the lab meeting for code"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

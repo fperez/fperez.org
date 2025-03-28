@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Python for Scientific Computing at SIAM CSE 2011: Slides &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Teaching" href="../../teaching/index.html" />
+    <link rel="prev" title="Guido van Rossum at the Py4Science meeting" href="../2009_guido_ucb/index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../../index.html">
+  <img src="../../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../teaching/index.html" title="Teaching"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../2009_guido_ucb/index.html" title="Guido van Rossum at the Py4Science meeting"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Events</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="../../py4science/index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python for Scientific Computing at SIAM CSE 2011: Slides</a><ul>
+<li><a class="reference internal" href="#other-python-talks">Other Python talks</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../2009_guido_ucb/index.html"
+                        title="previous chapter">Guido van Rossum at the Py4Science meeting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../teaching/index.html"
+                        title="next chapter">Teaching</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/events/2011_siam_cse/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-for-scientific-computing-at-siam-cse-2011-slides">
+<h1>Python for Scientific Computing at SIAM CSE 2011: Slides<a class="headerlink" href="#python-for-scientific-computing-at-siam-cse-2011-slides" title="Permalink to this headline">¶</a></h1>
+<p>At the <a class="reference external" href="http://www.siam.org/meetings/cse11">2011 SIAM CSE meeting</a> held in Reno on February 28-March 6, Randy
+LeVeque from U. Washington, Hans-Petter Langtangen from the Simula Research
+Laboratory in Norway and I co-organized a 2-part minisymposium entitled <em>Python
+for Scientific Computing</em>.  This was done partly as a followup to the
+successful one we had <a class="reference external" href="http://fdoperez.blogspot.com/2009/03/python-at-siam-cse09-meeting.html">in 2009</a>, and we had again good attendance and lively
+discussions.</p>
+<p>Our minisymposium was divided in two parts, and I am posting here links to the
+original program pages as well as all the slides I have so far from the
+speakers, along with any links they may have provided to their personal or
+project pages.  A <a class="reference external" href="http://blog.fperez.org/2011/04/python-goes-to-reno-siam-cse-2011.html">short narrative is my blog</a> and I
+also put
+<a class="reference external" href="https://picasaweb.google.com/fdo.perez/SIAMCSE2011InReno#">some pictures</a> up.</p>
+<p>As a sign of the healthy growth of the scientific python ecosystem, this year
+there were also other python-focused minisymposia at this conference, as well
+as several python talks in other MS; those slides are <a class="reference internal" href="#below">below</a>.</p>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11706">Python in Scientific Computing - Part I of II</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="http://www.slideshare.net/enthought/numpy-talk-at-siam">Capabilities and Recent Developments of NumPy for Scientific Computing</a></dt>
+<dd>Travis E. Oliphant, Enthought, Inc., USA</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="cython-siam-cse2011.pdf">Cython: Compiled Code meets Dynamic Python</a></dt>
+<dd>Lisandro Dalcin, Centro Int. de Métodos Computacionales en Ingeniería,
+Argentina; Robert Bradshaw, University of Washington, Seattle, USA</dd>
+<dt><a class="reference external" href="siam_reno_hunter11.ppt">Matplotlib - from Interactive Exploration to Publication Graphics</a></dt>
+<dd>John Hunter, Tradelink Securities, Inc., USA</dd>
+<dt><a class="reference external" href="1102_siam_cse_ipython.pdf">Why Modern, High-performance Networking Matters for Interactive Computing</a></dt>
+<dd>Fernando Perez, University of California, Berkeley, USA; Brian Granger,
+California Polytechnic State University, San Luis Obispo, USA; Evan
+Patterson, California Institute of Technology, USA</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11707">Python in Scientific Computing - Part II of II</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="SIAM.ipzmq.pdf">Interactive Parallel Python with ZeroMQ</a></dt>
+<dd>Min Ragan-Kelley and Fernando Perez, University of California, Berkeley,
+USA; Brian Granger, California Polytechnic State University, San Luis
+Obispo, USA</dd>
+<dt><a class="reference external" href="siam_bloom_2011.pdf">Real-time Classification of Astronomical Events with Python</a></dt>
+<dd>Joshua Bloom, Dan Starr, Joseph Richards, Nathaniel Butler, and Dovi
+Poznanski, University of California, Berkeley, USA</dd>
+<dt><a class="reference external" href="siamcse2011_sympy.pdf">SymPy: Symbolic Mathematics in Pure Python</a></dt>
+<dd>Mateusz Paprocki, University of Nevada, Reno, USA</dd>
+<dt>FEMhub Online Numerical Methods Laboratory</dt>
+<dd>Pavel Solin and Ondrej Certik, University of Nevada, Reno, USA; Mateusz
+Paprocki, University of Wroclaw, Poland; Aayush Poudel, University of
+Nevada, Reno, USA</dd>
+</dl>
+<div class="section" id="other-python-talks">
+<span id="below"></span><h2>Other Python talks<a class="headerlink" href="#other-python-talks" title="Permalink to this headline">¶</a></h2>
+<p>There were a number of other sessions dedicated to Python tools, as well as
+talks based on Python elsewhere.  Here is a summary of the ones for which I
+have slides (a few are pending review by National Labs for public release):</p>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11217">Python-based Software for Solving Partial Differential Equations - Part I
+of II</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="cse2011_proteus.pdf">Lessons Learned and Open Issues from the Development of the Proteus Toolkit for Coastal and Hydraulics Modeling</a></dt>
+<dd>Chris Kees and Matthew Farthing, U.S. Army Engineer Research and
+Development Center, USA</dd>
+<dt><a class="reference external" href="kmardal_siam_fenics.pdf">FEniCS: An Attempt to Combine Simplicity, Generality, Efficiency and Reliability</a></dt>
+<dd>Kent-Andre Mardal, University of Oslo, Norway; Hans Petter
+Langtangen, Simula Research Laboratory and University of Oslo, Norway;
+Anders Logg, Simula Research Laboratory, Norway; Garth N. Wells, University
+of Cambridge, United Kingdom</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11218">Python-based Software for Solving Partial Differential Equations - Part II
+of II</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="SIAM2011_wheeler.pdf">Making a Python based PDE Solver Work Efficiently in Parallel with the Available Open Source Interfaces to MPI</a></dt>
+<dd>Daniel Wheeler and Jonathan Guyer, National Institute of Standards and
+Technology, USA; James O’Beirne, George Mason University, USA</dd>
+<dt><a class="reference external" href="LeVequeMandli2011.pdf">Python, Clawpack, and PyClaw</a></dt>
+<dd>Randall J. LeVeque and Kyle T. Mandli, University of Washington, USA</dd>
+<dt><a class="reference external" href="cse2011_petsc4py.pdf">Mpi4py and Petsc4py: Using Python to develop Scalable PDE Solvers</a></dt>
+<dd>Lisandro Dalcin, Centro Int. de Métodos Computacionales en Ingeniería,
+Argentina; Chris Kees, U.S. Army Engineer Research and Development
+Center, USA</dd>
+<dt><a class="reference external" href="hedge-op-compiler.pdf">Paper to GPU: Optimizing and Executing Discontinuous Galerkin Operators in Python</a></dt>
+<dd>Andreas Kloeckner, Courant Institute of Mathematical Sciences, New York
+University, USA</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11572">Python Software for Numerical Optimization</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="cse_dorban.pdf">A Flexible Python Environment for PDE-Constrained Optimization</a></dt>
+<dd><a class="reference external" href="www.gerad.ca/~orban">Dominique Orban</a>, École Polytechnique de Montréal, Canada; Nick Gould and
+Sue Thorne, Rutherford Appleton Laboratory, United Kingdom</dd>
+</dl>
+<dl class="docutils">
+<dt>Analyzing Optimization Models Developed with the Pyomo Modeling Software (<em>slides pending review by Sandia NL for release</em>)</dt>
+<dd>William E. Hart and Jean-Paul Watson, Sandia National Laboratories, USA;
+David Woodruff, University of California, Davis, USA</dd>
+<dt>Stochastic Nonlinear Programming with Pyomo (<em>slides pending review by Sandia NL for release</em>)</dt>
+<dd>Carl Laird, Texas A&amp;M University, USA; Jean-Paul Watson, Sandia
+National Laboratories, USA</dd>
+<dt><a class="reference external" href="cse11_bell.pdf">Algorithmic Differentiation in Python</a></dt>
+<dd>Sebastian F. Walter, Humboldt University Berlin, Germany; Bradley
+M. Bell, University of Washington, USA</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11562">FEniCS: Automated Solution of Differential Equations</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="kmardal_siam_precond.pdf">On the Construction of Preconditioners for Systems of PDEs</a></dt>
+<dd>Kent-Andre Mardal, University of Oslo, Norway</dd>
+<dt><a class="reference external" href="RognesSIAM.pdf">Automated Goal-Oriented Error Control</a></dt>
+<dd>Marie E. Rognes and Anders Logg, Simula Research Laboratory, Norway</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=12747">CSE Education</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="siam-cse11-IndianaArc.pdf">Sculpture, Geometry and Computer Science</a></dt>
+<dd><a class="reference external" href="http://mypage.iu.edu/~heiland">Randy Heiland</a>, Indiana University, USA;
+Charles Perry, www.charlesperry.com, USA; Barbara Ream, International
+School of Columbus, USA; Andrew Lumsdaine, Indiana University, USA</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11844">Verifiable, Reproducible Research and Computational Science</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="reno2011_fomel_magadascar.pdf">Reproducible Research, Lessons from the Madagascar Project</a></dt>
+<dd>Sergey Fomel, University of Texas at Austin, USA (lead of the <a class="reference external" href="http://ahay.org">Magadascar</a>
+project).</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11663">Kinetic Plasma Modeling</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="SIAM.ptsg.pdf">Design and Preliminary Results for PIC on GPUs with Python</a></dt>
+<dd>Min Ragan-Kelley, University of California, Berkeley, USA; John
+Verboncoeur, University of California, USA</dd>
+</dl>
+<p>MS: <a class="reference external" href="http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=11520">Advanced Algorithms on GPUs</a></p>
+<dl class="docutils">
+<dt><a class="reference external" href="SIAMCSE11_knepley.pdf">A Case Study of GPUs in Scientific Computing: Low-Order FEM</a></dt>
+<dd><a class="reference external" href="http://www.cs.uchicago.edu/~knepley">Matthew G. Knepley</a>, Argonne National Laboratory, USA</dd>
+</dl>
+<dl class="docutils">
+<dt><a class="reference external" href="gpu-dg.pdf">High-Order Discontinuous Galerkin Methods by GPU Metaprogramming</a></dt>
+<dd>Andreas Kloeckner, Courant Institute of Mathematical Sciences, New York
+University, USA; Timothy Warburton, Rice University, USA; Jan S. Hesthaven,
+Brown University, USA</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../teaching/index.html" title="Teaching"
+             >next</a></li>
+        <li class="right" >
+          <a href="../2009_guido_ucb/index.html" title="Guido van Rossum at the Py4Science meeting"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Events</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

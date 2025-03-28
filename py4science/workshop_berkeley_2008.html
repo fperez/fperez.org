@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>A hands-on 2-day workshop at UC Berkeley &#8212; Fernando Pérez</title>
+    <link rel="stylesheet" href="../_static/fperez.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyMVPA - NiPy week" href="pymvpa_nipy_sprint_200904.html" />
+    <link rel="prev" title="Guido van Rossum at the Py4Science meeting" href="2009_guido_ucb/index.html" /> 
+  </head>
+  <body>
+<div class="header">
+ <a href="../index.html">
+  <img src="../_static/top_mountains_clouds.jpg"
+	       alt="Fernando Pérez"></a>
+</div>
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pymvpa_nipy_sprint_200904.html" title="PyMVPA - NiPy week"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="2009_guido_ucb/index.html" title="Guido van Rossum at the Py4Science meeting"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h4> Site Navigation </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="../research/index.html">Research</a></li>
+    <li><a class="reference external"
+	href="../talks/index.html">Talks</a></li>
+    <li><a class="reference external"
+	href="../events/index.html">Events</a></li>
+    <li><a class="reference external"
+	href="../teaching/index.html">Teaching</a></li>
+    <li><a class="reference external"
+	href="index.html">Py4Science</a></li>
+    <li><a class="reference external"
+	href="../code/index.html">Software</a></li>
+    <li><a class="reference external"
+	href="../personal.html">Personal</a></li>
+  </ul>
+<h4> External links </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://blog.fperez.org">Blog</a></li>
+    <li><a class="reference external"
+	href="http://gplus.to/fperez">Google+</a></li>
+    <li><a class="reference external"
+	href="http://twitter.com/fperez_org">@fperez_org</a></li>
+    <li><a class="reference external"
+	href="http://ipython.org">IPython</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org">NumFOCUS</a></li>
+    <li><a class="reference external"
+	href="http://numfocus.org/johnhunter">J.D. Hunter Memorial</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A hands-on 2-day workshop at UC Berkeley</a><ul>
+<li><a class="reference internal" href="#updates">UPDATES</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#logistics">Logistics</a></li>
+<li><a class="reference internal" href="#software-prerequisites">Software prerequisites</a><ul>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation-and-reading-prerequistes">Documentation and reading prerequistes</a></li>
+<li><a class="reference internal" href="#contact-information">Contact information</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2009_guido_ucb/index.html"
+                        title="previous chapter">Guido van Rossum at the Py4Science meeting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pymvpa_nipy_sprint_200904.html"
+                        title="next chapter">PyMVPA - NiPy week</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/py4science/workshop_berkeley_2008.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="11" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+<hr>
+
+<div class="header">
+     
+     
+     <a href="http://dst.lbl.gov">
+     <img src="../_static/lbl_logo.png", width=140px
+     alt="Data Science Division, LBNL"></a>
+
+     <a href="http://bids.berkeley.edu">
+       <img src="../_static/bids_logo.png", width=140px
+       	alt="Berkeley Institute for Data Science (BIDS)"></a>
+</div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="a-hands-on-2-day-workshop-at-uc-berkeley">
+<h1>A hands-on 2-day workshop at UC Berkeley<a class="headerlink" href="#a-hands-on-2-day-workshop-at-uc-berkeley" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="updates">
+<h2>UPDATES<a class="headerlink" href="#updates" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The workshop is now over, but most of the lectures were videotaped and can be
+found <a class="reference external" href="http://www.archive.org/search.php?query=Fernando+Perez+scientific+python">here</a></li>
+<li>As of Sept 25, the course is full and we already have a wait list.  But if
+you are interested, you can still <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a>
+and I’ll put you on thee wait list in case we have cancellations.</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>We will be holding an introductory workshop covering the use of the Python
+programming language for scientific computing on campus, on October 9 and
+October 16, 2008.</p>
+<p>The workshop is targeted at the level of a graduate student in engineering or
+the sciences.  A working knowledge of basic programming is assumed, as well as
+familiarity with calculus, basic linear algebra, FFTs, and other similar
+topics.</p>
+<p>We will briefly review the core language and will cover a number of basic
+exercises involving numerics, using the core libraries for scientific
+manipulation in Python (<a class="reference external" href="http://numpy.scipy.org">Numpy</a> and <a class="reference external" href="http://www.scipy.org">Scipy</a>), plotting with <a class="reference external" href="http://matplotlib.sourceforge.net">Matploblib</a>, analyzing data files, etc.  The workshop
+is very interactive, consisting mostly of hands-on exercises to be completed by
+the students, interleaved with ‘type-along’ sessions where we’ll demonstrate
+ideas by typing them out while you follow along on your own computer.</p>
+<p>The course will not go into advanced aspects of Python; we will review the
+basics, but will assume that you have worked through the introductory resources
+available online (see below).</p>
+</div>
+<div class="section" id="logistics">
+<h2>Logistics<a class="headerlink" href="#logistics" title="Permalink to this headline">¶</a></h2>
+<p>The workshop will take place October 9 and 16 2008, 9am-5pm at Tolman 5101.  We
+only have room for about 20 people total, so <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a> if you are interested in attending so we can
+reserve a slot for you (first come, first served).  Please include your full
+name, department, affiliation (student, postdoc, faculty, staff…) as well as
+a short note on your programming background and research interest regarding the
+workshop, so we can know the audience a bit better.</p>
+<p>There is a $10 charge for each person to cover the cost of having coffee,
+bagels and snacks available in the room, so we can take coffee breaks without
+everyone having to leave the building.  Lunch both days will be on your own.</p>
+<p>We’ll have work tables and power strips available, but <em>no computers</em>.  The
+point of the workshop is for you to work on your laptop, so that after this you
+have all the tools locally installed to continue working.  You must also ensure
+that you can connect to the AirBears network, so you can have access to various
+files and data online.</p>
+</div>
+<div class="section" id="software-prerequisites">
+<h2>Software prerequisites<a class="headerlink" href="#software-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before the workshop, we strongly encourage you to install the necessary tools
+on your laptop.  We’ll do an install check on the first day in the morning, but
+it will be much better if you do the installation in advance.</p>
+<p>For Mac OSX and Windows users, the easiest (by far) route is to install the
+<a class="reference external" href="http://www.enthought.com/products/edudownload.php">Enthought Python Distribution</a>, which provides a self-contained installer
+with all the tools we’ll need.</p>
+<p>Linux users need to get the following packages, either by using their
+distribution’s package manager or by installing from source: nose, setuptools,
+ipython, numpy, scipy, matplotlib.</p>
+<div class="section" id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
+<p>Once you’ve installed the code above, please download (save to your disk) <a class="reference external" href="workshop_checklist.py">this
+file</a> and execute it as per the instructions contained
+in it (at the top).  It runs a set of sanity checks on your system to ensure
+that things are reasonably well installed (it does not do exhaustive testing
+however).</p>
+</div>
+</div>
+<div class="section" id="documentation-and-reading-prerequistes">
+<h2>Documentation and reading prerequistes<a class="headerlink" href="#documentation-and-reading-prerequistes" title="Permalink to this headline">¶</a></h2>
+<p>For the workshop, you should at the very least <em>work through</em> (not just read,
+but actually type in and execute) the basic <a class="reference external" href="http://docs.python.org/tutorial">Python tutorial</a>, as well as the <a class="reference external" href="http://mentat.za.net/numpy/intro/intro.html">introductory NumPy
+tutorial</a>.</p>
+<p>Note: in all of these, the markers that you see as <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> are the prompts
+generated by Python which you do not type.  Similarly, the <a class="reference external" href="http://ipython.org">IPython</a> prompts
+look like <code class="docutils literal"><span class="pre">In</span> <span class="pre">[3]:</span></code>.</p>
+<p>In addition to these two minimal requirements, the following links can also be
+useful as reference:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.scipy.org/wikis/topical_software/Tutorial">Interactive data analysis</a>: a tutorial with an
+astronomy focus but very useful for anyone dealing with data.  This is an
+<em>excellent resource</em>.</li>
+<li>The <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference">NumPy reference guide</a>:
+though still a draft, it contains much useful information.</li>
+<li>The <a class="reference external" href="http://matplotlib.sourceforge.net/contents.html">Matplotlib manual</a>:
+this is the matlab-like plotting library we’ll be using throughout.</li>
+<li>The <a class="reference external" href="http://ipython.scipy.org/doc/rel-0.9.1/html">IPython manual</a>: the
+interactive environment you’ll be working in.</li>
+<li>The <a class="reference external" href="http://www.scipy.org/Additional_Documentation">SciPy documentation page</a> contains links to many more
+documentation resources, especially for scientific work.</li>
+</ul>
+<p>Finally, fhe following Python books are freely available to UC Berkeley via the
+O’Reilly Safari system.  These are books I have personally found to be useful
+and can recommend, there’s obviously a lot more out there; all of them cover
+the language in general, without science-specific content.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/9780596513986">Learning Python, 3rd Edition</a> by Mark Lutz.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596001894">Python Pocket Reference, 2nd Edition</a> by Mark Lutz.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596100469">Python in a Nutshell, 2nd Edition</a> by Alex Martelli.</li>
+<li><a class="reference external" href="http://proquest.safaribooksonline.com/0596007973">Python Cookbook, 2nd Edition</a> by Alex Martelli; Anna
+Martelli Ravenscroft; David Ascher.</li>
+</ul>
+<p>Note that to access Safari, you need to be either on campus or browsing with
+the <a class="reference external" href="http://lib.berkeley.edu/Help/proxy.html">Berkeley Library Proxy</a>.</p>
+</div>
+<div class="section" id="contact-information">
+<h2>Contact information<a class="headerlink" href="#contact-information" title="Permalink to this headline">¶</a></h2>
+<p>To register or if you have any personal question regarding the workshop, you
+can <a class="reference external" href="mailto:Fernando&#46;Perez&#37;&#52;&#48;berkeley&#46;edu">email me</a>.  But for general questions,
+installation issues, etc, I encourage you to use the <a class="reference external" href="https://calmail.berkeley.edu/manage/list/listinfo/py4science&#64;lists.berkeley.edu">Py4science mailing list</a>,
+so that the answer to your question can benefit others as well who may
+encounter similar problems.  You are also welcome to stop by any of the regular
+<a class="reference external" href="https://cirl.berkeley.edu/view/Py4Science">Py4Science meetings on campus</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="pymvpa_nipy_sprint_200904.html" title="PyMVPA - NiPy week"
+             >next</a></li>
+        <li class="right" >
+          <a href="2009_guido_ucb/index.html" title="Guido van Rossum at the Py4Science meeting"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Python for scientific computing</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Fernando Pérez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
